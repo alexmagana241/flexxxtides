@@ -71,7 +71,7 @@ function PeptidePage() {
               <FlaskConical className="h-5 w-5 text-primary" /> Common Research Applications
             </h2>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {p.applications.map((a) => (
+              {p.applications.map((a: string) => (
                 <li key={a} className="rounded-lg border border-border bg-card p-4 text-sm">{a}</li>
               ))}
             </ul>
@@ -93,7 +93,7 @@ function PeptidePage() {
               <HelpCircle className="h-5 w-5 text-primary" /> FAQ
             </h2>
             <div className="mt-4 space-y-3">
-              {p.faq.map((f) => (
+              {p.faq.map((f: { q: string; a: string }) => (
                 <details key={f.q} className="group rounded-lg border border-border bg-card p-4">
                   <summary className="cursor-pointer text-sm font-medium flex items-center justify-between">
                     {f.q}
