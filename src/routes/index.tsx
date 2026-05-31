@@ -80,21 +80,34 @@ function Home() {
               key={p.slug}
               to="/peptides/$slug"
               params={{ slug: p.slug }}
-              className="group rounded-xl border border-border bg-card p-5 card-hover"
+              className="group rounded-xl border border-border bg-card overflow-hidden card-hover"
             >
-              <div className="flex items-center justify-between">
-                <span className="h-10 w-10 grid place-items-center rounded-lg bg-primary/10 text-primary">
-                  <BeakerIcon className="h-5 w-5" />
-                </span>
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.category}</span>
+              <div className="aspect-square overflow-hidden bg-muted">
+                <img
+                  src={p.image}
+                  alt={`Research vial labeled ${p.name}`}
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
-              <h3 className="mt-4 text-lg font-semibold group-hover:text-primary transition-colors">{p.name}</h3>
-              <p className="mt-1 text-sm text-muted-foreground line-clamp-3">{p.tagline}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-xs text-primary">
-                Read overview <ArrowRight className="h-3 w-3" />
-              </span>
+              <div className="p-5">
+                <div className="flex items-center justify-between">
+                  <span className="h-9 w-9 grid place-items-center rounded-lg bg-primary/10 text-primary">
+                    <BeakerIcon className="h-4 w-4" />
+                  </span>
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.category}</span>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold group-hover:text-primary transition-colors">{p.name}</h3>
+                <p className="mt-1 text-sm text-muted-foreground line-clamp-3">{p.tagline}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs text-primary">
+                  Read overview <ArrowRight className="h-3 w-3" />
+                </span>
+              </div>
             </Link>
           ))}
+
         </div>
       </section>
 

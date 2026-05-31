@@ -81,22 +81,35 @@ function Catalog() {
                 key={p.slug}
                 to="/peptides/$slug"
                 params={{ slug: p.slug }}
-                className="group rounded-xl border border-border bg-card p-6 card-hover flex flex-col"
+                className="group rounded-xl border border-border bg-card overflow-hidden card-hover flex flex-col"
               >
-                <div className="flex items-center justify-between">
-                  <span className="h-10 w-10 grid place-items-center rounded-lg bg-primary/10 text-primary">
-                    <BeakerIcon className="h-5 w-5" />
-                  </span>
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.category}</span>
+                <div className="aspect-square overflow-hidden bg-muted">
+                  <img
+                    src={p.image}
+                    alt={`Research vial labeled ${p.name}`}
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-                <h2 className="mt-4 text-xl font-semibold group-hover:text-primary transition">{p.name}</h2>
-                {p.fullName && <p className="text-xs text-muted-foreground">{p.fullName}</p>}
-                <p className="mt-3 text-sm text-muted-foreground flex-1">{p.tagline}</p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm text-primary">
-                  View research overview <ArrowRight className="h-3 w-3" />
-                </span>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="h-9 w-9 grid place-items-center rounded-lg bg-primary/10 text-primary">
+                      <BeakerIcon className="h-4 w-4" />
+                    </span>
+                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.category}</span>
+                  </div>
+                  <h2 className="mt-4 text-xl font-semibold group-hover:text-primary transition">{p.name}</h2>
+                  {p.fullName && <p className="text-xs text-muted-foreground">{p.fullName}</p>}
+                  <p className="mt-3 text-sm text-muted-foreground flex-1">{p.tagline}</p>
+                  <span className="mt-5 inline-flex items-center gap-1 text-sm text-primary">
+                    View research overview <ArrowRight className="h-3 w-3" />
+                  </span>
+                </div>
               </Link>
             ))}
+
           </div>
         )}
         <div className="mt-12">

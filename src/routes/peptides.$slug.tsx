@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, BeakerIcon, BookText, FlaskConical, HelpCircle, Microscope, Workflow } from "lucide-react";
+import { ArrowLeft, BookText, FlaskConical, HelpCircle, Microscope, Workflow } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { Disclaimer } from "@/components/Disclaimer";
 import { getPeptide, peptides, type Peptide } from "@/data/peptides";
@@ -47,24 +47,32 @@ function PeptidePage() {
             <Link to="/catalog" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
               <ArrowLeft className="h-3 w-3" /> Back to catalog
             </Link>
-            <div className="mt-4 flex items-start gap-4">
-              <span className="h-14 w-14 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
-                <BeakerIcon className="h-7 w-7 text-primary-foreground" />
-              </span>
+            <div className="mt-6 grid gap-8 md:grid-cols-[260px_1fr] items-center">
+              <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-glow">
+                <img
+                  src={p.image}
+                  alt={`Research vial labeled ${p.name}`}
+                  width={1024}
+                  height={1024}
+                  className="w-full h-auto aspect-square object-cover"
+                />
+              </div>
               <div>
                 <p className="text-xs uppercase tracking-wider text-primary">{p.category}</p>
-                <h1 className="text-4xl font-bold tracking-tight">{p.name}</h1>
+                <h1 className="text-4xl font-bold tracking-tight mt-1">{p.name}</h1>
                 {p.fullName && <p className="text-muted-foreground mt-1">{p.fullName}</p>}
+                <p className="mt-4 text-lg text-muted-foreground">{p.tagline}</p>
               </div>
             </div>
-            <p className="mt-6 text-lg text-muted-foreground max-w-3xl">{p.tagline}</p>
           </div>
         </section>
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 space-y-12">
           <Section icon={BookText} title="Overview">{p.overview}</Section>
+          <Section icon={BookText} title="About this Compound">{p.description}</Section>
           <Section icon={Microscope} title="Research Background">{p.research}</Section>
           <Section icon={Workflow} title="Mechanism of Action">{p.mechanism}</Section>
+
 
           <div>
             <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
