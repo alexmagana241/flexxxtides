@@ -9,38 +9,175 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ReconstitutionRouteImport } from './routes/reconstitution'
+import { Route as LearningRouteImport } from './routes/learning'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CatalogRouteImport } from './routes/catalog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PeptidesSlugRouteImport } from './routes/peptides.$slug'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReconstitutionRoute = ReconstitutionRouteImport.update({
+  id: '/reconstitution',
+  path: '/reconstitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearningRoute = LearningRouteImport.update({
+  id: '/learning',
+  path: '/learning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogRoute = CatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PeptidesSlugRoute = PeptidesSlugRouteImport.update({
+  id: '/peptides/$slug',
+  path: '/peptides/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/catalog': typeof CatalogRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/learning': typeof LearningRoute
+  '/reconstitution': typeof ReconstitutionRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/peptides/$slug': typeof PeptidesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/catalog': typeof CatalogRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/learning': typeof LearningRoute
+  '/reconstitution': typeof ReconstitutionRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/peptides/$slug': typeof PeptidesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/catalog': typeof CatalogRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
+  '/learning': typeof LearningRoute
+  '/reconstitution': typeof ReconstitutionRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/peptides/$slug': typeof PeptidesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/catalog'
+    | '/contact'
+    | '/faq'
+    | '/learning'
+    | '/reconstitution'
+    | '/sitemap.xml'
+    | '/peptides/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/catalog'
+    | '/contact'
+    | '/faq'
+    | '/learning'
+    | '/reconstitution'
+    | '/sitemap.xml'
+    | '/peptides/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/catalog'
+    | '/contact'
+    | '/faq'
+    | '/learning'
+    | '/reconstitution'
+    | '/sitemap.xml'
+    | '/peptides/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CatalogRoute: typeof CatalogRoute
+  ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
+  LearningRoute: typeof LearningRoute
+  ReconstitutionRoute: typeof ReconstitutionRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  PeptidesSlugRoute: typeof PeptidesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reconstitution': {
+      id: '/reconstitution'
+      path: '/reconstitution'
+      fullPath: '/reconstitution'
+      preLoaderRoute: typeof ReconstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learning': {
+      id: '/learning'
+      path: '/learning'
+      fullPath: '/learning'
+      preLoaderRoute: typeof LearningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalog': {
+      id: '/catalog'
+      path: '/catalog'
+      fullPath: '/catalog'
+      preLoaderRoute: typeof CatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +185,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/peptides/$slug': {
+      id: '/peptides/$slug'
+      path: '/peptides/$slug'
+      fullPath: '/peptides/$slug'
+      preLoaderRoute: typeof PeptidesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CatalogRoute: CatalogRoute,
+  ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
+  LearningRoute: LearningRoute,
+  ReconstitutionRoute: ReconstitutionRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  PeptidesSlugRoute: PeptidesSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
