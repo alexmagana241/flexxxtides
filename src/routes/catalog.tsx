@@ -104,7 +104,7 @@ function Catalog() {
                   {p.fullName && <p className="text-xs text-muted-foreground">{p.fullName}</p>}
                   <p className="mt-3 text-sm text-muted-foreground flex-1">{p.tagline}</p>
                   <div className="mt-4 flex flex-wrap gap-1.5">
-                    {p.availableDoses.map((d) => (
+                    {p.availableDoses.map((d: string) => (
                       <span key={d} className="text-[10px] font-medium px-2 py-1 rounded-md border border-border bg-background text-foreground">
                         {d}
                       </span>
