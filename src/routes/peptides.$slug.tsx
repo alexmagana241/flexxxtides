@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, BeakerIcon, BookText, FlaskConical, HelpCircle, Microscope, Workflow } from "lucide-react";
+import { ArrowLeft, BookText, FlaskConical, HelpCircle, Microscope, Workflow } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { Disclaimer } from "@/components/Disclaimer";
 import { getPeptide, peptides, type Peptide } from "@/data/peptides";
