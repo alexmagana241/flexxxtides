@@ -62,6 +62,16 @@ function PeptidePage() {
                 <h1 className="text-4xl font-bold tracking-tight mt-1">{p.name}</h1>
                 {p.fullName && <p className="text-muted-foreground mt-1">{p.fullName}</p>}
                 <p className="mt-4 text-lg text-muted-foreground">{p.tagline}</p>
+                <div className="mt-6">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Available vial sizes</p>
+                  <div className="flex flex-wrap gap-2">
+                    {p.availableDoses.map((d: string) => (
+                      <span key={d} className="px-3 py-1.5 rounded-md border border-primary/40 bg-primary/10 text-primary text-sm font-semibold">
+                        {d}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

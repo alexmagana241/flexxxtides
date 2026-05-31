@@ -1,10 +1,4 @@
-import ghkCuImg from "@/assets/peptides/ghk-cu.jpg";
-import retatrutideImg from "@/assets/peptides/retatrutide.jpg";
-import tesamorelinImg from "@/assets/peptides/tesamorelin.jpg";
-import bpc157Img from "@/assets/peptides/bpc-157.jpg";
-import tb500Img from "@/assets/peptides/tb-500.jpg";
-import cjc1295Img from "@/assets/peptides/cjc-1295.jpg";
-import ipamorelinImg from "@/assets/peptides/ipamorelin.jpg";
+import vialImg from "@/assets/peptides/flexxxtides-vial.jpg";
 
 export type PeptideCategory =
   | "Growth Hormone Secretagogue"
@@ -18,6 +12,7 @@ export interface Peptide {
   fullName?: string;
   category: PeptideCategory;
   image: string;
+  availableDoses: string[];
   tagline: string;
   overview: string;
   description: string;
@@ -39,7 +34,8 @@ export const peptides: Peptide[] = [
     name: "GHK-Cu",
     fullName: "Glycyl-L-Histidyl-L-Lysine Copper",
     category: "Copper Peptide",
-    image: ghkCuImg,
+    image: vialImg,
+    availableDoses: ["50 mg", "100 mg", "200 mg"],
     tagline: "A naturally occurring copper-binding tripeptide studied for skin and tissue research.",
     overview:
       "GHK-Cu is a tripeptide complex with copper(II) that has been the subject of decades of research into skin remodeling, antioxidant signaling, and gene expression modulation.",
@@ -71,7 +67,8 @@ export const peptides: Peptide[] = [
     slug: "retatrutide",
     name: "Retatrutide",
     category: "Weight Management",
-    image: retatrutideImg,
+    image: vialImg,
+    availableDoses: ["5 mg", "10 mg", "15 mg", "20 mg"],
     tagline: "An investigational triple agonist studied in metabolic research.",
     overview:
       "Retatrutide is an investigational peptide studied as a triple agonist of GLP-1, GIP, and glucagon receptors. It is under active clinical investigation and is for research and educational discussion only.",
@@ -101,7 +98,8 @@ export const peptides: Peptide[] = [
     slug: "tesamorelin",
     name: "Tesamorelin",
     category: "Growth Hormone Secretagogue",
-    image: tesamorelinImg,
+    image: vialImg,
+    availableDoses: ["2 mg", "5 mg", "10 mg"],
     tagline: "A stabilized GHRH analog used in endocrinology research.",
     overview:
       "Tesamorelin is a synthetic analog of growth hormone-releasing hormone (GHRH) that has been widely studied in endocrine research literature.",
@@ -131,7 +129,8 @@ export const peptides: Peptide[] = [
     name: "BPC-157",
     fullName: "Body Protection Compound-157",
     category: "Recovery & Repair",
-    image: bpc157Img,
+    image: vialImg,
+    availableDoses: ["5 mg", "10 mg"],
     tagline: "A pentadecapeptide studied in tissue and recovery research.",
     overview:
       "BPC-157 is a synthetic 15-amino-acid sequence derived from a protective protein found in gastric juice, widely studied in preclinical research literature.",
@@ -161,7 +160,8 @@ export const peptides: Peptide[] = [
     name: "TB-500",
     fullName: "Thymosin Beta-4 Fragment",
     category: "Recovery & Repair",
-    image: tb500Img,
+    image: vialImg,
+    availableDoses: ["2 mg", "5 mg", "10 mg"],
     tagline: "A synthetic fragment related to thymosin beta-4, studied in recovery research.",
     overview:
       "TB-500 is a synthetic peptide related to a region of thymosin beta-4, a naturally occurring protein studied in cellular migration and tissue research.",
@@ -190,7 +190,8 @@ export const peptides: Peptide[] = [
     slug: "cjc-1295",
     name: "CJC-1295",
     category: "Growth Hormone Secretagogue",
-    image: cjc1295Img,
+    image: vialImg,
+    availableDoses: ["2 mg", "5 mg", "10 mg"],
     tagline: "A long-acting GHRH analog studied in endocrine research.",
     overview:
       "CJC-1295 is a synthetic peptide modeled on GHRH(1-29). Research versions exist with and without a Drug Affinity Complex (DAC) modification that extends half-life.",
@@ -219,7 +220,8 @@ export const peptides: Peptide[] = [
     slug: "ipamorelin",
     name: "Ipamorelin",
     category: "Growth Hormone Secretagogue",
-    image: ipamorelinImg,
+    image: vialImg,
+    availableDoses: ["2 mg", "5 mg", "10 mg"],
     tagline: "A selective ghrelin-receptor agonist studied in endocrine research.",
     overview:
       "Ipamorelin is a synthetic pentapeptide and selective growth hormone secretagogue receptor (GHS-R) agonist studied in endocrine research.",
