@@ -71,7 +71,7 @@ function PeptidePage() {
               <FlaskConical className="h-5 w-5 text-primary" /> Common Research Applications
             </h2>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {p.applications.map((a) => (
+              {p.applications.map((a: string) => (
                 <li key={a} className="rounded-lg border border-border bg-card p-4 text-sm">{a}</li>
               ))}
             </ul>
