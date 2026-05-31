@@ -2,10 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, BeakerIcon, BookText, FlaskConical, HelpCircle, Microscope, Workflow } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { Disclaimer } from "@/components/Disclaimer";
-import { getPeptide, peptides } from "@/data/peptides";
+import { getPeptide, peptides, type Peptide } from "@/data/peptides";
 
 export const Route = createFileRoute("/peptides/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { peptide: Peptide } => {
     const peptide = getPeptide(params.slug);
     if (!peptide) throw notFound();
     return { peptide };
