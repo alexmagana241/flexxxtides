@@ -1,13 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Moon, Sun, FlaskConical, X } from "lucide-react";
+import { Menu, Moon, Sun, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
+import { BrandMark } from "./BrandMark";
 
 const links = [
   { to: "/", label: "Home" },
   { to: "/catalog", label: "Catalog" },
-  { to: "/reconstitution", label: "Reconstitution" },
-  { to: "/learning", label: "Learning" },
+  { to: "/research-library", label: "Research Library" },
   { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -17,15 +17,11 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
+    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/85 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <span className="h-9 w-9 rounded-lg bg-gradient-primary grid place-items-center shadow-glow">
-            <FlaskConical className="h-5 w-5 text-primary-foreground" />
-          </span>
-          <span className="font-display font-semibold tracking-tight">
-            Flex<span className="text-primary"> Peptide</span> Research
-          </span>
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <span className="text-primary"><BrandMark className="h-8 w-8" /></span>
+          <span className="font-display font-bold tracking-[0.18em] text-sm">BIOHACKERS</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
@@ -42,7 +38,14 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
+          <Link
+            to="/cart"
+            aria-label="Cart"
+            className="h-9 w-9 grid place-items-center rounded-md hover:bg-muted transition-colors"
+          >
+            <ShoppingCart className="h-4 w-4" />
+          </Link>
           <button
             onClick={toggle}
             aria-label="Toggle theme"
