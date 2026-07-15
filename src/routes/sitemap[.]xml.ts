@@ -1,15 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { peptides } from "@/data/peptides";
+import { items } from "@/data/peptides";
+import { BRAND, POLICY_LINKS } from "@/lib/compliance";
 
-const BASE_URL = "";
+const BASE_URL = BRAND.domain;
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const staticPaths = ["/", "/catalog", "/reconstitution", "/learning", "/faq", "/contact"];
-        const dynamic = peptides.map((p) => `/peptides/${p.slug}`);
+        const staticPaths = [
+          "/", "/catalog", "/research-library", "/faq", "/contact",
+          ...POLICY_LINKS.map((p) => p.to),
+        ];
+        const dynamic = items.map((p) => `/peptides/${p.slug}`);
         const urls = [...staticPaths, ...dynamic].map(
           (p) => `  <url><loc>${BASE_URL}${p}</loc><changefreq>weekly</changefreq></url>`,
         );
