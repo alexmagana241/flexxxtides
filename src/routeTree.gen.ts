@@ -10,10 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ResearchLibraryRouteImport } from './routes/research-library'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as EligibilityRouteImport } from './routes/eligibility'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CatalogRouteImport } from './routes/catalog'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PoliciesTermsOfSaleRouteImport } from './routes/policies.terms-of-sale'
+import { Route as PoliciesShippingRouteImport } from './routes/policies.shipping'
+import { Route as PoliciesRestrictedRouteImport } from './routes/policies.restricted'
+import { Route as PoliciesResearchUseRouteImport } from './routes/policies.research-use'
+import { Route as PoliciesRefundsRouteImport } from './routes/policies.refunds'
+import { Route as PoliciesPrivacyRouteImport } from './routes/policies.privacy'
+import { Route as PoliciesIpRouteImport } from './routes/policies.ip'
+import { Route as PoliciesAccessibilityRouteImport } from './routes/policies.accessibility'
+import { Route as PoliciesAcceptableUseRouteImport } from './routes/policies.acceptable-use'
 import { Route as PeptidesSlugRouteImport } from './routes/peptides.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -21,9 +35,19 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResearchLibraryRoute = ResearchLibraryRouteImport.update({
+  id: '/research-library',
+  path: '/research-library',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EligibilityRoute = EligibilityRouteImport.update({
+  id: '/eligibility',
+  path: '/eligibility',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -31,14 +55,74 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogRoute = CatalogRouteImport.update({
   id: '/catalog',
   path: '/catalog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesTermsOfSaleRoute = PoliciesTermsOfSaleRouteImport.update({
+  id: '/policies/terms-of-sale',
+  path: '/policies/terms-of-sale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesShippingRoute = PoliciesShippingRouteImport.update({
+  id: '/policies/shipping',
+  path: '/policies/shipping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRestrictedRoute = PoliciesRestrictedRouteImport.update({
+  id: '/policies/restricted',
+  path: '/policies/restricted',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesResearchUseRoute = PoliciesResearchUseRouteImport.update({
+  id: '/policies/research-use',
+  path: '/policies/research-use',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRefundsRoute = PoliciesRefundsRouteImport.update({
+  id: '/policies/refunds',
+  path: '/policies/refunds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesPrivacyRoute = PoliciesPrivacyRouteImport.update({
+  id: '/policies/privacy',
+  path: '/policies/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesIpRoute = PoliciesIpRouteImport.update({
+  id: '/policies/ip',
+  path: '/policies/ip',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesAccessibilityRoute = PoliciesAccessibilityRouteImport.update({
+  id: '/policies/accessibility',
+  path: '/policies/accessibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesAcceptableUseRoute = PoliciesAcceptableUseRouteImport.update({
+  id: '/policies/acceptable-use',
+  path: '/policies/acceptable-use',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PeptidesSlugRoute = PeptidesSlugRouteImport.update({
@@ -49,63 +133,161 @@ const PeptidesSlugRoute = PeptidesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
   '/catalog': typeof CatalogRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
+  '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
+  '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
+  '/policies/accessibility': typeof PoliciesAccessibilityRoute
+  '/policies/ip': typeof PoliciesIpRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/research-use': typeof PoliciesResearchUseRoute
+  '/policies/restricted': typeof PoliciesRestrictedRoute
+  '/policies/shipping': typeof PoliciesShippingRoute
+  '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
   '/catalog': typeof CatalogRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
+  '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
+  '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
+  '/policies/accessibility': typeof PoliciesAccessibilityRoute
+  '/policies/ip': typeof PoliciesIpRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/research-use': typeof PoliciesResearchUseRoute
+  '/policies/restricted': typeof PoliciesRestrictedRoute
+  '/policies/shipping': typeof PoliciesShippingRoute
+  '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
   '/catalog': typeof CatalogRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
+  '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
+  '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
+  '/policies/accessibility': typeof PoliciesAccessibilityRoute
+  '/policies/ip': typeof PoliciesIpRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/refunds': typeof PoliciesRefundsRoute
+  '/policies/research-use': typeof PoliciesResearchUseRoute
+  '/policies/restricted': typeof PoliciesRestrictedRoute
+  '/policies/shipping': typeof PoliciesShippingRoute
+  '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/cart'
     | '/catalog'
+    | '/checkout'
     | '/contact'
+    | '/eligibility'
     | '/faq'
+    | '/research-library'
     | '/sitemap.xml'
     | '/peptides/$slug'
+    | '/policies/acceptable-use'
+    | '/policies/accessibility'
+    | '/policies/ip'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/research-use'
+    | '/policies/restricted'
+    | '/policies/shipping'
+    | '/policies/terms-of-sale'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
+    | '/cart'
     | '/catalog'
+    | '/checkout'
     | '/contact'
+    | '/eligibility'
     | '/faq'
+    | '/research-library'
     | '/sitemap.xml'
     | '/peptides/$slug'
+    | '/policies/acceptable-use'
+    | '/policies/accessibility'
+    | '/policies/ip'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/research-use'
+    | '/policies/restricted'
+    | '/policies/shipping'
+    | '/policies/terms-of-sale'
   id:
     | '__root__'
     | '/'
+    | '/admin'
+    | '/cart'
     | '/catalog'
+    | '/checkout'
     | '/contact'
+    | '/eligibility'
     | '/faq'
+    | '/research-library'
     | '/sitemap.xml'
     | '/peptides/$slug'
+    | '/policies/acceptable-use'
+    | '/policies/accessibility'
+    | '/policies/ip'
+    | '/policies/privacy'
+    | '/policies/refunds'
+    | '/policies/research-use'
+    | '/policies/restricted'
+    | '/policies/shipping'
+    | '/policies/terms-of-sale'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  CartRoute: typeof CartRoute
   CatalogRoute: typeof CatalogRoute
+  CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
+  EligibilityRoute: typeof EligibilityRoute
   FaqRoute: typeof FaqRoute
+  ResearchLibraryRoute: typeof ResearchLibraryRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   PeptidesSlugRoute: typeof PeptidesSlugRoute
+  PoliciesAcceptableUseRoute: typeof PoliciesAcceptableUseRoute
+  PoliciesAccessibilityRoute: typeof PoliciesAccessibilityRoute
+  PoliciesIpRoute: typeof PoliciesIpRoute
+  PoliciesPrivacyRoute: typeof PoliciesPrivacyRoute
+  PoliciesRefundsRoute: typeof PoliciesRefundsRoute
+  PoliciesResearchUseRoute: typeof PoliciesResearchUseRoute
+  PoliciesRestrictedRoute: typeof PoliciesRestrictedRoute
+  PoliciesShippingRoute: typeof PoliciesShippingRoute
+  PoliciesTermsOfSaleRoute: typeof PoliciesTermsOfSaleRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -117,11 +299,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/research-library': {
+      id: '/research-library'
+      path: '/research-library'
+      fullPath: '/research-library'
+      preLoaderRoute: typeof ResearchLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/faq': {
       id: '/faq'
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eligibility': {
+      id: '/eligibility'
+      path: '/eligibility'
+      fullPath: '/eligibility'
+      preLoaderRoute: typeof EligibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -131,6 +327,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalog': {
       id: '/catalog'
       path: '/catalog'
@@ -138,11 +341,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/terms-of-sale': {
+      id: '/policies/terms-of-sale'
+      path: '/policies/terms-of-sale'
+      fullPath: '/policies/terms-of-sale'
+      preLoaderRoute: typeof PoliciesTermsOfSaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/shipping': {
+      id: '/policies/shipping'
+      path: '/policies/shipping'
+      fullPath: '/policies/shipping'
+      preLoaderRoute: typeof PoliciesShippingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/restricted': {
+      id: '/policies/restricted'
+      path: '/policies/restricted'
+      fullPath: '/policies/restricted'
+      preLoaderRoute: typeof PoliciesRestrictedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/research-use': {
+      id: '/policies/research-use'
+      path: '/policies/research-use'
+      fullPath: '/policies/research-use'
+      preLoaderRoute: typeof PoliciesResearchUseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/refunds': {
+      id: '/policies/refunds'
+      path: '/policies/refunds'
+      fullPath: '/policies/refunds'
+      preLoaderRoute: typeof PoliciesRefundsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/privacy': {
+      id: '/policies/privacy'
+      path: '/policies/privacy'
+      fullPath: '/policies/privacy'
+      preLoaderRoute: typeof PoliciesPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/ip': {
+      id: '/policies/ip'
+      path: '/policies/ip'
+      fullPath: '/policies/ip'
+      preLoaderRoute: typeof PoliciesIpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/accessibility': {
+      id: '/policies/accessibility'
+      path: '/policies/accessibility'
+      fullPath: '/policies/accessibility'
+      preLoaderRoute: typeof PoliciesAccessibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/acceptable-use': {
+      id: '/policies/acceptable-use'
+      path: '/policies/acceptable-use'
+      fullPath: '/policies/acceptable-use'
+      preLoaderRoute: typeof PoliciesAcceptableUseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/peptides/$slug': {
@@ -157,11 +437,25 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  CartRoute: CartRoute,
   CatalogRoute: CatalogRoute,
+  CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
+  EligibilityRoute: EligibilityRoute,
   FaqRoute: FaqRoute,
+  ResearchLibraryRoute: ResearchLibraryRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   PeptidesSlugRoute: PeptidesSlugRoute,
+  PoliciesAcceptableUseRoute: PoliciesAcceptableUseRoute,
+  PoliciesAccessibilityRoute: PoliciesAccessibilityRoute,
+  PoliciesIpRoute: PoliciesIpRoute,
+  PoliciesPrivacyRoute: PoliciesPrivacyRoute,
+  PoliciesRefundsRoute: PoliciesRefundsRoute,
+  PoliciesResearchUseRoute: PoliciesResearchUseRoute,
+  PoliciesRestrictedRoute: PoliciesRestrictedRoute,
+  PoliciesShippingRoute: PoliciesShippingRoute,
+  PoliciesTermsOfSaleRoute: PoliciesTermsOfSaleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

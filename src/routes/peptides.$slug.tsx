@@ -96,7 +96,7 @@ function PeptidePage() {
 
             <Section title="Analytical methods">
               <ul className="grid gap-2 sm:grid-cols-2">
-                {p.analyticalMethods.map((m) => (
+                {p.analyticalMethods.map((m: string) => (
                   <li key={m} className="rounded-md border border-border bg-card p-3 text-sm">{m}</li>
                 ))}
               </ul>
@@ -104,7 +104,7 @@ function PeptidePage() {
 
             <Section title="References">
               <ul className="space-y-2 text-sm text-muted-foreground">
-                {p.references.map((r) => (
+                {p.references.map((r: string) => (
                   <li key={r} className="border-l-2 border-border pl-3">{r}</li>
                 ))}
               </ul>
@@ -128,7 +128,7 @@ function PeptidePage() {
             <div className="rounded-xl border border-border bg-card p-5">
               <p className="text-xs uppercase tracking-wider text-muted-foreground">Pack sizes</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {p.packSizes.map((d) => (
+                {p.packSizes.map((d: string) => (
                   <span key={d} className="px-3 py-1.5 rounded-md border border-primary/40 bg-primary/10 text-primary text-sm font-semibold">
                     {d}
                   </span>
