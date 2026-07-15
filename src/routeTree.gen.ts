@@ -10,8 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ReconstitutionRouteImport } from './routes/reconstitution'
-import { Route as LearningRouteImport } from './routes/learning'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CatalogRouteImport } from './routes/catalog'
@@ -21,16 +19,6 @@ import { Route as PeptidesSlugRouteImport } from './routes/peptides.$slug'
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReconstitutionRoute = ReconstitutionRouteImport.update({
-  id: '/reconstitution',
-  path: '/reconstitution',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LearningRoute = LearningRouteImport.update({
-  id: '/learning',
-  path: '/learning',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -64,8 +52,6 @@ export interface FileRoutesByFullPath {
   '/catalog': typeof CatalogRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/learning': typeof LearningRoute
-  '/reconstitution': typeof ReconstitutionRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
 }
@@ -74,8 +60,6 @@ export interface FileRoutesByTo {
   '/catalog': typeof CatalogRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/learning': typeof LearningRoute
-  '/reconstitution': typeof ReconstitutionRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
 }
@@ -85,8 +69,6 @@ export interface FileRoutesById {
   '/catalog': typeof CatalogRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/learning': typeof LearningRoute
-  '/reconstitution': typeof ReconstitutionRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
 }
@@ -97,8 +79,6 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/contact'
     | '/faq'
-    | '/learning'
-    | '/reconstitution'
     | '/sitemap.xml'
     | '/peptides/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -107,8 +87,6 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/contact'
     | '/faq'
-    | '/learning'
-    | '/reconstitution'
     | '/sitemap.xml'
     | '/peptides/$slug'
   id:
@@ -117,8 +95,6 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/contact'
     | '/faq'
-    | '/learning'
-    | '/reconstitution'
     | '/sitemap.xml'
     | '/peptides/$slug'
   fileRoutesById: FileRoutesById
@@ -128,8 +104,6 @@ export interface RootRouteChildren {
   CatalogRoute: typeof CatalogRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
-  LearningRoute: typeof LearningRoute
-  ReconstitutionRoute: typeof ReconstitutionRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   PeptidesSlugRoute: typeof PeptidesSlugRoute
 }
@@ -141,20 +115,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reconstitution': {
-      id: '/reconstitution'
-      path: '/reconstitution'
-      fullPath: '/reconstitution'
-      preLoaderRoute: typeof ReconstitutionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/learning': {
-      id: '/learning'
-      path: '/learning'
-      fullPath: '/learning'
-      preLoaderRoute: typeof LearningRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -200,8 +160,6 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogRoute: CatalogRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
-  LearningRoute: LearningRoute,
-  ReconstitutionRoute: ReconstitutionRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   PeptidesSlugRoute: PeptidesSlugRoute,
 }
