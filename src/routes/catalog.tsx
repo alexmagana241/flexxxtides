@@ -1,18 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState, useEffect } from "react";
-import { ArrowRight, Search, Lock } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowRight, Search } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
+import { Vial } from "@/components/Vial";
 import { items, categories } from "@/data/peptides";
-import { BRAND, readEligibility } from "@/lib/compliance";
+import { BRAND, formatPrice } from "@/lib/compliance";
 
 export const Route = createFileRoute("/catalog")({
   head: () => ({
     meta: [
       { title: "Catalog — BIOHACKERS Research Materials" },
-      { name: "description", content: "Searchable catalog of BIOHACKERS peptide reference standards for laboratory, analytical, and non-clinical research. Not for human or veterinary use." },
+      { name: "description", content: "Searchable catalog of BIOHACKERS peptide reference standards for laboratory, analytical, and non-clinical research. Pricing per pack size. Not for human or veterinary use." },
       { property: "og:title", content: "Catalog — BIOHACKERS Research Materials" },
-      { property: "og:description", content: "Peptide reference standards for laboratory research." },
+      { property: "og:description", content: "Peptide reference standards for laboratory research, priced per pack size." },
       { property: "og:url", content: `${BRAND.domain}/catalog` },
     ],
     links: [{ rel: "canonical", href: `${BRAND.domain}/catalog` }],
@@ -23,11 +24,6 @@ export const Route = createFileRoute("/catalog")({
 function Catalog() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string>("All");
-  const [verified, setVerified] = useState(false);
-
-  useEffect(() => {
-    setVerified(!!readEligibility());
-  }, []);
 
   const filtered = useMemo(() => {
     return items.filter((p) => {
@@ -51,7 +47,8 @@ function Catalog() {
           <p className="text-[10px] uppercase tracking-wider text-primary font-semibold">Research materials</p>
           <h1 className="mt-2 text-4xl font-bold tracking-tight">Catalog</h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">
-            Characterized peptide reference standards supplied to qualified research organizations.
+            Characterized peptide reference standards supplied for laboratory research.
+            Every pack ships as a lyophilized powder with a Certificate of Analysis.
           </p>
           <div className="mt-5 max-w-3xl">
             <ResearchUseNotice variant="callout" />
@@ -87,25 +84,10 @@ function Catalog() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        {!verified && (
-          <div className="mb-8 rounded-lg border border-border bg-card p-5 flex flex-col sm:flex-row sm:items-center gap-4">
-            <Lock className="h-5 w-5 text-primary shrink-0" />
-            <div className="flex-1">
-              <p className="text-sm font-semibold">Pricing and ordering are gated.</p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Complete research-eligibility verification to request quotes and view pack pricing.
-              </p>
-            </div>
-            <Link to="/eligibility" className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
-              Verify eligibility <ArrowRight className="h-3 w-3" />
-            </Link>
-          </div>
-        )}
-
         {filtered.length === 0 ? (
           <p className="text-center text-muted-foreground py-20">No catalog items match your search.</p>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((p) => (
               <Link
                 key={p.slug}
@@ -113,39 +95,41 @@ function Catalog() {
                 params={{ slug: p.slug }}
                 className="group rounded-xl border border-border bg-card p-5 card-hover flex flex-col"
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.catalogNumber}</p>
-                    <h2 className="mt-1 text-lg font-semibold group-hover:text-primary transition">{p.name}</h2>
-                    {p.fullName && <p className="text-xs text-muted-foreground mt-0.5">{p.fullName}</p>}
+                <div className="flex gap-4">
+                  <div className="shrink-0 w-24 grid place-items-center rounded-lg bg-gradient-to-b from-muted/60 to-background border border-border">
+                    <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} className="h-32 w-auto" />
                   </div>
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground shrink-0">{p.category}</span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.catalogNumber}</p>
+                    <h2 className="mt-1 text-lg font-semibold group-hover:text-primary transition truncate">{p.name}</h2>
+                    {p.fullName && <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{p.fullName}</p>}
+                    <span className="mt-2 inline-block text-[10px] uppercase tracking-wider text-muted-foreground">{p.category}</span>
+                  </div>
                 </div>
+
                 <dl className="mt-4 grid grid-cols-2 gap-2 text-xs">
                   <div>
                     <dt className="text-muted-foreground">Formula</dt>
-                    <dd className="font-mono">{p.molecularFormula}</dd>
+                    <dd className="font-mono truncate">{p.molecularFormula}</dd>
                   </div>
                   <div>
                     <dt className="text-muted-foreground">MW</dt>
                     <dd>{p.molecularWeight}</dd>
                   </div>
-                  <div>
-                    <dt className="text-muted-foreground">Purity</dt>
-                    <dd>{p.statedPurity.replace(" (documented on Certificate of Analysis)", "")}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-muted-foreground">Form</dt>
-                    <dd>Lyophilized</dd>
-                  </div>
                 </dl>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {p.packSizes.map((d) => (
-                    <span key={d} className="text-[10px] font-medium px-2 py-1 rounded-md border border-border bg-background text-foreground">
-                      {d}
-                    </span>
-                  ))}
+
+                <div className="mt-4">
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Pack sizes & pricing</p>
+                  <ul className="divide-y divide-border rounded-md border border-border">
+                    {p.packs.map((pk: { size: string; priceUSD: number }) => (
+                      <li key={pk.size} className="flex items-center justify-between px-3 py-2 text-sm">
+                        <span className="font-medium">{pk.size}</span>
+                        <span className="tabular-nums font-semibold text-primary">{formatPrice(pk.priceUSD)}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+
                 <div className="mt-4">
                   <ResearchUseNotice variant="chip" />
                 </div>

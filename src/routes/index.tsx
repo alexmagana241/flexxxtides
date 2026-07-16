@@ -2,8 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, FileText, FlaskConical, ShieldCheck, Beaker } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
+import { Vial } from "@/components/Vial";
 import { items } from "@/data/peptides";
-import { BRAND } from "@/lib/compliance";
+import { BRAND, formatPrice } from "@/lib/compliance";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,9 +35,8 @@ function Home() {
               Peptide reference standards for <span className="text-primary">non-clinical research.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground text-balance leading-relaxed">
-              BIOHACKERS supplies characterized peptide reference materials to research
-              organizations for analytical, method-development, and in vitro research
-              applications.
+              BIOHACKERS supplies characterized peptide reference materials for analytical,
+              method-development, and in vitro research applications.
             </p>
             <div className="mt-6 max-w-2xl">
               <ResearchUseNotice variant="callout" />
@@ -45,8 +45,8 @@ function Home() {
               <Link to="/catalog" className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition">
                 Browse the Catalog <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/eligibility" className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-5 py-3 text-sm font-medium hover:bg-muted transition">
-                Verify Research Eligibility
+              <Link to="/research-library" className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-5 py-3 text-sm font-medium hover:bg-muted transition">
+                Open the Research Library
               </Link>
             </div>
           </div>
@@ -58,7 +58,7 @@ function Home() {
           {[
             { icon: FileText, title: "Documented", body: "Each catalog item ships with a Certificate of Analysis and Safety Data Sheet describing purity, identity, and handling." },
             { icon: Beaker, title: "Laboratory-Only", body: "Materials are supplied as dry lyophilized powder for in vitro and analytical research — never for administration to humans or animals." },
-            { icon: ShieldCheck, title: "Verified Purchasers", body: "Orders require research-eligibility verification and are subject to administrative review before fulfillment." },
+            { icon: ShieldCheck, title: "Transparent Pricing", body: "Every pack size is listed with a price set approximately 3% below reference-standard market rates." },
           ].map(({ icon: Icon, title, body }) => (
             <div key={title} className="rounded-xl border border-border bg-card p-6 card-hover">
               <Icon className="h-5 w-5 text-primary" />
@@ -85,40 +85,17 @@ function Home() {
               key={p.slug}
               to="/peptides/$slug"
               params={{ slug: p.slug }}
-              className="group rounded-xl border border-border bg-card p-5 card-hover flex flex-col"
+              className="group rounded-xl border border-border bg-card p-5 card-hover flex flex-col items-center text-center"
             >
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.catalogNumber}</span>
+              <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} className="h-36 w-auto" />
+              <span className="mt-3 text-[10px] uppercase tracking-wider text-muted-foreground">{p.catalogNumber}</span>
               <h3 className="mt-1 text-base font-semibold group-hover:text-primary transition-colors">{p.name}</h3>
-              <p className="mt-1 text-xs text-muted-foreground">{p.category}</p>
-              <p className="mt-3 text-xs text-muted-foreground">MW {p.molecularWeight}</p>
-              <div className="mt-4">
-                <ResearchUseNotice variant="chip" />
-              </div>
-              <span className="mt-5 inline-flex items-center gap-1 text-xs text-primary">
+              <p className="mt-1 text-xs text-muted-foreground">from {formatPrice(p.packs[0].priceUSD)}</p>
+              <span className="mt-4 inline-flex items-center gap-1 text-xs text-primary">
                 Specification <ArrowRight className="h-3 w-3" />
               </span>
             </Link>
           ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="rounded-2xl border border-border bg-card p-10 md:p-14">
-          <h2 className="text-3xl font-bold tracking-tight">For qualified research organizations only</h2>
-          <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">
-            Pricing and ordering are gated behind a research-eligibility verification.
-            Applicants must confirm institutional affiliation, laboratory intended use, and
-            acknowledge that BIOHACKERS materials are not offered as drugs, foods,
-            supplements, cosmetics, or veterinary products.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link to="/eligibility" className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground">
-              Start Eligibility Verification <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link to="/policies/research-use" className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium hover:bg-muted">
-              Read Research-Use Policy
-            </Link>
-          </div>
         </div>
       </section>
     </Layout>

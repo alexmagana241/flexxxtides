@@ -1,14 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ArrowLeft, FileText, ShieldAlert, Lock } from "lucide-react";
+import { ArrowLeft, FileText, ShieldAlert } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
+import { Vial } from "@/components/Vial";
 import { getItem, items, type CatalogItem } from "@/data/peptides";
 import {
   BRAND,
   LIVE_CHECKOUT_ENABLED,
   UNAVAILABLE_NOTICE,
-  readEligibility,
+  formatPrice,
 } from "@/lib/compliance";
 
 export const Route = createFileRoute("/peptides/$slug")({
@@ -50,8 +50,6 @@ export const Route = createFileRoute("/peptides/$slug")({
 
 function PeptidePage() {
   const { item: p } = Route.useLoaderData();
-  const [verified, setVerified] = useState(false);
-  useEffect(() => setVerified(!!readEligibility()), []);
 
   return (
     <Layout>
@@ -61,11 +59,18 @@ function PeptidePage() {
             <Link to="/catalog" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
               <ArrowLeft className="h-3 w-3" /> Back to catalog
             </Link>
-            <p className="mt-6 text-[11px] uppercase tracking-wider text-primary font-semibold">{p.catalogNumber} · {p.category}</p>
-            <h1 className="mt-2 text-4xl font-bold tracking-tight">{p.name}</h1>
-            {p.fullName && <p className="text-muted-foreground mt-1">{p.fullName}</p>}
-            <div className="mt-6 max-w-3xl">
-              <ResearchUseNotice variant="callout" />
+            <div className="mt-6 grid gap-8 md:grid-cols-[220px_1fr] items-start">
+              <div className="rounded-xl border border-border bg-card p-4 grid place-items-center">
+                <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} className="h-56 w-auto" />
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-wider text-primary font-semibold">{p.catalogNumber} · {p.category}</p>
+                <h1 className="mt-2 text-4xl font-bold tracking-tight">{p.name}</h1>
+                {p.fullName && <p className="text-muted-foreground mt-1">{p.fullName}</p>}
+                <div className="mt-4 max-w-2xl">
+                  <ResearchUseNotice variant="callout" />
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -114,54 +119,39 @@ function PeptidePage() {
                 materials for use in or on humans or animals.
               </p>
             </Section>
-
-            <Section title="Institutional use">
-              <p className="text-muted-foreground leading-relaxed">
-                BIOHACKERS supplies this material exclusively to research organizations
-                for laboratory, analytical, and non-clinical research. Orders are subject
-                to research-eligibility verification and administrative review.
-              </p>
-            </Section>
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-24 self-start">
             <div className="rounded-xl border border-border bg-card p-5">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">Pack sizes</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {p.packSizes.map((d: string) => (
-                  <span key={d} className="px-3 py-1.5 rounded-md border border-primary/40 bg-primary/10 text-primary text-sm font-semibold">
-                    {d}
-                  </span>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">Pack sizes & pricing</p>
+              <ul className="mt-3 divide-y divide-border rounded-md border border-border">
+                {p.packs.map((pk: { size: string; priceUSD: number }) => (
+                  <li key={pk.size} className="flex items-center justify-between px-3 py-2.5">
+                    <div>
+                      <p className="text-sm font-semibold">{pk.size}</p>
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Lyophilized · single vial</p>
+                    </div>
+                    <p className="tabular-nums text-base font-bold text-primary">{formatPrice(pk.priceUSD)}</p>
+                  </li>
                 ))}
-              </div>
+              </ul>
+              <p className="mt-3 text-[10px] text-muted-foreground">
+                Prices set approximately 3% below current reference-standard market pricing. Subject to change.
+              </p>
 
               <div className="mt-5 border-t border-border pt-5">
-                {!verified ? (
-                  <>
-                    <div className="flex items-center gap-2 text-sm font-semibold">
-                      <Lock className="h-4 w-4 text-primary" /> Pricing gated
-                    </div>
-                    <p className="mt-2 text-xs text-muted-foreground">Complete eligibility verification to request pricing.</p>
-                    <Link to="/eligibility" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
-                      Verify eligibility
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <div className="rounded-md border border-primary/40 bg-primary/5 p-3">
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-primary">Research use only</p>
-                      <p className="mt-1 text-xs text-muted-foreground">Not for human or veterinary use.</p>
-                    </div>
-                    <button
-                      disabled
-                      className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary/40 px-4 py-2 text-sm font-medium text-primary-foreground cursor-not-allowed"
-                      title={UNAVAILABLE_NOTICE}
-                    >
-                      {LIVE_CHECKOUT_ENABLED ? "Add to Cart" : "Purchasing unavailable"}
-                    </button>
-                    <p className="mt-2 text-[11px] text-muted-foreground text-center">{UNAVAILABLE_NOTICE}</p>
-                  </>
-                )}
+                <div className="rounded-md border border-primary/40 bg-primary/5 p-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-primary">Research use only</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Not for human or veterinary use.</p>
+                </div>
+                <button
+                  disabled
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary/40 px-4 py-2 text-sm font-medium text-primary-foreground cursor-not-allowed"
+                  title={UNAVAILABLE_NOTICE}
+                >
+                  {LIVE_CHECKOUT_ENABLED ? "Add to Cart" : "Purchasing unavailable"}
+                </button>
+                <p className="mt-2 text-[11px] text-muted-foreground text-center">{UNAVAILABLE_NOTICE}</p>
               </div>
             </div>
 

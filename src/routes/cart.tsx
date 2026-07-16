@@ -8,7 +8,7 @@ export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
       { title: "Cart — BIOHACKERS" },
-      { name: "description", content: "BIOHACKERS shopping cart. Online purchasing is currently unavailable pending legal and payment-processor review." },
+      { name: "description", content: "BIOHACKERS shopping cart. Online purchasing is currently unavailable pending payment-processor review." },
       { property: "og:url", content: `${BRAND.domain}/cart` },
       { name: "robots", content: "noindex" },
     ],
@@ -43,11 +43,10 @@ function Cart() {
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="font-semibold">Before checkout, we require</h2>
+          <h2 className="font-semibold">Before checkout</h2>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground list-disc pl-5">
-            <li>Completed <Link to="/eligibility" className="text-primary hover:underline">research-eligibility verification</Link></li>
+            <li>Confirm you are 21+ and understand these materials are for research only</li>
             <li>Acceptance of the <Link to="/policies/terms-of-sale" className="text-primary hover:underline">Terms of Sale</Link> and <Link to="/policies/research-use" className="text-primary hover:underline">Research-Use Policy</Link></li>
-            <li>Institutional (non-residential) shipping address</li>
           </ul>
         </div>
       </div>

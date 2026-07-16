@@ -9,7 +9,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
-            <span className="text-primary"><BrandMark className="h-9 w-9" /></span>
+            <BrandMark className="h-9 w-9" />
             <span className="font-display font-bold tracking-[0.18em] text-sm">BIOHACKERS</span>
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-md leading-relaxed">
@@ -26,7 +26,6 @@ export function Footer() {
             <li><Link to="/research-library" className="hover:text-foreground">Research Library</Link></li>
             <li><Link to="/faq" className="hover:text-foreground">FAQ</Link></li>
             <li><Link to="/contact" className="hover:text-foreground">Contact & Compliance</Link></li>
-            <li><Link to="/eligibility" className="hover:text-foreground">Research Eligibility</Link></li>
           </ul>
         </div>
         <div>
