@@ -125,7 +125,7 @@ function PeptidePage() {
             <div className="rounded-xl border border-border bg-card p-5">
               <p className="text-xs uppercase tracking-wider text-muted-foreground">Pack sizes & pricing</p>
               <ul className="mt-3 divide-y divide-border rounded-md border border-border">
-                {p.packs.map((pk) => (
+                {p.packs.map((pk: { size: string; priceUSD: number }) => (
                   <li key={pk.size} className="flex items-center justify-between px-3 py-2.5">
                     <div>
                       <p className="text-sm font-semibold">{pk.size}</p>

@@ -121,7 +121,7 @@ function Catalog() {
                 <div className="mt-4">
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Pack sizes & pricing</p>
                   <ul className="divide-y divide-border rounded-md border border-border">
-                    {p.packs.map((pk) => (
+                    {p.packs.map((pk: { size: string; priceUSD: number }) => (
                       <li key={pk.size} className="flex items-center justify-between px-3 py-2 text-sm">
                         <span className="font-medium">{pk.size}</span>
                         <span className="tabular-nums font-semibold text-primary">{formatPrice(pk.priceUSD)}</span>

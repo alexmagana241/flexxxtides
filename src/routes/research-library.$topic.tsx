@@ -1,13 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, FileText, FlaskConical, HardHat, Recycle, ShieldCheck, TestTube } from "lucide-react";
+import type { ComponentType } from "react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { BRAND } from "@/lib/compliance";
-import { articles, getArticle, type LibraryArticle } from "@/data/library";
+import { articles, getArticle, type LibraryArticle, type LibraryIcon, type LibrarySection } from "@/data/library";
 
-const iconMap = {
+const iconMap: Record<LibraryIcon, ComponentType<{ className?: string }>> = {
   FileText, TestTube, ShieldCheck, HardHat, FlaskConical, Recycle, BookOpen,
-} as const;
+};
 
 export const Route = createFileRoute("/research-library/$topic")({
   loader: ({ params }): { article: LibraryArticle } => {
@@ -68,17 +69,17 @@ function TopicPage() {
         </section>
 
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 space-y-10">
-          {a.sections.map((s) => (
+          {a.sections.map((s: LibrarySection) => (
             <section key={s.heading}>
               <h2 className="text-xl font-bold tracking-tight">{s.heading}</h2>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                {s.paragraphs.map((p, i) => (
+                {s.paragraphs.map((p: string, i: number) => (
                   <p key={i}>{p}</p>
                 ))}
               </div>
               {s.bullets && (
                 <ul className="mt-4 grid gap-2 text-sm">
-                  {s.bullets.map((b) => (
+                  {s.bullets.map((b: string) => (
                     <li key={b} className="rounded-md border border-border bg-card p-3">{b}</li>
                   ))}
                 </ul>
@@ -90,7 +91,7 @@ function TopicPage() {
             <section className="rounded-xl border border-border bg-card p-5">
               <h2 className="text-sm font-semibold uppercase tracking-wider">Further reading</h2>
               <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                {a.furtherReading.map((r) => (
+                {a.furtherReading.map((r: string) => (
                   <li key={r} className="border-l-2 border-border pl-3">{r}</li>
                 ))}
               </ul>
