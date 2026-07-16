@@ -44,7 +44,7 @@ export const Route = createFileRoute("/research-library/$topic")({
 });
 
 function TopicPage() {
-  const { article: a } = Route.useLoaderData();
+  const { article: a } = Route.useLoaderData() as { article: LibraryArticle };
   const Icon = iconMap[a.icon];
   const others = articles.filter((x) => x.slug !== a.slug).slice(0, 4);
 
