@@ -55,7 +55,6 @@ export const items: CatalogItem[] = [
     packs: [
       { size: "50 mg", priceUSD: 38.80 },
       { size: "100 mg", priceUSD: 58.20 },
-      { size: "200 mg", priceUSD: 96.99 },
     ],
     scientificSummary:
       "A copper(II) coordination complex of the tripeptide glycyl-L-histidyl-L-lysine. First isolated from human plasma in 1973 (Pickart & Thaler) and referenced across a broad body of biochemistry and materials-science literature examining copper-peptide coordination chemistry, extracellular-matrix biology in cell-culture systems, and antioxidant enzyme assays. Supplied as a laboratory reference standard for in vitro assay development and analytical characterization.",
@@ -77,10 +76,11 @@ export const items: CatalogItem[] = [
     statedPurity: "≥ 98% (documented on Certificate of Analysis)",
     storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
     packs: [
-      { size: "5 mg", priceUSD: 135.80 },
-      { size: "10 mg", priceUSD: 242.50 },
-      { size: "15 mg", priceUSD: 349.20 },
-      { size: "20 mg", priceUSD: 446.20 },
+      { size: "5 mg", priceUSD: 40 },
+      { size: "10 mg", priceUSD: 80 },
+      { size: "20 mg", priceUSD: 120 },
+      { size: "30 mg", priceUSD: 160 },
+      { size: "60 mg", priceUSD: 310 },
     ],
     scientificSummary:
       "An investigational reference peptide described in the endocrinology literature in the context of tri-receptor incretin pharmacology research (GIP, GLP-1, and glucagon receptors). Supplied as a laboratory reference standard for analytical, receptor-binding, and method-development research applications.",
@@ -103,9 +103,8 @@ export const items: CatalogItem[] = [
     statedPurity: "≥ 98% (documented on Certificate of Analysis)",
     storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
     packs: [
-      { size: "2 mg", priceUSD: 48.50 },
-      { size: "5 mg", priceUSD: 111.55 },
-      { size: "10 mg", priceUSD: 203.70 },
+      { size: "5 mg", priceUSD: 60 },
+      { size: "10 mg", priceUSD: 100 },
     ],
     scientificSummary:
       "A stabilized 44-amino-acid GHRH analog referenced in endocrinology literature as a laboratory reference standard for receptor-binding, analytical, and method-development research.",
@@ -125,8 +124,8 @@ export const items: CatalogItem[] = [
     statedPurity: "≥ 98% (documented on Certificate of Analysis)",
     storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
     packs: [
-      { size: "5 mg", priceUSD: 38.80 },
-      { size: "10 mg", priceUSD: 67.90 },
+      { size: "5 mg", priceUSD: 60 },
+      { size: "10 mg", priceUSD: 80 },
     ],
     scientificSummary:
       "A synthetic pentadecapeptide whose sequence is described in the preclinical research literature as a partial sequence derived from gastric juice protein studies. Supplied as a laboratory reference standard for in vitro assay development and analytical characterization only.",
@@ -146,7 +145,6 @@ export const items: CatalogItem[] = [
     statedPurity: "≥ 98% (documented on Certificate of Analysis)",
     storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
     packs: [
-      { size: "2 mg", priceUSD: 24.25 },
       { size: "5 mg", priceUSD: 48.50 },
       { size: "10 mg", priceUSD: 87.30 },
     ],
@@ -189,7 +187,6 @@ export const items: CatalogItem[] = [
     statedPurity: "≥ 98% (documented on Certificate of Analysis)",
     storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
     packs: [
-      { size: "2 mg", priceUSD: 24.25 },
       { size: "5 mg", priceUSD: 43.65 },
       { size: "10 mg", priceUSD: 82.45 },
     ],
