@@ -177,7 +177,7 @@ function PeptidePage() {
                   "LC-MS spectrum — available on request per lot",
                   "Residual solvent report — available on request where analyzed",
                   "Safety Data Sheet (SDS) — available on request",
-                ]).map((d) => (
+                ]).map((d: string) => (
                   <li key={d} className="flex items-start gap-2 text-muted-foreground">
                     <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{d}</span>
