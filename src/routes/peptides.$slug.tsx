@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, FileText, ShieldAlert } from "lucide-react";
+import { ArrowLeft, CheckCircle2, FileText, ShieldAlert } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
@@ -77,16 +77,27 @@ function PeptidePage() {
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 grid gap-8 lg:grid-cols-[1fr_320px]">
           <div className="space-y-10">
-            <Section title="Specification">
+            <Section title="Identity & specification">
               <dl className="grid gap-4 sm:grid-cols-2">
                 <Row label="Catalog number" value={p.catalogNumber} />
+                <Row label="Research category" value={p.category} />
                 {p.casNumber && <Row label="CAS" value={p.casNumber} />}
+                {p.synonyms && p.synonyms.length > 0 && (
+                  <Row label="Synonyms" value={p.synonyms.join(", ")} />
+                )}
                 <Row label="Molecular formula" value={p.molecularFormula} mono />
                 <Row label="Molecular weight" value={p.molecularWeight} />
                 {p.sequence && <Row label="Sequence" value={p.sequence} mono />}
-                <Row label="Physical form" value={p.physicalForm} />
+                <Row label="Appearance" value={p.appearance ?? p.physicalForm} />
                 <Row label="Stated purity" value={p.statedPurity} />
                 <Row label="Storage" value={p.storage} />
+                {p.shippingTemperature && <Row label="Shipping temperature" value={p.shippingTemperature} />}
+                {p.solubility && <Row label="Solubility" value={p.solubility} />}
+                {p.handling && <Row label="Handling" value={p.handling} />}
+                {p.stability && <Row label="Stability" value={p.stability} />}
+                {p.recommendedAnalyticalUse && (
+                  <Row label="Recommended analytical use" value={p.recommendedAnalyticalUse} />
+                )}
               </dl>
             </Section>
 
@@ -136,7 +147,7 @@ function PeptidePage() {
                 ))}
               </ul>
               <p className="mt-3 text-[10px] text-muted-foreground">
-                Prices set approximately 3% below current reference-standard market pricing. Subject to change.
+                Pricing subject to change without notice.
               </p>
 
               <div className="mt-5 border-t border-border pt-5">
@@ -160,23 +171,27 @@ function PeptidePage() {
                 <FileText className="h-4 w-4 text-primary" /> Documentation
               </div>
               <ul className="mt-3 space-y-2 text-sm">
-                <li>
-                  <span className="text-muted-foreground">Certificate of Analysis:</span>{" "}
-                  <span className="text-xs text-muted-foreground italic">Available on request per lot</span>
-                </li>
-                <li>
-                  <span className="text-muted-foreground">Safety Data Sheet:</span>{" "}
-                  <span className="text-xs text-muted-foreground italic">Available on request</span>
-                </li>
+                {(p.documentation ?? [
+                  "Certificate of Analysis (CoA) — available on request per lot",
+                  "HPLC chromatogram — available on request per lot",
+                  "LC-MS spectrum — available on request per lot",
+                  "Residual solvent report — available on request where analyzed",
+                  "Safety Data Sheet (SDS) — available on request",
+                ]).map((d: string) => (
+                  <li key={d} className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                    <span>{d}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            <div className="rounded-xl border border-destructive/40 bg-destructive/5 p-4 flex gap-3">
-              <ShieldAlert className="h-4 w-4 text-destructive shrink-0 mt-0.5" />
-              <p className="text-xs text-destructive-foreground/90 leading-relaxed">
-                <strong className="text-destructive">Restricted material.</strong> Requests
-                inconsistent with legitimate laboratory research may be held, rejected,
-                cancelled, or refunded.
+            <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 flex gap-3">
+              <ShieldAlert className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                <strong className="text-foreground">Laboratory Research Material.</strong>{" "}
+                Requests inconsistent with legitimate laboratory research may be declined.
+                Materials are supplied exclusively for lawful research and analytical purposes.
               </p>
             </div>
           </aside>
