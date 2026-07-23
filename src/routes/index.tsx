@@ -58,7 +58,7 @@ function Home() {
           {[
             { icon: FileText, title: "Documented", body: "Each catalog item ships with a Certificate of Analysis and Safety Data Sheet describing purity, identity, and handling." },
             { icon: Beaker, title: "Laboratory-Only", body: "Materials are supplied as dry lyophilized powder for in vitro and analytical research — never for administration to humans or animals." },
-            { icon: ShieldCheck, title: "Transparent Pricing", body: "Every pack size is listed with a price set approximately 3% below reference-standard market rates." },
+            { icon: ShieldCheck, title: "Transparent Pricing", body: "Every pack size is listed with a clear price. Pricing is subject to change without notice." },
           ].map(({ icon: Icon, title, body }) => (
             <div key={title} className="rounded-xl border border-border bg-card p-6 card-hover">
               <Icon className="h-5 w-5 text-primary" />

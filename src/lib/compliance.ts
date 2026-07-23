@@ -85,5 +85,10 @@ export const writeEligibility = writeConfirmation;
 export const clearEligibility = clearConfirmation;
 
 export function formatPrice(usd: number): string {
-  return usd.toLocaleString("en-US", { style: "currency", currency: "USD" });
+  return Math.round(usd).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+  });
 }

@@ -8,9 +8,8 @@ export function Footer() {
     <footer className="border-t border-border bg-card/40 mt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-2.5">
-            <BrandMark className="h-9 w-9" />
-            <span className="font-display font-bold tracking-[0.18em] text-sm">BIOHACKERS</span>
+          <div className="flex items-center">
+            <BrandMark className="h-10 w-auto" />
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-md leading-relaxed">
             {FOOTER_NOTICE}
