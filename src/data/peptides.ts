@@ -46,7 +46,6 @@ export interface CatalogItem {
 }
 
 const COMMON = {
-  appearance: "White to off-white lyophilized powder",
   shippingTemperature:
     "Shipped with cold packs; short-term ambient exposure during transit does not typically affect a lyophilized reference standard.",
   solubility:
