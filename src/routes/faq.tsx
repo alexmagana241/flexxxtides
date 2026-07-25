@@ -31,7 +31,7 @@ const sections = [
     items: [
       { q: "Who can purchase?", a: "Purchases are limited to qualified research organizations. Buyers must complete an eligibility verification and affirm intended laboratory use." },
       { q: "Are orders reviewed?", a: "Yes. Orders are subject to administrative review and may be held, rejected, cancelled, or refunded when they appear inconsistent with legitimate laboratory research or otherwise conflict with BIOHACKERS policies or applicable law." },
-      { q: "Is online purchasing currently available?", a: "Online purchasing is currently unavailable pending completion of legal review and payment-processor approval. The catalog is browsable in the meantime." },
+      { q: "Is online purchasing currently available?", a: "Yes, orders may be placed through the online catalog." },
     ],
   },
   {

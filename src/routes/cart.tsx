@@ -2,13 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShoppingCart } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
-import { BRAND, LIVE_CHECKOUT_ENABLED, UNAVAILABLE_NOTICE } from "@/lib/compliance";
+import { BRAND } from "@/lib/compliance";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
       { title: "Cart — BIOHACKERS" },
-      { name: "description", content: "BIOHACKERS shopping cart. Online purchasing is currently unavailable pending payment-processor review." },
+      { name: "description", content: "BIOHACKERS shopping cart." },
       { property: "og:url", content: `${BRAND.domain}/cart` },
       { name: "robots", content: "noindex" },
     ],
@@ -32,11 +32,6 @@ function Cart() {
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 space-y-6">
         <div className="rounded-xl border border-border bg-card p-8 text-center">
           <p className="text-sm text-muted-foreground">Your cart is empty.</p>
-          {!LIVE_CHECKOUT_ENABLED && (
-            <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-primary">
-              {UNAVAILABLE_NOTICE}
-            </p>
-          )}
           <Link to="/catalog" className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
             Browse the catalog
           </Link>
