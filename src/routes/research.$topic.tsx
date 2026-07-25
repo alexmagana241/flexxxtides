@@ -27,9 +27,9 @@ export const Route = createFileRoute("/research/$topic")({
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `${BRAND.domain}/research-library/${params.topic}` },
+        { property: "og:url", content: `${BRAND.domain}/research/${params.topic}` },
       ],
-      links: [{ rel: "canonical", href: `${BRAND.domain}/research-library/${params.topic}` }],
+      links: [{ rel: "canonical", href: `${BRAND.domain}/research/${params.topic}` }],
     };
   },
   component: TopicPage,
