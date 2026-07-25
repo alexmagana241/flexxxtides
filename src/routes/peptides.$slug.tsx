@@ -155,14 +155,12 @@ function PeptidePage() {
                   <p className="text-[11px] font-semibold uppercase tracking-wider text-primary">Research use only</p>
                   <p className="mt-1 text-xs text-muted-foreground">Not for human or veterinary use.</p>
                 </div>
-                <button
-                  disabled
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary/40 px-4 py-2 text-sm font-medium text-primary-foreground cursor-not-allowed"
-                  title={UNAVAILABLE_NOTICE}
+                <Link
+                  to="/checkout"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
                 >
-                  {LIVE_CHECKOUT_ENABLED ? "Add to Cart" : "Purchasing unavailable"}
-                </button>
-                <p className="mt-2 text-[11px] text-muted-foreground text-center">{UNAVAILABLE_NOTICE}</p>
+                  Add to Cart
+                </Link>
               </div>
             </div>
 
