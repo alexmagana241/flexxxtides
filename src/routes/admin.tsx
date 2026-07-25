@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AlertTriangle, ShieldAlert } from "lucide-react";
+import { ShieldAlert } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { DraftBanner } from "@/components/DraftBanner";
 import {

@@ -28,7 +28,7 @@ export interface LibraryArticle {
 
 export const articles: LibraryArticle[] = [
   {
-    slug: "reading-a-certificate-of-analysis",
+    slug: "reading-certificate-of-analysis",
     title: "Reading a Certificate of Analysis",
     icon: "FileText",
     summary:
@@ -89,7 +89,7 @@ export const articles: LibraryArticle[] = [
     ],
   },
   {
-    slug: "interpreting-a-safety-data-sheet",
+    slug: "interpreting-safety-data-sheet",
     title: "Interpreting a Safety Data Sheet",
     icon: "ShieldCheck",
     summary:
@@ -204,7 +204,7 @@ export const articles: LibraryArticle[] = [
     ],
   },
   {
-    slug: "storage-and-stability-principles",
+    slug: "storage-and-stability",
     title: "Storage and stability principles",
     icon: "FlaskConical",
     summary:
@@ -249,7 +249,7 @@ export const articles: LibraryArticle[] = [
     ],
   },
   {
-    slug: "laboratory-waste-and-disposal",
+    slug: "laboratory-waste-disposal",
     title: "Laboratory waste and disposal",
     icon: "Recycle",
     summary:
