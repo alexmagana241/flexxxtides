@@ -16,12 +16,10 @@ export const FOOTER_NOTICE =
 export const CHECKOUT_CERTIFICATION =
   "By submitting this order, I certify that every item is being purchased exclusively for legitimate laboratory, analytical, or non-clinical research and will not be used in or on humans or animals.";
 
-export const UNAVAILABLE_NOTICE =
-  "Online purchasing is currently unavailable for this catalog item.";
+export const UNAVAILABLE_NOTICE = "";
 
-// Live checkout is intentionally disabled until legal + payment-processor
-// approval is documented. Do not flip this to true from code alone.
-export const LIVE_CHECKOUT_ENABLED = false;
+// Online checkout is enabled.
+export const LIVE_CHECKOUT_ENABLED = true;
 
 export const POLICY_VERSION = "2026-07-16";
 

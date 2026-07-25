@@ -19,7 +19,7 @@ import { Route as CatalogRouteImport } from './routes/catalog'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ResearchLibraryTopicRouteImport } from './routes/research-library.$topic'
+import { Route as ResearchTopicRouteImport } from './routes/research.$topic'
 import { Route as PoliciesTermsOfSaleRouteImport } from './routes/policies.terms-of-sale'
 import { Route as PoliciesShippingRouteImport } from './routes/policies.shipping'
 import { Route as PoliciesRestrictedRouteImport } from './routes/policies.restricted'
@@ -81,10 +81,10 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResearchLibraryTopicRoute = ResearchLibraryTopicRouteImport.update({
-  id: '/$topic',
-  path: '/$topic',
-  getParentRoute: () => ResearchLibraryRoute,
+const ResearchTopicRoute = ResearchTopicRouteImport.update({
+  id: '/research/$topic',
+  path: '/research/$topic',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PoliciesTermsOfSaleRoute = PoliciesTermsOfSaleRouteImport.update({
   id: '/policies/terms-of-sale',
@@ -146,7 +146,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
-  '/research-library': typeof ResearchLibraryRouteWithChildren
+  '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
   '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
@@ -158,7 +158,7 @@ export interface FileRoutesByFullPath {
   '/policies/restricted': typeof PoliciesRestrictedRoute
   '/policies/shipping': typeof PoliciesShippingRoute
   '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
-  '/research-library/$topic': typeof ResearchLibraryTopicRoute
+  '/research/$topic': typeof ResearchTopicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -169,7 +169,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
-  '/research-library': typeof ResearchLibraryRouteWithChildren
+  '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
   '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
@@ -181,7 +181,7 @@ export interface FileRoutesByTo {
   '/policies/restricted': typeof PoliciesRestrictedRoute
   '/policies/shipping': typeof PoliciesShippingRoute
   '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
-  '/research-library/$topic': typeof ResearchLibraryTopicRoute
+  '/research/$topic': typeof ResearchTopicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -193,7 +193,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
-  '/research-library': typeof ResearchLibraryRouteWithChildren
+  '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
   '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
@@ -205,7 +205,7 @@ export interface FileRoutesById {
   '/policies/restricted': typeof PoliciesRestrictedRoute
   '/policies/shipping': typeof PoliciesShippingRoute
   '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
-  '/research-library/$topic': typeof ResearchLibraryTopicRoute
+  '/research/$topic': typeof ResearchTopicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -230,7 +230,7 @@ export interface FileRouteTypes {
     | '/policies/restricted'
     | '/policies/shipping'
     | '/policies/terms-of-sale'
-    | '/research-library/$topic'
+    | '/research/$topic'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -253,7 +253,7 @@ export interface FileRouteTypes {
     | '/policies/restricted'
     | '/policies/shipping'
     | '/policies/terms-of-sale'
-    | '/research-library/$topic'
+    | '/research/$topic'
   id:
     | '__root__'
     | '/'
@@ -276,7 +276,7 @@ export interface FileRouteTypes {
     | '/policies/restricted'
     | '/policies/shipping'
     | '/policies/terms-of-sale'
-    | '/research-library/$topic'
+    | '/research/$topic'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -288,7 +288,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   EligibilityRoute: typeof EligibilityRoute
   FaqRoute: typeof FaqRoute
-  ResearchLibraryRoute: typeof ResearchLibraryRouteWithChildren
+  ResearchLibraryRoute: typeof ResearchLibraryRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   PeptidesSlugRoute: typeof PeptidesSlugRoute
   PoliciesAcceptableUseRoute: typeof PoliciesAcceptableUseRoute
@@ -300,6 +300,7 @@ export interface RootRouteChildren {
   PoliciesRestrictedRoute: typeof PoliciesRestrictedRoute
   PoliciesShippingRoute: typeof PoliciesShippingRoute
   PoliciesTermsOfSaleRoute: typeof PoliciesTermsOfSaleRoute
+  ResearchTopicRoute: typeof ResearchTopicRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -374,12 +375,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/research-library/$topic': {
-      id: '/research-library/$topic'
-      path: '/$topic'
-      fullPath: '/research-library/$topic'
-      preLoaderRoute: typeof ResearchLibraryTopicRouteImport
-      parentRoute: typeof ResearchLibraryRoute
+    '/research/$topic': {
+      id: '/research/$topic'
+      path: '/research/$topic'
+      fullPath: '/research/$topic'
+      preLoaderRoute: typeof ResearchTopicRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/policies/terms-of-sale': {
       id: '/policies/terms-of-sale'
@@ -454,18 +455,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface ResearchLibraryRouteChildren {
-  ResearchLibraryTopicRoute: typeof ResearchLibraryTopicRoute
-}
-
-const ResearchLibraryRouteChildren: ResearchLibraryRouteChildren = {
-  ResearchLibraryTopicRoute: ResearchLibraryTopicRoute,
-}
-
-const ResearchLibraryRouteWithChildren = ResearchLibraryRoute._addFileChildren(
-  ResearchLibraryRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
@@ -475,7 +464,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   EligibilityRoute: EligibilityRoute,
   FaqRoute: FaqRoute,
-  ResearchLibraryRoute: ResearchLibraryRouteWithChildren,
+  ResearchLibraryRoute: ResearchLibraryRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   PeptidesSlugRoute: PeptidesSlugRoute,
   PoliciesAcceptableUseRoute: PoliciesAcceptableUseRoute,
@@ -487,6 +476,7 @@ const rootRouteChildren: RootRouteChildren = {
   PoliciesRestrictedRoute: PoliciesRestrictedRoute,
   PoliciesShippingRoute: PoliciesShippingRoute,
   PoliciesTermsOfSaleRoute: PoliciesTermsOfSaleRoute,
+  ResearchTopicRoute: ResearchTopicRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

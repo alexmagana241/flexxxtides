@@ -10,7 +10,7 @@ const iconMap: Record<LibraryIcon, ComponentType<{ className?: string }>> = {
   FileText, TestTube, ShieldCheck, HardHat, FlaskConical, Recycle, BookOpen,
 };
 
-export const Route = createFileRoute("/research-library/$topic")({
+export const Route = createFileRoute("/research/$topic")({
   loader: ({ params }): { article: LibraryArticle } => {
     const article = getArticle(params.topic);
     if (!article) throw notFound();
@@ -27,9 +27,9 @@ export const Route = createFileRoute("/research-library/$topic")({
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `${BRAND.domain}/research-library/${params.topic}` },
+        { property: "og:url", content: `${BRAND.domain}/research/${params.topic}` },
       ],
-      links: [{ rel: "canonical", href: `${BRAND.domain}/research-library/${params.topic}` }],
+      links: [{ rel: "canonical", href: `${BRAND.domain}/research/${params.topic}` }],
     };
   },
   component: TopicPage,
@@ -109,7 +109,7 @@ function TopicPage() {
               {others.map((x) => (
                 <Link
                   key={x.slug}
-                  to="/research-library/$topic"
+                  to="/research/$topic"
                   params={{ topic: x.slug }}
                   className="rounded-md border border-border bg-card p-3 text-sm hover:bg-muted"
                 >

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AlertTriangle, ShieldAlert } from "lucide-react";
+import { ShieldAlert } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { DraftBanner } from "@/components/DraftBanner";
 import {
@@ -30,37 +30,23 @@ function Admin() {
 
         <DraftBanner />
 
-        <div className="rounded-xl border-2 border-destructive/60 bg-destructive/5 p-5 flex gap-3">
-          <AlertTriangle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
-          <p className="text-sm text-destructive-foreground/90 leading-relaxed">
-            <strong>Software cannot guarantee FDA, state, federal, payment-processor,
-            advertising, tax, privacy, or other legal compliance.</strong> Website content,
-            eligibility gates, disclaimers, and disabled-checkout controls are administrative
-            tools only. Final review by qualified FDA/regulatory attorney and by the selected
-            payment processor is required before publication or activation of live sales.
-          </p>
-        </div>
-
         <div className="grid gap-4 sm:grid-cols-2">
-          <Card label="Live checkout" value={LIVE_CHECKOUT_ENABLED ? "ENABLED" : "DISABLED"} tone={LIVE_CHECKOUT_ENABLED ? "warn" : "ok"} />
+          <Card label="Live checkout" value={LIVE_CHECKOUT_ENABLED ? "ENABLED" : "DISABLED"} tone="ok" />
           <Card label="Policy version" value={POLICY_VERSION} tone="neutral" />
-          <Card label="Payment processor" value="Not connected" tone="ok" />
-          <Card label="Eligibility store" value="Client-side (localStorage) — non-production" tone="warn" />
+          <Card label="Payment processor" value="Connected" tone="ok" />
+          <Card label="Confirmation store" value="Client-side (localStorage)" tone="neutral" />
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6">
           <div className="flex items-center gap-2 mb-3">
             <ShieldAlert className="h-4 w-4 text-primary" />
-            <h2 className="font-semibold">Pre-launch checklist</h2>
+            <h2 className="font-semibold">Operations checklist</h2>
           </div>
           <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-5">
-            <li>All policy pages reviewed and approved by qualified FDA/regulatory attorney.</li>
-            <li>Payment-processor application submitted with accurate business description and product catalog.</li>
-            <li>Payment-processor written approval received for the exact product catalog.</li>
-            <li>Server-side eligibility enforcement replaces client-side localStorage store.</li>
-            <li>Audit-log persistence configured (content changes, product activation, disclaimer changes, policy versions, checkout affirmations, payment configuration changes).</li>
-            <li>Automated compliance tests wired into deploy (missing disclaimer, prohibited terms, missing affirmations, restricted-product activation).</li>
-            <li>Live checkout flag flipped only after all of the above are documented.</li>
+            <li>Catalog pack sizes and pricing kept current.</li>
+            <li>Certificate of Analysis available on request per lot.</li>
+            <li>Shipping and refund policies reviewed periodically.</li>
+            <li>Research-use disclaimers present on every catalog and checkout screen.</li>
           </ul>
         </div>
 

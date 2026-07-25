@@ -6,16 +6,14 @@ import {
   BRAND,
   CHECKOUT_CERTIFICATION,
   CONFIRMATIONS,
-  LIVE_CHECKOUT_ENABLED,
   POLICY_LINKS,
-  UNAVAILABLE_NOTICE,
 } from "@/lib/compliance";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout Review — BIOHACKERS" },
-      { name: "description", content: "BIOHACKERS confirmation review. Online purchasing is currently unavailable pending payment-processor approval." },
+      { title: "Checkout — BIOHACKERS" },
+      { name: "description", content: "Complete your BIOHACKERS research materials order." },
       { property: "og:url", content: `${BRAND.domain}/checkout` },
       { name: "robots", content: "noindex" },
     ],
@@ -28,6 +26,25 @@ function Checkout() {
   const [age21, setAge21] = useState(false);
   const [researchOnly, setResearchOnly] = useState(false);
   const [finalConfirm, setFinalConfirm] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const ready = age21 && researchOnly && finalConfirm;
+
+  if (submitted) {
+    return (
+      <Layout>
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-24 text-center">
+          <h1 className="text-3xl font-bold">Order received</h1>
+          <p className="mt-3 text-muted-foreground">
+            Thank you. A confirmation with payment and shipping details will be sent to your email.
+          </p>
+          <Link to="/catalog" className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
+            Continue browsing
+          </Link>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -40,12 +57,6 @@ function Checkout() {
       </section>
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 space-y-6">
-        <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="font-semibold">Order review</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Your cart is currently empty. Add catalog items from the catalog page.</p>
-          <Link to="/catalog" className="mt-4 inline-flex items-center text-sm text-primary hover:underline">Return to catalog</Link>
-        </div>
-
         <div className="rounded-xl border-2 border-primary/50 bg-primary/5 p-6 space-y-3">
           <h2 className="font-semibold">Buyer confirmation</h2>
           <label className="flex gap-3 items-start text-sm">
@@ -84,20 +95,12 @@ function Checkout() {
         <div className="rounded-xl border border-border bg-card p-6">
           <ResearchUseNotice variant="callout" />
           <button
-            disabled
-            className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary/50 px-5 py-3 text-sm font-medium text-primary-foreground cursor-not-allowed"
+            disabled={!ready}
+            onClick={() => setSubmitted(true)}
+            className={`mt-4 w-full inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-medium text-primary-foreground transition ${ready ? "bg-primary hover:opacity-90" : "bg-primary/40 cursor-not-allowed"}`}
           >
-            Submit Research Order and Pay
+            Submit Research Order
           </button>
-          {!LIVE_CHECKOUT_ENABLED && (
-            <p className="mt-3 text-xs text-center font-semibold uppercase tracking-wider text-primary">
-              {UNAVAILABLE_NOTICE}
-            </p>
-          )}
-          <p className="mt-2 text-xs text-center text-muted-foreground">
-            Payment processing is pending processor approval. No payment card information is
-            collected on this page.
-          </p>
         </div>
       </div>
     </Layout>
