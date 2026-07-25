@@ -1,8 +1,6 @@
-// Photograph-based research vial with an overlaid BIOHACKERS reference-
-// standard label. The base image is the uploaded clear pharmaceutical vial;
-// the label is rendered in CSS/HTML so pack size and compound name can vary
-// per catalog item at runtime.
-import vialAsset from "@/assets/vial.png.asset.json";
+// Original SVG research vial with an overlaid BIOHACKERS reference-standard
+// label. Renders per-product so the compound name and pack size vary by
+// catalog item at runtime.
 
 export function Vial({
   packSize,
@@ -14,64 +12,150 @@ export function Vial({
   compound?: string;
 }) {
   const name = compound ? compound.replace(/\s*\(.*\)$/, "") : "";
+  const displayName = name.length > 18 ? name.slice(0, 16) + "…" : name;
   return (
-    <div
-      className={`relative inline-block ${className}`}
-      style={{ aspectRatio: "1 / 1.6" }}
+    <svg
+      viewBox="0 0 120 200"
+      className={className}
+      role="img"
       aria-label={compound ? `${compound} research vial` : "Research vial"}
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <img
-        src={vialAsset.url}
-        alt=""
-        className="h-full w-full object-contain select-none pointer-events-none"
-        draggable={false}
+      <defs>
+        <linearGradient id="vGlass" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#F1F5F9" stopOpacity="0.85" />
+          <stop offset="20%" stopColor="#FFFFFF" stopOpacity="0.6" />
+          <stop offset="55%" stopColor="#CBD5E1" stopOpacity="0.28" />
+          <stop offset="100%" stopColor="#0B1B34" stopOpacity="0.45" />
+        </linearGradient>
+        <linearGradient id="vCap" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1E293B" />
+          <stop offset="100%" stopColor="#0B1B34" />
+        </linearGradient>
+        <linearGradient id="vCrimp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#E2E8F0" />
+          <stop offset="50%" stopColor="#94A3B8" />
+          <stop offset="100%" stopColor="#475569" />
+        </linearGradient>
+        <linearGradient id="vShadow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#000" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="#000" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+
+      {/* Reflection */}
+      <ellipse cx="60" cy="192" rx="34" ry="4" fill="#000" opacity="0.18" />
+
+      {/* Cap (dark navy flip-off) */}
+      <rect x="40" y="10" width="40" height="14" rx="3" fill="url(#vCap)" />
+      <ellipse cx="60" cy="12" rx="20" ry="3" fill="#334155" />
+
+      {/* Aluminum crimp */}
+      <rect x="36" y="22" width="48" height="16" rx="2" fill="url(#vCrimp)" />
+      <line x1="38" y1="27" x2="82" y2="27" stroke="#64748B" strokeWidth="0.6" />
+      <line x1="38" y1="32" x2="82" y2="32" stroke="#64748B" strokeWidth="0.6" />
+      <line x1="38" y1="36" x2="82" y2="36" stroke="#64748B" strokeWidth="0.6" />
+
+      {/* Neck */}
+      <path d="M42 38 h36 v6 h-36 z" fill="url(#vGlass)" stroke="#0B1B34" strokeWidth="0.8" />
+
+      {/* Shoulder + body */}
+      <path
+        d="M40 44
+           C 40 50, 32 54, 32 62
+           L 32 172
+           C 32 182, 40 188, 50 188
+           L 70 188
+           C 80 188, 88 182, 88 172
+           L 88 62
+           C 88 54, 80 50, 80 44
+           Z"
+        fill="url(#vGlass)"
+        stroke="#0B1B34"
+        strokeWidth="1.1"
       />
-      {/* Label wraps the mid-lower body of the vial */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2 rounded-[3px] border border-primary/40 bg-[#0B1B34] text-white shadow-sm overflow-hidden"
-        style={{
-          top: "44%",
-          width: "68%",
-          padding: "6% 6% 5%",
-          fontFamily: "'Space Grotesk','Inter',sans-serif",
-        }}
-      >
-        <div
-          className="text-primary font-bold uppercase text-center leading-none"
-          style={{ fontSize: "clamp(6px, 1.6cqw, 10px)", letterSpacing: "0.14em" }}
+
+      {/* Interior meniscus / lyophilized cake */}
+      <path
+        d="M36 150 L84 150 L84 178 Q60 184 36 178 Z"
+        fill="#F8FAFC"
+        opacity="0.55"
+      />
+      <path d="M36 150 L84 150" stroke="#CBD5E1" strokeWidth="0.6" opacity="0.9" />
+
+      {/* Left highlight */}
+      <rect x="36" y="50" width="3" height="120" rx="1.5" fill="#FFFFFF" opacity="0.7" />
+      <rect x="41" y="50" width="1.2" height="90" rx="0.6" fill="#FFFFFF" opacity="0.35" />
+      {/* Right shadow */}
+      <rect x="82" y="60" width="4" height="110" rx="2" fill="url(#vShadow)" />
+
+      {/* Label */}
+      <g>
+        <rect x="38" y="80" width="44" height="56" rx="2" fill="#0B1B34" stroke="#1E293B" strokeWidth="0.5" />
+        <text
+          x="60"
+          y="91"
+          textAnchor="middle"
+          fontFamily="'Space Grotesk','Inter',system-ui,sans-serif"
+          fontWeight="800"
+          fontSize="5"
+          letterSpacing="0.9"
+          fill="#3B82F6"
         >
           BIOHACKERS
-        </div>
-        <div className="mt-1 h-px bg-primary/60" />
-        {name && (
-          <div
-            className="mt-1 text-center font-semibold leading-tight"
-            style={{ fontSize: "clamp(6px, 1.6cqw, 10px)" }}
+        </text>
+        <line x1="42" y1="94" x2="78" y2="94" stroke="#3B82F6" strokeWidth="0.4" opacity="0.7" />
+        {displayName && (
+          <text
+            x="60"
+            y="106"
+            textAnchor="middle"
+            fontFamily="'Space Grotesk','Inter',system-ui,sans-serif"
+            fontWeight="700"
+            fontSize="6"
+            fill="#FFFFFF"
           >
-            {name.length > 22 ? name.slice(0, 20) + "…" : name}
-          </div>
+            {displayName}
+          </text>
         )}
-        <div
-          className="mt-0.5 text-center text-[9px] uppercase tracking-[0.08em] text-white/70"
-          style={{ fontSize: "clamp(5px, 1.2cqw, 8px)" }}
+        <text
+          x="60"
+          y="115"
+          textAnchor="middle"
+          fontFamily="'Space Grotesk','Inter',system-ui,sans-serif"
+          fontWeight="500"
+          fontSize="3.6"
+          letterSpacing="0.5"
+          fill="#94A3B8"
         >
-          Research Reference Standard
-        </div>
+          RESEARCH REFERENCE STANDARD
+        </text>
         {packSize && (
-          <div
-            className="mt-1 text-center font-bold text-primary leading-none"
-            style={{ fontSize: "clamp(8px, 2.2cqw, 13px)", letterSpacing: "0.06em" }}
+          <text
+            x="60"
+            y="127"
+            textAnchor="middle"
+            fontFamily="'Space Grotesk','Inter',system-ui,sans-serif"
+            fontWeight="800"
+            fontSize="8"
+            fill="#3B82F6"
           >
             {packSize}
-          </div>
+          </text>
         )}
-        <div
-          className="mt-1 text-center uppercase tracking-[0.08em] text-white/50"
-          style={{ fontSize: "clamp(4px, 1cqw, 7px)" }}
+        <text
+          x="60"
+          y="133"
+          textAnchor="middle"
+          fontFamily="'Space Grotesk','Inter',system-ui,sans-serif"
+          fontWeight="500"
+          fontSize="2.8"
+          letterSpacing="0.4"
+          fill="#64748B"
         >
-          For research use only · Not for human use
-        </div>
-      </div>
-    </div>
+          FOR RESEARCH USE ONLY
+        </text>
+      </g>
+    </svg>
   );
 }
