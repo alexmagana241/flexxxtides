@@ -47,7 +47,7 @@ function Library() {
           return (
             <Link
               key={a.slug}
-              to="/research-library/$topic"
+              to="/research/$topic"
               params={{ topic: a.slug }}
               className="group rounded-xl border border-border bg-card p-6 card-hover flex flex-col"
             >
