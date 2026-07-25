@@ -4,12 +4,7 @@ import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
 import { getItem, items, type CatalogItem } from "@/data/peptides";
-import {
-  BRAND,
-  LIVE_CHECKOUT_ENABLED,
-  UNAVAILABLE_NOTICE,
-  formatPrice,
-} from "@/lib/compliance";
+import { BRAND, formatPrice } from "@/lib/compliance";
 
 export const Route = createFileRoute("/peptides/$slug")({
   loader: ({ params }): { item: CatalogItem } => {
