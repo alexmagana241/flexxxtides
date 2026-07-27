@@ -120,8 +120,11 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <Outlet />
+        <CartProvider>
+          <Outlet />
+        </CartProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
 }
+
