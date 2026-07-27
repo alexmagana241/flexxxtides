@@ -48,6 +48,12 @@ export const Route = createFileRoute("/peptides/$slug")({
 
 function PeptidePage() {
   const { item: p } = Route.useLoaderData();
+  const { add } = useCart();
+  const [sizeIdx, setSizeIdx] = useState(0);
+  const [qty, setQty] = useState(1);
+  const [added, setAdded] = useState(false);
+  const pack = p.packs[sizeIdx] ?? p.packs[0];
+  const displayName = p.name.replace(/\s*\(.*\)$/, "");
 
   return (
     <Layout>
@@ -59,8 +65,9 @@ function PeptidePage() {
             </Link>
             <div className="mt-6 grid gap-8 md:grid-cols-[220px_1fr] items-start">
               <div className="rounded-xl border border-border bg-card p-4 grid place-items-center">
-                <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} className="h-56 w-auto" />
+                <Vial packSize={pack?.size} compound={displayName} className="h-56 w-auto" />
               </div>
+
               <div>
                 <p className="text-[11px] uppercase tracking-wider text-primary font-semibold">{p.catalogNumber} · {p.category}</p>
                 <h1 className="mt-2 text-4xl font-bold tracking-tight">{p.name}</h1>
