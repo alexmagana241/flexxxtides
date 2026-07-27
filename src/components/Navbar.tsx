@@ -44,11 +44,17 @@ export function Navbar() {
         <div className="flex items-center gap-1">
           <Link
             to="/cart"
-            aria-label="Cart"
-            className="h-9 w-9 grid place-items-center rounded-md hover:bg-muted transition-colors"
+            aria-label={`Cart (${count} items)`}
+            className="relative h-9 w-9 grid place-items-center rounded-md hover:bg-muted transition-colors"
           >
             <ShoppingCart className="h-4 w-4" />
+            {count > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 grid place-items-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground tabular-nums">
+                {count}
+              </span>
+            )}
           </Link>
+
           <button
             onClick={toggle}
             aria-label="Toggle theme"
