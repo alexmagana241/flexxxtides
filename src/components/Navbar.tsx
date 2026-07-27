@@ -3,6 +3,8 @@ import { Menu, Moon, Sun, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import { BrandMark } from "./BrandMark";
+import { useCart } from "./CartProvider";
+
 
 const links = [
   { to: "/", label: "Home" },
