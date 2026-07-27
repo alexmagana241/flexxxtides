@@ -1,10 +1,13 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, CheckCircle2, FileText, ShieldAlert } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, CheckCircle2, FileText, Minus, Plus, ShieldAlert, ShoppingCart } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
+import { useCart } from "@/components/CartProvider";
 import { getItem, items, type CatalogItem } from "@/data/peptides";
 import { BRAND, formatPrice } from "@/lib/compliance";
+
 
 export const Route = createFileRoute("/peptides/$slug")({
   loader: ({ params }): { item: CatalogItem } => {
