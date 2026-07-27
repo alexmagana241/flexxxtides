@@ -1,10 +1,13 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, CheckCircle2, FileText, ShieldAlert } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, CheckCircle2, FileText, Minus, Plus, ShieldAlert, ShoppingCart } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
+import { useCart } from "@/components/CartProvider";
 import { getItem, items, type CatalogItem } from "@/data/peptides";
 import { BRAND, formatPrice } from "@/lib/compliance";
+
 
 export const Route = createFileRoute("/peptides/$slug")({
   loader: ({ params }): { item: CatalogItem } => {
@@ -45,6 +48,12 @@ export const Route = createFileRoute("/peptides/$slug")({
 
 function PeptidePage() {
   const { item: p } = Route.useLoaderData();
+  const { add } = useCart();
+  const [sizeIdx, setSizeIdx] = useState(0);
+  const [qty, setQty] = useState(1);
+  const [added, setAdded] = useState(false);
+  const pack = p.packs[sizeIdx] ?? p.packs[0];
+  const displayName = p.name.replace(/\s*\(.*\)$/, "");
 
   return (
     <Layout>
@@ -56,8 +65,9 @@ function PeptidePage() {
             </Link>
             <div className="mt-6 grid gap-8 md:grid-cols-[220px_1fr] items-start">
               <div className="rounded-xl border border-border bg-card p-4 grid place-items-center">
-                <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} className="h-56 w-auto" />
+                <Vial packSize={pack?.size} compound={displayName} className="h-56 w-auto" />
               </div>
+
               <div>
                 <p className="text-[11px] uppercase tracking-wider text-primary font-semibold">{p.catalogNumber} · {p.category}</p>
                 <h1 className="mt-2 text-4xl font-bold tracking-tight">{p.name}</h1>
@@ -129,15 +139,21 @@ function PeptidePage() {
 
           <aside className="space-y-4 lg:sticky lg:top-24 self-start">
             <div className="rounded-xl border border-border bg-card p-5">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">Pack sizes & pricing</p>
-              <ul className="mt-3 divide-y divide-border rounded-md border border-border">
-                {p.packs.map((pk: { size: string; priceUSD: number }) => (
-                  <li key={pk.size} className="flex items-center justify-between px-3 py-2.5">
-                    <div>
-                      <p className="text-sm font-semibold">{pk.size}</p>
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Lyophilized · single vial</p>
-                    </div>
-                    <p className="tabular-nums text-base font-bold text-primary">{formatPrice(pk.priceUSD)}</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">Select strength</p>
+              <ul className="mt-3 space-y-2">
+                {p.packs.map((pk: { size: string; priceUSD: number }, i: number) => (
+                  <li key={pk.size}>
+                    <button
+                      onClick={() => { setSizeIdx(i); setAdded(false); }}
+                      aria-pressed={i === sizeIdx}
+                      className={`w-full flex items-center justify-between rounded-md border px-3 py-2.5 text-left transition ${i === sizeIdx ? "border-primary bg-primary/5" : "border-border hover:bg-muted"}`}
+                    >
+                      <span>
+                        <span className="block text-sm font-semibold">{pk.size}</span>
+                        <span className="block text-[10px] text-muted-foreground uppercase tracking-wider">Lyophilized · single vial</span>
+                      </span>
+                      <span className="tabular-nums text-base font-bold text-primary">{formatPrice(pk.priceUSD)}</span>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -150,13 +166,47 @@ function PeptidePage() {
                   <p className="text-[11px] font-semibold uppercase tracking-wider text-primary">Research use only</p>
                   <p className="mt-1 text-xs text-muted-foreground">Not for human or veterinary use.</p>
                 </div>
-                <Link
-                  to="/checkout"
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
+
+                <div className="mt-4 flex items-center justify-between gap-3">
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">Quantity</span>
+                  <div className="inline-flex items-center rounded-md border border-border">
+                    <button aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))} className="h-9 w-9 grid place-items-center hover:bg-muted">
+                      <Minus className="h-3.5 w-3.5" />
+                    </button>
+                    <input
+                      aria-label="Quantity"
+                      value={qty}
+                      onChange={(e) => setQty(Math.max(1, Number(e.target.value.replace(/\D/g, "")) || 1))}
+                      className="w-12 bg-transparent text-center text-sm tabular-nums outline-none"
+                    />
+                    <button aria-label="Increase quantity" onClick={() => setQty((q) => q + 1)} className="h-9 w-9 grid place-items-center hover:bg-muted">
+                      <Plus className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => {
+                    if (!pack) return;
+                    add({ slug: p.slug, name: displayName, size: pack.size, priceUSD: pack.priceUSD }, qty);
+                    setAdded(true);
+                  }}
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
                 >
-                  Add to Cart
-                </Link>
+                  <ShoppingCart className="h-4 w-4" />
+                  Add to cart — {pack ? formatPrice(pack.priceUSD * qty) : ""}
+                </button>
+                {added && (
+                  <div className="mt-3 rounded-md border border-primary/40 bg-primary/5 p-3 text-xs">
+                    <p className="font-medium text-primary">Added to cart.</p>
+                    <div className="mt-2 flex gap-3">
+                      <Link to="/cart" className="text-primary hover:underline">View cart</Link>
+                      <Link to="/catalog" className="text-muted-foreground hover:text-foreground">Continue shopping</Link>
+                    </div>
+                  </div>
+                )}
               </div>
+
             </div>
 
             <div className="rounded-xl border border-border bg-card p-5">

@@ -3,6 +3,8 @@ import { Menu, Moon, Sun, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import { BrandMark } from "./BrandMark";
+import { useCart } from "./CartProvider";
+
 
 const links = [
   { to: "/", label: "Home" },
@@ -14,14 +16,16 @@ const links = [
 
 export function Navbar() {
   const { theme, toggle } = useTheme();
+  const { count } = useCart();
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/85 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center group" aria-label="BIOHACKERS Research — home">
-          <BrandMark className="h-10 w-auto" />
+          <BrandMark className="h-9 sm:h-11 w-auto" />
         </Link>
+
 
         <nav className="hidden md:flex items-center gap-1">
           {links.map((l) => (
@@ -40,11 +44,17 @@ export function Navbar() {
         <div className="flex items-center gap-1">
           <Link
             to="/cart"
-            aria-label="Cart"
-            className="h-9 w-9 grid place-items-center rounded-md hover:bg-muted transition-colors"
+            aria-label={`Cart (${count} items)`}
+            className="relative h-9 w-9 grid place-items-center rounded-md hover:bg-muted transition-colors"
           >
             <ShoppingCart className="h-4 w-4" />
+            {count > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 grid place-items-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground tabular-nums">
+                {count}
+              </span>
+            )}
           </Link>
+
           <button
             onClick={toggle}
             aria-label="Toggle theme"
