@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldAlert } from "lucide-react";
 import { Layout } from "@/components/Layout";
-import { DraftBanner } from "@/components/DraftBanner";
 import {
   BRAND,
   LIVE_CHECKOUT_ENABLED,
@@ -28,7 +27,6 @@ function Admin() {
         <p className="text-[10px] uppercase tracking-wider text-primary font-semibold">Internal only</p>
         <h1 className="text-4xl font-bold tracking-tight">Compliance dashboard</h1>
 
-        <DraftBanner />
 
         <div className="grid gap-4 sm:grid-cols-2">
           <Card label="Live checkout" value={LIVE_CHECKOUT_ENABLED ? "ENABLED" : "DISABLED"} tone="ok" />

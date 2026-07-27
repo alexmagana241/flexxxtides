@@ -24,7 +24,6 @@ export const Route = createFileRoute("/policies/terms-of-sale")({
       <h2>Limitation of liability</h2>
       <p>BIOHACKERS materials are provided without warranty of fitness for any particular purpose beyond the analytical specifications documented on the Certificate of Analysis. Materials are not intended for use in or on humans or animals.</p>
       <h2>Governing law</h2>
-      <p>These terms are subject to review and finalization by qualified counsel prior to activation of live sales.</p>
     </PolicyPage>
   ),
 });
