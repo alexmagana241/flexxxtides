@@ -16,14 +16,16 @@ const links = [
 
 export function Navbar() {
   const { theme, toggle } = useTheme();
+  const { count } = useCart();
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/85 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center group" aria-label="BIOHACKERS Research — home">
-          <BrandMark className="h-10 w-auto" />
+          <BrandMark className="h-9 sm:h-11 w-auto" />
         </Link>
+
 
         <nav className="hidden md:flex items-center gap-1">
           {links.map((l) => (
