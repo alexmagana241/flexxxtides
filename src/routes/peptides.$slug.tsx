@@ -4,7 +4,7 @@ import { ArrowLeft, CheckCircle2, FileText, Minus, Plus, ShieldAlert, ShoppingCa
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
-import { useCart } from "@/components/CartProvider";
+import { KIT_DISCOUNT, KIT_VIALS, kitListPrice, kitPrice, useCart } from "@/components/CartProvider";
 import { getItem, items, type CatalogItem } from "@/data/peptides";
 import { BRAND, formatPrice } from "@/lib/compliance";
 
@@ -52,6 +52,7 @@ function PeptidePage() {
   const [sizeIdx, setSizeIdx] = useState(0);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const [buyKit, setBuyKit] = useState(false);
   const pack = p.packs[sizeIdx] ?? p.packs[0];
   const displayName = p.name.replace(/\s*\(.*\)$/, "");
 
