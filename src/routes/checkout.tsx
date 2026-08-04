@@ -287,10 +287,10 @@ export function Checkout() {
               <Card title="Order review">
                 <ul className="divide-y divide-border">
                   {lines.map((l) => (
-                    <li key={`${l.slug}-${l.size}`} className="flex items-center gap-3 py-3">
+                    <li key={lineId(l)} className="flex items-center gap-3 py-3">
                       <Vial compound={l.name} packSize={l.size} className="h-16 w-auto shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{l.name}</p>
+                        <p className="text-sm font-medium truncate">{l.name}{l.kit ? " — 10-vial kit" : ""}</p>
                         <p className="text-xs text-muted-foreground">{l.size} · Qty {l.qty} · {formatPrice(l.priceUSD)} each</p>
                       </div>
                       <span className="text-sm font-semibold tabular-nums">{formatPrice(l.priceUSD * l.qty)}</span>
@@ -364,8 +364,8 @@ export function Checkout() {
           <h2 className="font-semibold">Order summary</h2>
           <ul className="space-y-2 text-sm">
             {lines.map((l) => (
-              <li key={`${l.slug}-${l.size}`} className="flex justify-between gap-3">
-                <span className="text-muted-foreground truncate">{l.name} · {l.size} × {l.qty}</span>
+              <li key={lineId(l)} className="flex justify-between gap-3">
+                <span className="text-muted-foreground truncate">{l.name} · {l.size}{l.kit ? " · kit of 10" : ""} × {l.qty}</span>
                 <span className="tabular-nums">{formatPrice(l.priceUSD * l.qty)}</span>
               </li>
             ))}
