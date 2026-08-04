@@ -3,7 +3,7 @@ import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
-import { useCart } from "@/components/CartProvider";
+import { KIT_DISCOUNT, lineId, useCart } from "@/components/CartProvider";
 import { BRAND, formatPrice } from "@/lib/compliance";
 
 export const Route = createFileRoute("/cart")({
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/cart")({
 });
 
 function Cart() {
-  const { lines, subtotal, setQty, remove } = useCart();
+  const { lines, subtotal, savings, setQty, remove } = useCart();
 
   return (
     <Layout>
