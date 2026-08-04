@@ -4,7 +4,8 @@ import { CheckCircle2, CreditCard, Lock } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
-import { useCart } from "@/components/CartProvider";
+import { lineId, useCart } from "@/components/CartProvider";
+import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import {
   BRAND,
   CHECKOUT_CERTIFICATION,
@@ -177,7 +178,16 @@ export function Checkout() {
               <Card title="Shipping address">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="sm:col-span-2">
-                    <Field label="Address line 1" value={addr1} onChange={setAddr1} autoComplete="address-line1" />
+                    <AddressAutocomplete
+                      value={addr1}
+                      onChange={setAddr1}
+                      onSelect={(parts) => {
+                        if (parts.city) setCity(parts.city);
+                        if (parts.state) setState(parts.state);
+                        if (parts.postalCode) setZip(parts.postalCode);
+                        if (parts.country) setCountry(parts.country);
+                      }}
+                    />
                   </div>
                   <div className="sm:col-span-2">
                     <Field label="Address line 2 (optional)" value={addr2} onChange={setAddr2} autoComplete="address-line2" />
