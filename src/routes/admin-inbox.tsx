@@ -6,17 +6,17 @@ import { Layout } from "@/components/Layout";
 import { BRAND } from "@/lib/compliance";
 import { listInquiries, setInquiryStatus } from "@/lib/support.functions";
 
-export const Route = createFileRoute("/admin/inbox")({
+export const Route = createFileRoute("/admin-inbox")({
   head: () => ({
     meta: [
       { title: "Customer Inbox — BIOHACKERS" },
       { name: "description", content: "Internal inbox of customer inquiries submitted through the website." },
       { property: "og:title", content: "Customer Inbox — BIOHACKERS" },
       { property: "og:description", content: "Internal customer inquiry inbox." },
-      { property: "og:url", content: `${BRAND.domain}/admin/inbox` },
+      { property: "og:url", content: `${BRAND.domain}/admin-inbox` },
       { name: "robots", content: "noindex,nofollow" },
     ],
-    links: [{ rel: "canonical", href: `${BRAND.domain}/admin/inbox` }],
+    links: [{ rel: "canonical", href: `${BRAND.domain}/admin-inbox` }],
   }),
   component: AdminInbox,
 });

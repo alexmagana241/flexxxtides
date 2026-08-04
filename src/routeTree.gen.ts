@@ -30,6 +30,7 @@ import { Route as PoliciesIpRouteImport } from './routes/policies.ip'
 import { Route as PoliciesAccessibilityRouteImport } from './routes/policies.accessibility'
 import { Route as PoliciesAcceptableUseRouteImport } from './routes/policies.acceptable-use'
 import { Route as PeptidesSlugRouteImport } from './routes/peptides.$slug'
+import { Route as AdminInboxRouteImport } from './routes/admin.inbox'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -136,10 +137,15 @@ const PeptidesSlugRoute = PeptidesSlugRouteImport.update({
   path: '/peptides/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminInboxRoute = AdminInboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
   '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/inbox': typeof AdminInboxRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
   '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
   '/policies/accessibility': typeof PoliciesAccessibilityRoute
@@ -162,7 +169,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
   '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
@@ -171,6 +178,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/inbox': typeof AdminInboxRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
   '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
   '/policies/accessibility': typeof PoliciesAccessibilityRoute
@@ -186,7 +194,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
   '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
@@ -195,6 +203,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/research-library': typeof ResearchLibraryRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/inbox': typeof AdminInboxRoute
   '/peptides/$slug': typeof PeptidesSlugRoute
   '/policies/acceptable-use': typeof PoliciesAcceptableUseRoute
   '/policies/accessibility': typeof PoliciesAccessibilityRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/research-library'
     | '/sitemap.xml'
+    | '/admin/inbox'
     | '/peptides/$slug'
     | '/policies/acceptable-use'
     | '/policies/accessibility'
@@ -243,6 +253,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/research-library'
     | '/sitemap.xml'
+    | '/admin/inbox'
     | '/peptides/$slug'
     | '/policies/acceptable-use'
     | '/policies/accessibility'
@@ -266,6 +277,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/research-library'
     | '/sitemap.xml'
+    | '/admin/inbox'
     | '/peptides/$slug'
     | '/policies/acceptable-use'
     | '/policies/accessibility'
@@ -281,7 +293,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   CartRoute: typeof CartRoute
   CatalogRoute: typeof CatalogRoute
   CheckoutRoute: typeof CheckoutRoute
@@ -452,12 +464,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PeptidesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/inbox': {
+      id: '/admin/inbox'
+      path: '/inbox'
+      fullPath: '/admin/inbox'
+      preLoaderRoute: typeof AdminInboxRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminInboxRoute: typeof AdminInboxRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminInboxRoute: AdminInboxRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   CartRoute: CartRoute,
   CatalogRoute: CatalogRoute,
   CheckoutRoute: CheckoutRoute,
