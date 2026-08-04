@@ -1,8 +1,8 @@
-// Product vial rendering. Uses the supplied BIOHACKERS vial photograph and
-// overlays the correct compound name + strength on the vial's lower label
-// area so every product shows its own identity.
+// Product vial rendering. Uses the BIOHACKERS branded vial photograph and
+// prints the compound name + strength directly inside the blank band on the
+// vial's own label so every product shows its own identity.
 
-import vialAsset from "@/assets/biohackers-vial.png.asset.json";
+import vialImage from "@/assets/vial-blank.png";
 
 export function Vial({
   packSize,
@@ -14,8 +14,9 @@ export function Vial({
   compound?: string;
 }) {
   const name = compound ? compound.replace(/\s*\(.*\)$/, "") : "";
-  const label = [name, packSize].filter(Boolean).join(" · ");
-  const long = label.length > 16;
+  const strength = packSize ?? "";
+  const alt = [name, strength].filter(Boolean).join(" ");
+  const longName = name.length > 12;
 
   return (
     <div
@@ -23,24 +24,45 @@ export function Vial({
       style={{ containerType: "inline-size" }}
     >
       <img
-        src={vialAsset.url}
-        alt={label ? `${label} research vial` : "BIOHACKERS research vial"}
+        src={vialImage}
+        alt={alt ? `${alt} BIOHACKERS research vial` : "BIOHACKERS research vial"}
         className="h-full w-full object-contain select-none"
         draggable={false}
         loading="lazy"
+        width={1024}
+        height={1024}
       />
-      {label && (
-        <span
-          className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-slate-400/70 px-[2.2cqw] py-[0.9cqw] font-medium tracking-wide text-slate-200"
+
+      {/* Printed label band on the vial itself */}
+      {(name || strength) && (
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center leading-none text-white"
           style={{
-            left: "44.7%",
-            top: "78%",
-            fontSize: long ? "2.6cqw" : "3.4cqw",
+            left: "50%",
+            top: "75%",
+            width: "31%",
+            height: "10%",
             fontFamily: "'Space Grotesk','Inter',system-ui,sans-serif",
+            textShadow: "0 0.2cqw 0.4cqw rgba(0,0,0,0.85)",
           }}
         >
-          {label}
-        </span>
+          {name && (
+            <span
+              className="w-full truncate text-center font-semibold uppercase tracking-wide"
+              style={{ fontSize: longName ? "2.5cqw" : "3.2cqw" }}
+            >
+              {name}
+            </span>
+          )}
+          {strength && (
+            <span
+              className="mt-[0.6cqw] w-full truncate text-center font-medium tracking-widest text-sky-300"
+              style={{ fontSize: "2.4cqw" }}
+            >
+              {strength}
+            </span>
+          )}
+        </div>
       )}
     </div>
   );
