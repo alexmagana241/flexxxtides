@@ -1,5 +1,5 @@
 // Product vial rendering. Uses the BIOHACKERS branded vial photograph and
-// prints the compound name + strength directly inside the blank band on the
+// prints the compound name + strength directly onto the blank area of the
 // vial's own label so every product shows its own identity.
 
 import vialImage from "@/assets/vial-blank.png";
@@ -33,18 +33,10 @@ export function Vial({
         height={1024}
       />
 
-      {/* Printed label band on the vial itself */}
       {(name || strength) && (
         <div
-          className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center leading-none text-white"
-          style={{
-            left: "50%",
-            top: "75%",
-            width: "31%",
-            height: "10%",
-            fontFamily: "'Space Grotesk','Inter',system-ui,sans-serif",
-            textShadow: "0 0.2cqw 0.4cqw rgba(0,0,0,0.85)",
-          }}
+          className="absolute left-1/2 top-[62%] -translate-x-1/2 -translate-y-1/2 flex w-[27%] flex-col items-center justify-center leading-none text-white"
+          style={{ fontFamily: "'Space Grotesk','Inter',system-ui,sans-serif" }}
         >
           {name && (
             <span
@@ -56,7 +48,7 @@ export function Vial({
           )}
           {strength && (
             <span
-              className="mt-[0.6cqw] w-full truncate text-center font-medium tracking-widest text-sky-300"
+              className="mt-[1cqw] w-full truncate text-center font-medium uppercase tracking-widest text-sky-300"
               style={{ fontSize: "2.4cqw" }}
             >
               {strength}
