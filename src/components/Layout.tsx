@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { ResearchUseNotice } from "./ResearchUseNotice";
+import { SupportChat } from "./SupportChat";
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -10,6 +11,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <Navbar />
       <main className="flex-1 animate-fade-up">{children}</main>
       <Footer />
+      <SupportChat />
     </div>
   );
 }
