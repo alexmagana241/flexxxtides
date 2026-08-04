@@ -22,8 +22,14 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/85 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center group" aria-label="BIOHACKERS Research — home">
-          <BrandMark className="h-9 sm:h-11 w-auto" />
+        <Link to="/" className="flex items-center gap-3 group" aria-label="BIOHACKERS Research — home">
+          <BrandMark className="h-12 sm:h-16 w-auto" />
+          <span className="flex flex-col leading-none">
+            <span className="text-base sm:text-xl font-bold tracking-[0.18em] text-foreground">BIOHACKERS</span>
+            <span className="mt-1 text-[9px] sm:text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
+              Research Materials
+            </span>
+          </span>
         </Link>
 
 

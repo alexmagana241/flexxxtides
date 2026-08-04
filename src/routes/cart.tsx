@@ -3,7 +3,7 @@ import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
-import { useCart } from "@/components/CartProvider";
+import { KIT_DISCOUNT, lineId, useCart } from "@/components/CartProvider";
 import { BRAND, formatPrice } from "@/lib/compliance";
 
 export const Route = createFileRoute("/cart")({
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/cart")({
 });
 
 function Cart() {
-  const { lines, subtotal, setQty, remove } = useCart();
+  const { lines, subtotal, savings, setQty, remove } = useCart();
 
   return (
     <Layout>
@@ -47,7 +47,7 @@ function Cart() {
           <div className="grid gap-8 lg:grid-cols-[1fr_320px] items-start">
             <ul className="space-y-4">
               {lines.map((l) => (
-                <li key={`${l.slug}-${l.size}`} className="rounded-xl border border-border bg-card p-4 flex flex-col sm:flex-row gap-4">
+                <li key={lineId(l)} className="rounded-xl border border-border bg-card p-4 flex flex-col sm:flex-row gap-4">
                   <Link to="/peptides/$slug" params={{ slug: l.slug }} className="shrink-0 self-center">
                     <Vial compound={l.name} packSize={l.size} className="h-28 w-auto" />
                   </Link>
@@ -55,24 +55,37 @@ function Cart() {
                     <Link to="/peptides/$slug" params={{ slug: l.slug }} className="font-semibold hover:text-primary">
                       {l.name}
                     </Link>
+                    {l.kit && (
+                      <span className="ml-2 rounded-full border border-primary/50 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                        10-vial kit · 40% off
+                      </span>
+                    )}
                     <p className="text-xs text-muted-foreground mt-1">Strength: {l.size}</p>
-                    <p className="text-xs text-muted-foreground">Unit price: {formatPrice(l.priceUSD)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {l.kit ? "Kit price" : "Unit price"}: {formatPrice(l.priceUSD)}
+                      {l.kit && (
+                        <>
+                          {" "}
+                          <span className="line-through">{formatPrice(Math.round(l.priceUSD / (1 - KIT_DISCOUNT)))}</span>
+                        </>
+                      )}
+                    </p>
                     <div className="mt-3 flex flex-wrap items-center gap-3">
                       <div className="inline-flex items-center rounded-md border border-border">
-                        <button aria-label="Decrease quantity" onClick={() => setQty(l.slug, l.size, l.qty - 1)} className="h-9 w-9 grid place-items-center hover:bg-muted">
+                        <button aria-label="Decrease quantity" onClick={() => setQty(lineId(l), l.qty - 1)} className="h-9 w-9 grid place-items-center hover:bg-muted">
                           <Minus className="h-3.5 w-3.5" />
                         </button>
                         <input
                           aria-label={`Quantity for ${l.name} ${l.size}`}
                           value={l.qty}
-                          onChange={(e) => setQty(l.slug, l.size, Number(e.target.value.replace(/\D/g, "")) || 0)}
+                          onChange={(e) => setQty(lineId(l), Number(e.target.value.replace(/\D/g, "")) || 0)}
                           className="w-12 bg-transparent text-center text-sm tabular-nums outline-none"
                         />
-                        <button aria-label="Increase quantity" onClick={() => setQty(l.slug, l.size, l.qty + 1)} className="h-9 w-9 grid place-items-center hover:bg-muted">
+                        <button aria-label="Increase quantity" onClick={() => setQty(lineId(l), l.qty + 1)} className="h-9 w-9 grid place-items-center hover:bg-muted">
                           <Plus className="h-3.5 w-3.5" />
                         </button>
                       </div>
-                      <button onClick={() => remove(l.slug, l.size)} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
+                      <button onClick={() => remove(lineId(l))} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
                         <Trash2 className="h-3.5 w-3.5" /> Remove
                       </button>
                     </div>
@@ -91,6 +104,13 @@ function Cart() {
                 <span className="text-muted-foreground">Subtotal</span>
                 <span className="font-semibold tabular-nums">{formatPrice(subtotal)}</span>
               </div>
+              {savings > 0 && (
+                <div className="flex items-center justify-between text-sm text-primary">
+                  <span>Kit savings</span>
+                  <span className="font-semibold tabular-nums">−{formatPrice(savings)}</span>
+                </div>
+              )}
+
               <p className="text-xs text-muted-foreground">Shipping calculated at checkout.</p>
               <Link to="/checkout" className="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:opacity-90">
                 Proceed to checkout
