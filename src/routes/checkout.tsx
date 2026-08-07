@@ -28,11 +28,40 @@ export const Route = createFileRoute("/checkout")({
   component: Checkout,
 });
 
-type Shipping = { method: "standard" | "express"; label: string; priceUSD: number };
-const SHIPPING: Shipping[] = [
-  { method: "standard", label: "Standard cold-pack shipping (3–5 business days)", priceUSD: 12 },
-  { method: "express", label: "Express cold-pack shipping (1–2 business days)", priceUSD: 28 },
-];
+type ShipMethod = "standard" | "express";
+type Shipping = { method: ShipMethod; label: string; priceUSD: number };
+
+// Automated zone-based rate calculation.
+const ZONE_2 = ["CA", "OR", "WA", "NV", "AZ", "ID", "UT"]; // west
+const ZONE_4 = ["AK", "HI", "PR"]; // remote
+
+function shippingZone(country: string, state: string): number {
+  const c = country.trim().toLowerCase();
+  if (c && !["united states", "usa", "us", "united states of america"].includes(c)) return 5;
+  const s = state.trim().toUpperCase();
+  if (ZONE_4.includes(s)) return 4;
+  if (ZONE_2.includes(s)) return 2;
+  return 3;
+}
+
+function shippingOptions(country: string, state: string, weightUnits: number): Shipping[] {
+  const zone = shippingZone(country, state);
+  const zoneFee = { 2: 0, 3: 4, 4: 14, 5: 26 }[zone] ?? 4;
+  const handling = Math.max(0, Math.ceil(weightUnits / 10) - 1) * 3;
+  return [
+    {
+      method: "standard",
+      label: "Standard shipping (4–7 business days)",
+      priceUSD: 9 + zoneFee + handling,
+    },
+    {
+      method: "express",
+      label: "Express shipping (2–3 business days)",
+      priceUSD: 22 + Math.round(zoneFee * 1.5) + handling,
+    },
+  ];
+}
+
 
 const STEPS = ["Customer", "Shipping", "Payment", "Review"] as const;
 
