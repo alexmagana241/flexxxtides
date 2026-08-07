@@ -17,8 +17,9 @@ export type FaqEntry = { q: string; a: string };
 export const FAQ_ENTRIES: FaqEntry[] = [
   {
     q: "How long does shipping take and what does it cost?",
-    a: "Orders ship in cold-pack packaging. Standard shipping is $12 and arrives in 3–5 business days; express shipping is $28 and arrives in 1–2 business days. Orders placed before 2pm PT on a business day are normally packed the same day.",
+    a: "Standard shipping arrives in 4–7 business days and express shipping in 2–3 business days. The exact rate is calculated automatically at checkout from your destination and order size. Orders placed before 2pm PT on a business day are normally packed the same day.",
   },
+
   {
     q: "How do I check my order status or tracking?",
     a: "Your order confirmation number is emailed to you as soon as the order is placed, and a tracking number follows when the package leaves the lab. If you need an update, send us your order number and we will look it up for you.",
