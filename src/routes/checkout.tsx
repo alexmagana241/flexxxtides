@@ -107,8 +107,12 @@ export function Checkout() {
   const [researchOnly, setResearchOnly] = useState(false);
   const [certify, setCertify] = useState(false);
 
+  const vialCount = lines.reduce((n, l) => n + l.qty * (l.kit ? KIT_VIALS : 1), 0);
+  const shipOptions = shippingOptions(country, state, vialCount);
+  const ship = shipOptions.find((s) => s.method === shipMethod) ?? shipOptions[0]!;
   const shippingCost = lines.length ? ship.priceUSD : 0;
   const total = subtotal + shippingCost;
+
 
   const digits = cardNumber.replace(/\D/g, "");
   const customerOk = /\S+@\S+\.\S+/.test(email) && firstName.trim() !== "" && lastName.trim() !== "";
