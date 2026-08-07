@@ -30,7 +30,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   },
   {
     q: "What products do you sell?",
-    a: "BIOHACKERS supplies characterized peptide reference standards for laboratory research: GHK-Cu, Retatrutide, Tesamorelin, BPC-157, TB-500, CJC-1295 and Ipamorelin. Every item ships as a lyophilized powder with a Certificate of Analysis available per lot.",
+    a: "BIOHACKERS supplies characterized peptide reference standards for laboratory research: GHK-Cu, Retatrutide, Tesamorelin, BPC-157, TB-500, CJC-1295 and Ipamorelin. Every item ships as a lyophilized powder.",
   },
   {
     q: "What pack sizes and prices are available?",
