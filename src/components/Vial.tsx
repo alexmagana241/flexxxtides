@@ -50,9 +50,10 @@ export function Vial({
           {strength && (
             <span
               className="mt-[1cqw] w-full truncate text-center font-medium uppercase tracking-widest text-sky-300"
-              style={{ fontSize: "2.4cqw" }}
+              style={{ fontSize: "2.7cqw" }}
             >
               {strength}
+
             </span>
           )}
         </div>
