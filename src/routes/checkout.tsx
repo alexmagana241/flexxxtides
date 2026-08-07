@@ -86,7 +86,7 @@ export function Checkout() {
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("United States");
-  const [ship, setShip] = useState<Shipping>(SHIPPING[0]);
+  const [shipMethod, setShipMethod] = useState<ShipMethod>("standard");
 
   // Billing
   const [billingSame, setBillingSame] = useState(true);
