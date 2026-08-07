@@ -234,9 +234,10 @@ export function Checkout() {
 
               <Card title="Shipping method">
                 <div className="space-y-3">
-                  {SHIPPING.map((s) => (
+                  {shipOptions.map((s) => (
                     <label key={s.method} className={`flex items-center gap-3 rounded-md border p-3 text-sm cursor-pointer ${ship.method === s.method ? "border-primary bg-primary/5" : "border-border"}`}>
-                      <input type="radio" name="shipping" checked={ship.method === s.method} onChange={() => setShip(s)} />
+                      <input type="radio" name="shipping" checked={ship.method === s.method} onChange={() => setShipMethod(s.method)} />
+
                       <span className="flex-1">{s.label}</span>
                       <span className="font-semibold tabular-nums">{formatPrice(s.priceUSD)}</span>
                     </label>
