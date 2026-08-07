@@ -17,8 +17,9 @@ export type FaqEntry = { q: string; a: string };
 export const FAQ_ENTRIES: FaqEntry[] = [
   {
     q: "How long does shipping take and what does it cost?",
-    a: "Orders ship in cold-pack packaging. Standard shipping is $12 and arrives in 3–5 business days; express shipping is $28 and arrives in 1–2 business days. Orders placed before 2pm PT on a business day are normally packed the same day.",
+    a: "Standard shipping arrives in 4–7 business days and express shipping in 2–3 business days. The exact rate is calculated automatically at checkout from your destination and order size. Orders placed before 2pm PT on a business day are normally packed the same day.",
   },
+
   {
     q: "How do I check my order status or tracking?",
     a: "Your order confirmation number is emailed to you as soon as the order is placed, and a tracking number follows when the package leaves the lab. If you need an update, send us your order number and we will look it up for you.",
@@ -29,7 +30,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   },
   {
     q: "What products do you sell?",
-    a: "BIOHACKERS supplies characterized peptide reference standards for laboratory research: GHK-Cu, Retatrutide, Tesamorelin, BPC-157, TB-500, CJC-1295 and Ipamorelin. Every item ships as a lyophilized powder with a Certificate of Analysis available per lot.",
+    a: "BIOHACKERS supplies characterized peptide reference standards for laboratory research: GHK-Cu, Retatrutide, Tesamorelin, BPC-157, TB-500, CJC-1295 and Ipamorelin. Every item ships as a lyophilized powder.",
   },
   {
     q: "What pack sizes and prices are available?",
@@ -42,10 +43,6 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   {
     q: "How should the material be stored?",
     a: "Lyophilized powder should be stored sealed at -20 °C, protected from light and moisture. Storage, shipping temperature, solubility and stability details are listed on every product specification page.",
-  },
-  {
-    q: "Can I get a Certificate of Analysis (CoA) or SDS?",
-    a: "Yes. A CoA, HPLC chromatogram, LC-MS spectrum and Safety Data Sheet are available on request per lot. Tell us the catalog number and lot and we will send the documentation.",
   },
   {
     q: "Who can order?",

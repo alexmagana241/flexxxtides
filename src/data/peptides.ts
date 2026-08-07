@@ -57,12 +57,12 @@ const COMMON = {
   recommendedAnalyticalUse:
     "Reference standard for identity confirmation, RP-HPLC purity assays, LC-MS method development, and in vitro receptor / biochemical characterization.",
   documentation: [
-    "Certificate of Analysis (CoA) — available on request per lot",
-    "HPLC chromatogram — available on request per lot",
-    "LC-MS spectrum — available on request per lot",
-    "Residual solvent report — available on request where analyzed",
-    "Safety Data Sheet (SDS) — available on request",
+    "Identity confirmed by LC-MS",
+    "Purity determined by RP-HPLC (UV, 214 nm)",
+    "Residual solvent screening where applicable",
+    "Lot-controlled lyophilized fill",
   ],
+
 };
 
 export const items: CatalogItem[] = [

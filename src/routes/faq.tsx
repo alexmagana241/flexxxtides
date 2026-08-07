@@ -37,7 +37,7 @@ const sections = [
   {
     title: "Documentation and shipping",
     items: [
-      { q: "Is a Certificate of Analysis included?", a: "A Certificate of Analysis is available for each supplied lot. Please request the lot-specific CoA when placing a purchase inquiry." },
+      { q: "How is material quality controlled?", a: "Every lot is identity-confirmed by LC-MS and purity-tested by RP-HPLC before release. Specifications for each item are listed on its catalog page." },
       { q: "Is a Safety Data Sheet available?", a: "Yes. SDS documents are provided on request for laboratory handling and disposal reference." },
       { q: "Are there shipping restrictions?", a: "Certain products or destinations may be restricted by law, carrier policy, payment-processor policy, or company policy. See the Restricted Products & Jurisdictions Policy." },
     ],

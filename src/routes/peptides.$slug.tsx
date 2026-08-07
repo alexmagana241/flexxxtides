@@ -248,16 +248,10 @@ function PeptidePage() {
 
             <div className="rounded-xl border border-border bg-card p-5">
               <div className="flex items-center gap-2 text-sm font-semibold">
-                <FileText className="h-4 w-4 text-primary" /> Documentation
+                <FileText className="h-4 w-4 text-primary" /> Quality control
               </div>
               <ul className="mt-3 space-y-2 text-sm">
-                {(p.documentation ?? [
-                  "Certificate of Analysis (CoA) — available on request per lot",
-                  "HPLC chromatogram — available on request per lot",
-                  "LC-MS spectrum — available on request per lot",
-                  "Residual solvent report — available on request where analyzed",
-                  "Safety Data Sheet (SDS) — available on request",
-                ]).map((d: string) => (
+                {p.analyticalMethods.map((d: string) => (
                   <li key={d} className="flex items-start gap-2 text-muted-foreground">
                     <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{d}</span>
@@ -265,6 +259,7 @@ function PeptidePage() {
                 ))}
               </ul>
             </div>
+
 
             <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 flex gap-3">
               <ShieldAlert className="h-4 w-4 text-primary shrink-0 mt-0.5" />

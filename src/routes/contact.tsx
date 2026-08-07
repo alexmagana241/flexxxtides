@@ -92,7 +92,7 @@ function Contact() {
               required
               value={type}
               onChange={setType}
-              placeholder="Order status, shipping, refund, CoA/SDS, compliance report…"
+              placeholder="Order status, shipping, refund, product specification, compliance report…"
             />
           </div>
           <div>
