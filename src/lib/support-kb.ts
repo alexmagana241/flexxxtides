@@ -45,10 +45,6 @@ export const FAQ_ENTRIES: FaqEntry[] = [
     a: "Lyophilized powder should be stored sealed at -20 °C, protected from light and moisture. Storage, shipping temperature, solubility and stability details are listed on every product specification page.",
   },
   {
-    q: "Can I get a Certificate of Analysis (CoA) or SDS?",
-    a: "Yes. A CoA, HPLC chromatogram, LC-MS spectrum and Safety Data Sheet are available on request per lot. Tell us the catalog number and lot and we will send the documentation.",
-  },
-  {
     q: "Who can order?",
     a: "Purchasers must be 21 or older and must confirm the material is being purchased exclusively for laboratory, analytical or non-clinical research. Requests inconsistent with legitimate laboratory research may be declined.",
   },
