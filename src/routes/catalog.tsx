@@ -48,7 +48,7 @@ function Catalog() {
           <h1 className="mt-2 text-4xl font-bold tracking-tight">Catalog</h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">
             Characterized peptide reference standards supplied for laboratory research.
-            Every pack ships as a lyophilized powder with a Certificate of Analysis.
+            Every pack ships as a lot-controlled lyophilized powder.
           </p>
           <div className="mt-5 max-w-3xl">
             <ResearchUseNotice variant="callout" />
