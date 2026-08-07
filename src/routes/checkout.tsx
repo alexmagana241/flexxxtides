@@ -4,7 +4,7 @@ import { CheckCircle2, CreditCard, Lock } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
-import { lineId, useCart } from "@/components/CartProvider";
+import { KIT_VIALS, lineId, useCart } from "@/components/CartProvider";
 import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import {
   BRAND,
