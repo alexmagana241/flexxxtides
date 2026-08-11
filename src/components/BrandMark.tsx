@@ -1,6 +1,6 @@
 // BIOHACKERS brand mark — the official hexagonal BH logo.
 
-import logo from "@/assets/biohackers-logo-hex.png.asset.json";
+import logo from "@/assets/biohackers-logo-mark.png.asset.json";
 
 export function BrandMark({
   className = "h-10 w-auto",
