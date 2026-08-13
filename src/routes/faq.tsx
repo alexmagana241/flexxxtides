@@ -42,7 +42,30 @@ const sections = [
       { q: "Are there shipping restrictions?", a: "Certain products or destinations may be restricted by law, carrier policy, payment-processor policy, or company policy. See the Restricted Products & Jurisdictions Policy." },
     ],
   },
+  {
+    title: "Orders, shipping, taxes and returns",
+    items: [
+      {
+        q: "How long does order processing take?",
+        a: "Orders are generally processed and shipped within 1–3 business days (Monday–Friday). Once processed, you will receive an email with your order status and shipping information, including carrier tracking details.",
+      },
+      {
+        q: "What are my shipping options?",
+        a: "We offer Priority and Next-Day shipping options. You will receive an email with your tracking number as soon as your order ships. Orders with a cart subtotal of $150 or more qualify for free Priority shipping. Free shipping applies only to regular Priority shipping. Next-Day shipping is not included in the free-shipping promotion and remains a paid shipping option regardless of cart subtotal.",
+      },
+      {
+        q: "Why do you collect taxes?",
+        a: "Applicable sales taxes are collected where required by law and calculated according to the order and applicable taxing jurisdiction.",
+      },
+      {
+        q: "Can I return my purchase for an exchange or refund?",
+        a: "Due to our quality-control standards and the nature of our products, we generally do not accept returns. However, replacements or refunds may be issued on a case-by-case basis for qualifying claims.",
+        link: { to: "/policies/refunds", label: "Refund & Replacement Policy" },
+      },
+    ],
+  },
 ];
+
 
 function FAQ() {
   return (
