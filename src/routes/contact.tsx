@@ -5,6 +5,7 @@ import { CheckCircle2, Mail, MessageCircle, ShieldAlert } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { BRAND } from "@/lib/compliance";
+import { SUPPORT_EMAIL } from "@/lib/compliance";
 import { FAQ_ENTRIES } from "@/lib/support-kb";
 import { submitInquiry } from "@/lib/support.functions";
 
@@ -71,6 +72,11 @@ function Contact() {
           <p className="mt-3 inline-flex items-center gap-2 text-sm text-primary">
             <MessageCircle className="h-4 w-4" />
             For a fast answer, open the support chat in the bottom-right corner.
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            You can also email us directly at{" "}
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-primary underline">{SUPPORT_EMAIL}</a>{" "}
+            for general support, order, shipping, refund, compliance, privacy, or SMS assistance.
           </p>
           <div className="mt-6 max-w-3xl">
             <ResearchUseNotice variant="callout" />
