@@ -6,10 +6,10 @@ import { BRAND } from "@/lib/compliance";
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — BIOHACKERS Research Materials" },
-      { name: "description", content: "Answers to common questions about BIOHACKERS laboratory reference materials, documentation, eligibility, ordering review, and shipping restrictions." },
-      { property: "og:title", content: "FAQ — BIOHACKERS Research Materials" },
-      { property: "og:description", content: "Frequently asked questions about BIOHACKERS research-materials ordering and documentation." },
+      { title: "FAQ — BH Research Materials" },
+      { name: "description", content: "Answers to common questions about BH laboratory reference materials, documentation, eligibility, ordering review, and shipping restrictions." },
+      { property: "og:title", content: "FAQ — BH Research Materials" },
+      { property: "og:description", content: "Frequently asked questions about BH research-materials ordering and documentation." },
       { property: "og:url", content: `${BRAND.domain}/faq` },
     ],
     links: [{ rel: "canonical", href: `${BRAND.domain}/faq` }],
@@ -19,18 +19,18 @@ export const Route = createFileRoute("/faq")({
 
 const sections = [
   {
-    title: "About BIOHACKERS materials",
+    title: "About BH materials",
     items: [
-      { q: "What does BIOHACKERS supply?", a: "Characterized peptide reference standards and related research materials in lyophilized powder form, intended exclusively for laboratory, analytical, and non-clinical research." },
-      { q: "Are these products medicines?", a: "No. BIOHACKERS materials are not drugs, foods, dietary supplements, cosmetics, medical devices, or veterinary products. They are laboratory research materials and are not offered or represented as suitable for use in or on humans or animals." },
-      { q: "Do you offer clinical, dosing, administration, or reconstitution-for-use guidance?", a: "No. BIOHACKERS does not provide medical, veterinary, diagnostic, therapeutic, or personal-use guidance of any kind." },
+      { q: "What does BH supply?", a: "Characterized peptide reference standards and related research materials in lyophilized powder form, intended exclusively for laboratory, analytical, and non-clinical research." },
+      { q: "Are these products medicines?", a: "No. BH materials are not drugs, foods, dietary supplements, cosmetics, medical devices, or veterinary products. They are laboratory research materials and are not offered or represented as suitable for use in or on humans or animals." },
+      { q: "Do you offer clinical, dosing, administration, or reconstitution-for-use guidance?", a: "No. BH does not provide medical, veterinary, diagnostic, therapeutic, or personal-use guidance of any kind." },
     ],
   },
   {
     title: "Ordering and eligibility",
     items: [
       { q: "Who can purchase?", a: "Purchases are limited to qualified research organizations. Buyers must complete an eligibility verification and affirm intended laboratory use." },
-      { q: "Are orders reviewed?", a: "Yes. Orders are subject to administrative review and may be held, rejected, cancelled, or refunded when they appear inconsistent with legitimate laboratory research or otherwise conflict with BIOHACKERS policies or applicable law." },
+      { q: "Are orders reviewed?", a: "Yes. Orders are subject to administrative review and may be held, rejected, cancelled, or refunded when they appear inconsistent with legitimate laboratory research or otherwise conflict with BH policies or applicable law." },
       { q: "Is online purchasing currently available?", a: "Yes, orders may be placed through the online catalog." },
     ],
   },
@@ -79,7 +79,7 @@ function FAQ() {
         <div className="rounded-xl border border-border bg-card p-6 text-center">
           <p className="text-sm text-muted-foreground">Have a research-organization question?</p>
           <Link to="/contact" className="mt-3 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
-            Contact BIOHACKERS
+            Contact BH
           </Link>
         </div>
       </div>

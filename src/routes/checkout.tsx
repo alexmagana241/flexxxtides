@@ -16,10 +16,10 @@ import {
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout — BIOHACKERS" },
-      { name: "description", content: "Complete your BIOHACKERS research materials order securely." },
-      { property: "og:title", content: "Checkout — BIOHACKERS" },
-      { property: "og:description", content: "Secure checkout for BIOHACKERS research materials." },
+      { title: "Checkout — BH Research Materials" },
+      { name: "description", content: "Complete your BH research materials order securely." },
+      { property: "og:title", content: "Checkout — BH Research Materials" },
+      { property: "og:description", content: "Secure checkout for BH research materials." },
       { property: "og:url", content: `${BRAND.domain}/checkout` },
       { name: "robots", content: "noindex" },
     ],

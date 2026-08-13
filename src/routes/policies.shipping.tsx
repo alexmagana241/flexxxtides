@@ -5,8 +5,8 @@ import { BRAND } from "@/lib/compliance";
 export const Route = createFileRoute("/policies/shipping")({
   head: () => ({
     meta: [
-      { title: "Shipping Policy — BIOHACKERS" },
-      { name: "description", content: "BIOHACKERS shipping policy for laboratory research materials." },
+      { title: "Shipping Policy — BH Research Materials" },
+      { name: "description", content: "BH shipping policy for laboratory research materials." },
       { property: "og:url", content: `${BRAND.domain}/policies/shipping` },
     ],
     links: [{ rel: "canonical", href: `${BRAND.domain}/policies/shipping` }],

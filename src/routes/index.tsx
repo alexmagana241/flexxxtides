@@ -9,9 +9,9 @@ import { BRAND, formatPrice } from "@/lib/compliance";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BIOHACKERS — Research Materials for Laboratory Use" },
-      { name: "description", content: "BIOHACKERS supplies peptide reference standards and research materials for legitimate laboratory, analytical, and non-clinical research. Not for human or veterinary use." },
-      { property: "og:title", content: "BIOHACKERS — Research Materials for Laboratory Use" },
+      { title: "BH — Research Materials for Laboratory Use" },
+      { name: "description", content: "BH supplies peptide reference standards and research materials for legitimate laboratory, analytical, and non-clinical research. Not for human or veterinary use." },
+      { property: "og:title", content: "BH — Research Materials for Laboratory Use" },
       { property: "og:description", content: "Peptide reference standards for laboratory research. Not for human or veterinary use." },
       { property: "og:url", content: `${BRAND.domain}/` },
     ],
@@ -35,7 +35,7 @@ function Home() {
               Peptide reference standards for <span className="text-primary">non-clinical research.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground text-balance leading-relaxed">
-              BIOHACKERS supplies characterized peptide reference materials for analytical,
+              BH supplies characterized peptide reference materials for analytical,
               method-development, and in vitro research applications.
             </p>
             <div className="mt-6 max-w-2xl">

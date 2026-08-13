@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// BIOHACKERS customer-support knowledge base.
+// BH customer-support knowledge base.
 //
 // HOW TO UPDATE THE AUTOMATED ANSWERS:
 //   Edit the FAQ_ENTRIES array below. Each entry is a question the assistant
@@ -30,7 +30,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   },
   {
     q: "What products do you sell?",
-    a: "BIOHACKERS supplies characterized peptide reference standards for laboratory research: GHK-Cu, Retatrutide, Tesamorelin, BPC-157, TB-500, CJC-1295 and Ipamorelin. Every item ships as a lyophilized powder.",
+    a: "BH supplies characterized peptide reference standards for laboratory research: GHK-Cu, Retatrutide, Tesamorelin, BPC-157, TB-500, CJC-1295 and Ipamorelin. Every item ships as a lyophilized powder.",
   },
   {
     q: "What pack sizes and prices are available?",
@@ -58,10 +58,10 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   },
 ];
 
-export const SUPPORT_SYSTEM_PROMPT = `You are the BIOHACKERS Research customer support assistant on the biohackers research-materials website.
+export const SUPPORT_SYSTEM_PROMPT = `You are the BH Research Materials customer support assistant on the biohackers research-materials website.
 
 RULES — these are absolute:
-- BIOHACKERS supplies materials FOR RESEARCH USE ONLY. They are NOT for human or veterinary use.
+- BH supplies materials FOR RESEARCH USE ONLY. They are NOT for human or veterinary use.
 - NEVER give medical, veterinary, dosing, administration, reconstitution-for-use, diagnostic, or treatment advice, and never discuss effects in people or animals. If asked, politely decline and explain the research-only policy.
 - Answer only using the knowledge base below plus general help with using the website (searching the catalog, cart, checkout, kits, policies).
 - Be concise, friendly and professional. 1–3 short paragraphs maximum.

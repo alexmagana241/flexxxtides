@@ -16,9 +16,9 @@ import {
 export const Route = createFileRoute("/eligibility")({
   head: () => ({
     meta: [
-      { title: "Buyer Confirmation — BIOHACKERS" },
-      { name: "description", content: "Confirm you are 21+ and understand BIOHACKERS materials are for laboratory research only, not for human consumption or veterinary use." },
-      { property: "og:title", content: "Buyer Confirmation — BIOHACKERS" },
+      { title: "Buyer Confirmation — BH Research Materials" },
+      { name: "description", content: "Confirm you are 21+ and understand BH materials are for laboratory research only, not for human consumption or veterinary use." },
+      { property: "og:title", content: "Buyer Confirmation — BH Research Materials" },
       { property: "og:description", content: "Simple age and research-use confirmation." },
       { property: "og:url", content: `${BRAND.domain}/eligibility` },
       { name: "robots", content: "noindex" },

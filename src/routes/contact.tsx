@@ -11,9 +11,9 @@ import { submitInquiry } from "@/lib/support.functions";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact & Compliance — BIOHACKERS" },
-      { name: "description", content: "Contact BIOHACKERS for research-organization inquiries, order questions, or to report a compliance concern about the use of research materials." },
-      { property: "og:title", content: "Contact & Compliance — BIOHACKERS" },
+      { title: "Contact & Compliance — BH Research Materials" },
+      { name: "description", content: "Contact BH for research-organization inquiries, order questions, or to report a compliance concern about the use of research materials." },
+      { property: "og:title", content: "Contact & Compliance — BH Research Materials" },
       { property: "og:description", content: "Research-organization contact, customer support and compliance reporting." },
       { property: "og:url", content: `${BRAND.domain}/contact` },
     ],
@@ -64,7 +64,7 @@ function Contact() {
           <p className="text-[10px] uppercase tracking-wider text-primary font-semibold">Contact</p>
           <h1 className="mt-2 text-4xl font-bold tracking-tight">Customer support & compliance reporting</h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">
-            BIOHACKERS responds to order questions and research-organization inquiries about catalog
+            BH responds to order questions and research-organization inquiries about catalog
             materials, documentation, and eligibility. We do not provide medical, veterinary,
             diagnostic, or treatment advice under any circumstances.
           </p>
@@ -144,7 +144,7 @@ function Contact() {
               <h3 className="font-semibold">Compliance reporting</h3>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
-              To report suspected misuse of BIOHACKERS materials, a website content concern,
+              To report suspected misuse of BH materials, a website content concern,
               a labelling issue, or a suspected diverted shipment, use this form and select
               "compliance report" as the inquiry type.
             </p>

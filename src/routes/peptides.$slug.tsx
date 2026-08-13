@@ -18,7 +18,7 @@ export const Route = createFileRoute("/peptides/$slug")({
   head: ({ loaderData, params }) => {
     const p = loaderData?.item;
     const title = p
-      ? `${p.name} — ${p.catalogNumber} | BIOHACKERS Research Materials`
+      ? `${p.name} — ${p.catalogNumber} | BH Research Materials`
       : "Catalog item";
     const desc = p
       ? `${p.name} laboratory reference standard. Molecular formula ${p.molecularFormula}, MW ${p.molecularWeight}. For research use only. Not for human or veterinary use.`

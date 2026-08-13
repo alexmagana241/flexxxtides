@@ -40,7 +40,7 @@ export function Footer() {
       </div>
       <div className="border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} BIOHACKERS. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} BH. All rights reserved.</p>
           <p>Not for human or veterinary use. Not medical advice.</p>
         </div>
       </div>

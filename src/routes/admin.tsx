@@ -10,7 +10,7 @@ import {
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Compliance Dashboard — BIOHACKERS" },
+      { title: "Compliance Dashboard — BH Research Materials" },
       { name: "description", content: "Internal compliance dashboard placeholder." },
       { property: "og:url", content: `${BRAND.domain}/admin` },
       { name: "robots", content: "noindex,nofollow" },

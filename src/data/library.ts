@@ -1,4 +1,4 @@
-// BIOHACKERS Research Library — long-form laboratory-practice reference
+// BH Research Materials Library — long-form laboratory-practice reference
 // articles. All content is neutral, laboratory-focused, and contains no
 // administration or personal-use guidance.
 

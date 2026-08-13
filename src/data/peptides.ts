@@ -1,4 +1,4 @@
-// BIOHACKERS research materials catalog — laboratory reference data only.
+// BH research materials catalog — laboratory reference data only.
 // No dosing, no administration, no therapeutic or bodily-effect claims.
 //
 // Molecular data is drawn from published chemistry references. Pricing is

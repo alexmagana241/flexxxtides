@@ -12,9 +12,9 @@ const iconMap = {
 export const Route = createFileRoute("/research-library")({
   head: () => ({
     meta: [
-      { title: "Research Library — BIOHACKERS" },
+      { title: "Research Library — BH Research Materials" },
       { name: "description", content: "Laboratory-focused reference articles on Certificate of Analysis interpretation, Safety Data Sheets, storage, PPE, disposal, and scientific literature evaluation." },
-      { property: "og:title", content: "Research Library — BIOHACKERS" },
+      { property: "og:title", content: "Research Library — BH Research Materials" },
       { property: "og:description", content: "Laboratory-focused reference articles for research professionals." },
       { property: "og:url", content: `${BRAND.domain}/research-library` },
     ],

@@ -9,10 +9,10 @@ import { BRAND, formatPrice } from "@/lib/compliance";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Cart — BIOHACKERS" },
-      { name: "description", content: "Review the research materials in your BIOHACKERS cart before checkout." },
-      { property: "og:title", content: "Cart — BIOHACKERS" },
-      { property: "og:description", content: "Review the research materials in your BIOHACKERS cart." },
+      { title: "Cart — BH Research Materials" },
+      { name: "description", content: "Review the research materials in your BH cart before checkout." },
+      { property: "og:title", content: "Cart — BH Research Materials" },
+      { property: "og:description", content: "Review the research materials in your BH cart." },
       { property: "og:url", content: `${BRAND.domain}/cart` },
       { name: "robots", content: "noindex" },
     ],

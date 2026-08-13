@@ -1,8 +1,8 @@
-// Single source of truth for BIOHACKERS research-only compliance strings.
+// Single source of truth for BH research-only compliance strings.
 // Do not fork these values into other files.
 
 export const BRAND = {
-  name: "BIOHACKERS",
+  name: "BH",
   tagline: "Research materials for laboratory use.",
   domain: "https://flexxxtides.lovable.app",
 } as const;
@@ -11,7 +11,7 @@ export const RESEARCH_USE_NOTICE =
   "FOR RESEARCH USE ONLY. NOT FOR HUMAN OR VETERINARY USE. NOT FOR CLINICAL, DIAGNOSTIC, THERAPEUTIC, PROPHYLACTIC, FOOD, DRUG, COSMETIC, HOUSEHOLD, OR CONSUMER USE.";
 
 export const FOOTER_NOTICE =
-  "BIOHACKERS supplies materials exclusively for legitimate laboratory, analytical, and non-clinical research. Products are not intended for human or veterinary use and are not offered as drugs, foods, dietary supplements, cosmetics, medical devices, or veterinary products. Nothing on this website constitutes medical, veterinary, diagnostic, or treatment advice.";
+  "BH supplies materials exclusively for legitimate laboratory, analytical, and non-clinical research. Products are not intended for human or veterinary use and are not offered as drugs, foods, dietary supplements, cosmetics, medical devices, or veterinary products. Nothing on this website constitutes medical, veterinary, diagnostic, or treatment advice.";
 
 export const CHECKOUT_CERTIFICATION =
   "By submitting this order, I certify that every item is being purchased exclusively for legitimate laboratory, analytical, or non-clinical research and will not be used in or on humans or animals.";
