@@ -9,17 +9,19 @@ import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import {
   BRAND,
   CHECKOUT_CERTIFICATION,
+  CHECKOUT_POLICY_NOTICE,
   CONFIRMATIONS,
+  FREE_PRIORITY_THRESHOLD,
   formatPrice,
 } from "@/lib/compliance";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout — BIOHACKERS" },
-      { name: "description", content: "Complete your BIOHACKERS research materials order securely." },
-      { property: "og:title", content: "Checkout — BIOHACKERS" },
-      { property: "og:description", content: "Secure checkout for BIOHACKERS research materials." },
+      { title: "Checkout — BH Research Materials" },
+      { name: "description", content: "Complete your BH research materials order securely." },
+      { property: "og:title", content: "Checkout — BH Research Materials" },
+      { property: "og:description", content: "Secure checkout for BH research materials." },
       { property: "og:url", content: `${BRAND.domain}/checkout` },
       { name: "robots", content: "noindex" },
     ],
@@ -28,8 +30,8 @@ export const Route = createFileRoute("/checkout")({
   component: Checkout,
 });
 
-type ShipMethod = "standard" | "express";
-type Shipping = { method: ShipMethod; label: string; priceUSD: number };
+type ShipMethod = "priority" | "nextday";
+type Shipping = { method: ShipMethod; label: string; priceUSD: number; free?: boolean };
 
 // Automated zone-based rate calculation.
 const ZONE_2 = ["CA", "OR", "WA", "NV", "AZ", "ID", "UT"]; // west
@@ -44,23 +46,33 @@ function shippingZone(country: string, state: string): number {
   return 3;
 }
 
-function shippingOptions(country: string, state: string, weightUnits: number): Shipping[] {
+function shippingOptions(
+  country: string,
+  state: string,
+  weightUnits: number,
+  subtotal: number,
+): Shipping[] {
   const zone = shippingZone(country, state);
   const zoneFee = { 2: 0, 3: 4, 4: 14, 5: 26 }[zone] ?? 4;
   const handling = Math.max(0, Math.ceil(weightUnits / 10) - 1) * 3;
+  const freePriority = subtotal >= FREE_PRIORITY_THRESHOLD;
   return [
     {
-      method: "standard",
-      label: "Standard shipping (4–7 business days)",
-      priceUSD: 9 + zoneFee + handling,
+      method: "priority",
+      label: freePriority
+        ? "Priority shipping (2–5 business days) — free on orders $150+"
+        : "Priority shipping (2–5 business days)",
+      priceUSD: freePriority ? 0 : 9 + zoneFee + handling,
+      free: freePriority,
     },
     {
-      method: "express",
-      label: "Express shipping (2–3 business days)",
-      priceUSD: 22 + Math.round(zoneFee * 1.5) + handling,
+      method: "nextday",
+      label: "Next-Day shipping (next business day)",
+      priceUSD: 39 + Math.round(zoneFee * 1.5) + handling,
     },
   ];
 }
+
 
 
 const STEPS = ["Customer", "Shipping", "Payment", "Review"] as const;
@@ -86,7 +98,7 @@ export function Checkout() {
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("United States");
-  const [shipMethod, setShipMethod] = useState<ShipMethod>("standard");
+  const [shipMethod, setShipMethod] = useState<ShipMethod>("priority");
 
   // Billing
   const [billingSame, setBillingSame] = useState(true);
@@ -106,9 +118,12 @@ export function Checkout() {
   const [age21, setAge21] = useState(false);
   const [researchOnly, setResearchOnly] = useState(false);
   const [certify, setCertify] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [agreeZeroTolerance, setAgreeZeroTolerance] = useState(false);
+  const [showAgreeError, setShowAgreeError] = useState(false);
 
   const vialCount = lines.reduce((n, l) => n + l.qty * (l.kit ? KIT_VIALS : 1), 0);
-  const shipOptions = shippingOptions(country, state, vialCount);
+  const shipOptions = shippingOptions(country, state, vialCount, subtotal);
   const ship = shipOptions.find((s) => s.method === shipMethod) ?? shipOptions[0]!;
   const shippingCost = lines.length ? ship.priceUSD : 0;
   const total = subtotal + shippingCost;
@@ -125,7 +140,8 @@ export function Checkout() {
     /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry) &&
     /^\d{3,4}$/.test(cvv) &&
     billingZip.trim().length >= 4;
-  const reviewOk = age21 && researchOnly && certify;
+  const agreementsOk = agreeTerms && agreeZeroTolerance;
+  const reviewOk = age21 && researchOnly && certify && agreementsOk;
 
   const stepOk = [customerOk, shippingOk, paymentOk, reviewOk][step];
 
@@ -239,7 +255,7 @@ export function Checkout() {
                       <input type="radio" name="shipping" checked={ship.method === s.method} onChange={() => setShipMethod(s.method)} />
 
                       <span className="flex-1">{s.label}</span>
-                      <span className="font-semibold tabular-nums">{formatPrice(s.priceUSD)}</span>
+                      <span className="font-semibold tabular-nums">{s.free ? "Free" : formatPrice(s.priceUSD)}</span>
                     </label>
                   ))}
                 </div>
@@ -355,6 +371,47 @@ export function Checkout() {
                   </label>
                 </div>
               </Card>
+
+              <Card title="Required agreements">
+                <p className="text-xs text-muted-foreground leading-relaxed">{CHECKOUT_POLICY_NOTICE}</p>
+                <div className="mt-4 space-y-3 text-sm">
+                  <label className="flex gap-3 items-start">
+                    <input
+                      type="checkbox"
+                      checked={agreeZeroTolerance}
+                      onChange={(e) => { setAgreeZeroTolerance(e.target.checked); setShowAgreeError(false); }}
+                      className="mt-1"
+                    />
+                    <span>
+                      I have read and agree to the{" "}
+                      <Link to="/policies/zero-tolerance" target="_blank" className="text-primary underline">
+                        BH Zero-Tolerance Policy
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                  <label className="flex gap-3 items-start">
+                    <input
+                      type="checkbox"
+                      checked={agreeTerms}
+                      onChange={(e) => { setAgreeTerms(e.target.checked); setShowAgreeError(false); }}
+                      className="mt-1"
+                    />
+                    <span>
+                      I have read and agree to the{" "}
+                      <Link to="/policies/terms-of-sale" target="_blank" className="text-primary underline">
+                        BH Terms and Conditions
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                </div>
+                {showAgreeError && (
+                  <p role="alert" className="mt-3 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-xs text-destructive">
+                    Please accept both the BH Zero-Tolerance Policy and the BH Terms and Conditions before placing your order.
+                  </p>
+                )}
+              </Card>
             </>
           )}
 
@@ -379,8 +436,11 @@ export function Checkout() {
               </button>
             ) : (
               <button
-                disabled={!reviewOk}
                 onClick={() => {
+                  if (!reviewOk) {
+                    setShowAgreeError(true);
+                    return;
+                  }
                   const id = `BH-${Date.now().toString(36).toUpperCase()}`;
                   setPlaced({ id, total });
                   clear();
@@ -406,7 +466,7 @@ export function Checkout() {
           </ul>
           <div className="border-t border-border pt-3 space-y-1 text-sm">
             <Row label="Subtotal" value={formatPrice(subtotal)} />
-            <Row label="Shipping" value={formatPrice(shippingCost)} />
+            <Row label="Shipping" value={ship.free ? "Free (Priority)" : formatPrice(shippingCost)} />
             <div className="flex justify-between pt-2 text-base font-semibold">
               <span>Total</span>
               <span className="tabular-nums text-primary">{formatPrice(total)}</span>

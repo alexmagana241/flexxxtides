@@ -9,7 +9,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 const GREETING: Msg = {
   role: "assistant",
   content:
-    "Hi — I'm the BIOHACKERS support assistant. I can help with shipping, order status, refunds, pack sizes, kits and documentation. What can I help you with?",
+    "Hi — I'm the BH support assistant. I can help with shipping, order status, refunds, pack sizes, kits and documentation. What can I help you with?",
 };
 
 export function SupportChat() {
@@ -105,7 +105,7 @@ export function SupportChat() {
           <div className="flex max-h-[80vh] flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl">
             <div className="flex items-center justify-between border-b border-border px-4 py-3">
               <div>
-                <p className="text-sm font-semibold">BIOHACKERS Support</p>
+                <p className="text-sm font-semibold">BH Support</p>
                 <p className="text-[11px] text-muted-foreground">Automated answers · research use only</p>
               </div>
               <button onClick={() => setOpen(false)} aria-label="Close support chat" className="h-8 w-8 grid place-items-center rounded-md hover:bg-muted">

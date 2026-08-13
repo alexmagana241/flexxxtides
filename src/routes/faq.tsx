@@ -6,10 +6,10 @@ import { BRAND } from "@/lib/compliance";
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — BIOHACKERS Research Materials" },
-      { name: "description", content: "Answers to common questions about BIOHACKERS laboratory reference materials, documentation, eligibility, ordering review, and shipping restrictions." },
-      { property: "og:title", content: "FAQ — BIOHACKERS Research Materials" },
-      { property: "og:description", content: "Frequently asked questions about BIOHACKERS research-materials ordering and documentation." },
+      { title: "FAQ — BH Research Materials" },
+      { name: "description", content: "Answers to common questions about BH laboratory reference materials, documentation, eligibility, ordering review, and shipping restrictions." },
+      { property: "og:title", content: "FAQ — BH Research Materials" },
+      { property: "og:description", content: "Frequently asked questions about BH research-materials ordering and documentation." },
       { property: "og:url", content: `${BRAND.domain}/faq` },
     ],
     links: [{ rel: "canonical", href: `${BRAND.domain}/faq` }],
@@ -17,20 +17,21 @@ export const Route = createFileRoute("/faq")({
   component: FAQ,
 });
 
-const sections = [
+type FaqItem = { q: string; a: string; link?: { to: string; label: string } };
+const sections: { title: string; items: FaqItem[] }[] = [
   {
-    title: "About BIOHACKERS materials",
+    title: "About BH materials",
     items: [
-      { q: "What does BIOHACKERS supply?", a: "Characterized peptide reference standards and related research materials in lyophilized powder form, intended exclusively for laboratory, analytical, and non-clinical research." },
-      { q: "Are these products medicines?", a: "No. BIOHACKERS materials are not drugs, foods, dietary supplements, cosmetics, medical devices, or veterinary products. They are laboratory research materials and are not offered or represented as suitable for use in or on humans or animals." },
-      { q: "Do you offer clinical, dosing, administration, or reconstitution-for-use guidance?", a: "No. BIOHACKERS does not provide medical, veterinary, diagnostic, therapeutic, or personal-use guidance of any kind." },
+      { q: "What does BH supply?", a: "Characterized peptide reference standards and related research materials in lyophilized powder form, intended exclusively for laboratory, analytical, and non-clinical research." },
+      { q: "Are these products medicines?", a: "No. BH materials are not drugs, foods, dietary supplements, cosmetics, medical devices, or veterinary products. They are laboratory research materials and are not offered or represented as suitable for use in or on humans or animals." },
+      { q: "Do you offer clinical, dosing, administration, or reconstitution-for-use guidance?", a: "No. BH does not provide medical, veterinary, diagnostic, therapeutic, or personal-use guidance of any kind." },
     ],
   },
   {
     title: "Ordering and eligibility",
     items: [
       { q: "Who can purchase?", a: "Purchases are limited to qualified research organizations. Buyers must complete an eligibility verification and affirm intended laboratory use." },
-      { q: "Are orders reviewed?", a: "Yes. Orders are subject to administrative review and may be held, rejected, cancelled, or refunded when they appear inconsistent with legitimate laboratory research or otherwise conflict with BIOHACKERS policies or applicable law." },
+      { q: "Are orders reviewed?", a: "Yes. Orders are subject to administrative review and may be held, rejected, cancelled, or refunded when they appear inconsistent with legitimate laboratory research or otherwise conflict with BH policies or applicable law." },
       { q: "Is online purchasing currently available?", a: "Yes, orders may be placed through the online catalog." },
     ],
   },
@@ -42,7 +43,30 @@ const sections = [
       { q: "Are there shipping restrictions?", a: "Certain products or destinations may be restricted by law, carrier policy, payment-processor policy, or company policy. See the Restricted Products & Jurisdictions Policy." },
     ],
   },
+  {
+    title: "Orders, shipping, taxes and returns",
+    items: [
+      {
+        q: "How long does order processing take?",
+        a: "Orders are generally processed and shipped within 1–3 business days (Monday–Friday). Once processed, you will receive an email with your order status and shipping information, including carrier tracking details.",
+      },
+      {
+        q: "What are my shipping options?",
+        a: "We offer Priority and Next-Day shipping options. You will receive an email with your tracking number as soon as your order ships. Orders with a cart subtotal of $150 or more qualify for free Priority shipping. Free shipping applies only to regular Priority shipping. Next-Day shipping is not included in the free-shipping promotion and remains a paid shipping option regardless of cart subtotal.",
+      },
+      {
+        q: "Why do you collect taxes?",
+        a: "Applicable sales taxes are collected where required by law and calculated according to the order and applicable taxing jurisdiction.",
+      },
+      {
+        q: "Can I return my purchase for an exchange or refund?",
+        a: "Due to our quality-control standards and the nature of our products, we generally do not accept returns. However, replacements or refunds may be issued on a case-by-case basis for qualifying claims.",
+        link: { to: "/policies/refunds", label: "Refund & Replacement Policy" },
+      },
+    ],
+  },
 ];
+
 
 function FAQ() {
   return (
@@ -70,6 +94,13 @@ function FAQ() {
                     <span className="text-muted-foreground group-open:rotate-180 transition-transform">▾</span>
                   </summary>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{it.a}</p>
+                  {it.link && (
+                    <p className="mt-2 text-sm">
+                      Please review our{" "}
+                      <Link to={it.link.to} className="text-primary underline">{it.link.label}</Link>{" "}
+                      for additional information.
+                    </p>
+                  )}
                 </details>
               ))}
             </div>
@@ -79,7 +110,7 @@ function FAQ() {
         <div className="rounded-xl border border-border bg-card p-6 text-center">
           <p className="text-sm text-muted-foreground">Have a research-organization question?</p>
           <Link to="/contact" className="mt-3 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
-            Contact BIOHACKERS
+            Contact BH
           </Link>
         </div>
       </div>

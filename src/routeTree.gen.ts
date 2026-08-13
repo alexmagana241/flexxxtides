@@ -21,6 +21,7 @@ import { Route as AdminInboxRouteImport } from './routes/admin-inbox'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResearchTopicRouteImport } from './routes/research.$topic'
+import { Route as PoliciesZeroToleranceRouteImport } from './routes/policies.zero-tolerance'
 import { Route as PoliciesTermsOfSaleRouteImport } from './routes/policies.terms-of-sale'
 import { Route as PoliciesShippingRouteImport } from './routes/policies.shipping'
 import { Route as PoliciesRestrictedRouteImport } from './routes/policies.restricted'
@@ -90,6 +91,11 @@ const IndexRoute = IndexRouteImport.update({
 const ResearchTopicRoute = ResearchTopicRouteImport.update({
   id: '/research/$topic',
   path: '/research/$topic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesZeroToleranceRoute = PoliciesZeroToleranceRouteImport.update({
+  id: '/policies/zero-tolerance',
+  path: '/policies/zero-tolerance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PoliciesTermsOfSaleRoute = PoliciesTermsOfSaleRouteImport.update({
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/policies/restricted': typeof PoliciesRestrictedRoute
   '/policies/shipping': typeof PoliciesShippingRoute
   '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
+  '/policies/zero-tolerance': typeof PoliciesZeroToleranceRoute
   '/research/$topic': typeof ResearchTopicRoute
 }
 export interface FileRoutesByTo {
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/policies/restricted': typeof PoliciesRestrictedRoute
   '/policies/shipping': typeof PoliciesShippingRoute
   '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
+  '/policies/zero-tolerance': typeof PoliciesZeroToleranceRoute
   '/research/$topic': typeof ResearchTopicRoute
 }
 export interface FileRoutesById {
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/policies/restricted': typeof PoliciesRestrictedRoute
   '/policies/shipping': typeof PoliciesShippingRoute
   '/policies/terms-of-sale': typeof PoliciesTermsOfSaleRoute
+  '/policies/zero-tolerance': typeof PoliciesZeroToleranceRoute
   '/research/$topic': typeof ResearchTopicRoute
 }
 export interface FileRouteTypes {
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/policies/restricted'
     | '/policies/shipping'
     | '/policies/terms-of-sale'
+    | '/policies/zero-tolerance'
     | '/research/$topic'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/policies/restricted'
     | '/policies/shipping'
     | '/policies/terms-of-sale'
+    | '/policies/zero-tolerance'
     | '/research/$topic'
   id:
     | '__root__'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/policies/restricted'
     | '/policies/shipping'
     | '/policies/terms-of-sale'
+    | '/policies/zero-tolerance'
     | '/research/$topic'
   fileRoutesById: FileRoutesById
 }
@@ -313,6 +325,7 @@ export interface RootRouteChildren {
   PoliciesRestrictedRoute: typeof PoliciesRestrictedRoute
   PoliciesShippingRoute: typeof PoliciesShippingRoute
   PoliciesTermsOfSaleRoute: typeof PoliciesTermsOfSaleRoute
+  PoliciesZeroToleranceRoute: typeof PoliciesZeroToleranceRoute
   ResearchTopicRoute: typeof ResearchTopicRoute
 }
 
@@ -400,6 +413,13 @@ declare module '@tanstack/react-router' {
       path: '/research/$topic'
       fullPath: '/research/$topic'
       preLoaderRoute: typeof ResearchTopicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/zero-tolerance': {
+      id: '/policies/zero-tolerance'
+      path: '/policies/zero-tolerance'
+      fullPath: '/policies/zero-tolerance'
+      preLoaderRoute: typeof PoliciesZeroToleranceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/policies/terms-of-sale': {
@@ -497,6 +517,7 @@ const rootRouteChildren: RootRouteChildren = {
   PoliciesRestrictedRoute: PoliciesRestrictedRoute,
   PoliciesShippingRoute: PoliciesShippingRoute,
   PoliciesTermsOfSaleRoute: PoliciesTermsOfSaleRoute,
+  PoliciesZeroToleranceRoute: PoliciesZeroToleranceRoute,
   ResearchTopicRoute: ResearchTopicRoute,
 }
 export const routeTree = rootRouteImport

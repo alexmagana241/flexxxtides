@@ -10,9 +10,9 @@ import { BRAND, formatPrice } from "@/lib/compliance";
 export const Route = createFileRoute("/catalog")({
   head: () => ({
     meta: [
-      { title: "Catalog — BIOHACKERS Research Materials" },
-      { name: "description", content: "Searchable catalog of BIOHACKERS peptide reference standards for laboratory, analytical, and non-clinical research. Pricing per pack size. Not for human or veterinary use." },
-      { property: "og:title", content: "Catalog — BIOHACKERS Research Materials" },
+      { title: "Catalog — BH Research Materials" },
+      { name: "description", content: "Searchable catalog of BH peptide reference standards for laboratory, analytical, and non-clinical research. Pricing per pack size. Not for human or veterinary use." },
+      { property: "og:title", content: "Catalog — BH Research Materials" },
       { property: "og:description", content: "Peptide reference standards for laboratory research, priced per pack size." },
       { property: "og:url", content: `${BRAND.domain}/catalog` },
     ],

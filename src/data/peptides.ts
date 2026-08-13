@@ -1,4 +1,4 @@
-// BIOHACKERS research materials catalog — laboratory reference data only.
+// BH research materials catalog — laboratory reference data only.
 // No dosing, no administration, no therapeutic or bodily-effect claims.
 //
 // Molecular data is drawn from published chemistry references. Pricing is
@@ -9,7 +9,9 @@ export type ResearchCategory =
   | "Reference Peptide"
   | "Investigational Reference Compound"
   | "Peptide Fragment"
-  | "Metal-Complex Peptide";
+  | "Metal-Complex Peptide"
+  | "Research Compound"
+  | "Laboratory Supply";
 
 export interface PackOption {
   size: string;   // e.g. "5 mg"
@@ -39,15 +41,13 @@ export interface CatalogItem {
   packs: PackOption[];
   scientificSummary: string;
   analyticalMethods: string[];
-  references: string[];
+  references?: string[];
   documentation?: string[];
   coaUrl?: string;
   sdsUrl?: string;
 }
 
 const COMMON = {
-  shippingTemperature:
-    "Shipped with cold packs; short-term ambient exposure during transit does not typically affect a lyophilized reference standard.",
   solubility:
     "Typically soluble in bacteriostatic or sterile water, dilute acetic acid, or DMSO for analytical work; solubility is sequence-dependent and should be established per assay.",
   handling:
@@ -95,14 +95,6 @@ export const items: CatalogItem[] = [
       "Karl Fischer moisture",
       "Amino-acid analysis (AAA)",
     ],
-    references: [
-      "Pickart, L.; Thaler, M.M. (1973). Nature New Biology 243: 85–87.",
-      "Pickart, L.; Margolina, A. (2018). Int. J. Mol. Sci. 19(7): 1987.",
-      "Maquart, F.X. et al. (1988). FEBS Lett. 238(2): 343–346.",
-      "Pickart, L. (2008). J. Biomater. Sci. Polym. Ed. 19(8): 969–988.",
-      "Pickart, L.; Vasquez-Soltero, J.M.; Margolina, A. (2015). Oxid. Med. Cell. Longev. 2015: 648108.",
-      "Miller, D.M.; DeSilva, D.; Pickart, L.; Aust, S.D. (1990). Adv. Exp. Med. Biol. 264: 79–84.",
-    ],
   },
   {
     slug: "retatrutide",
@@ -134,14 +126,6 @@ export const items: CatalogItem[] = [
       "Karl Fischer moisture",
       "Residual TFA / acetate by IC",
     ],
-    references: [
-      "Coskun, T. et al. (2022). Cell Metabolism 34(9): 1234–1247.e9.",
-      "Jastreboff, A.M. et al. (2023). N. Engl. J. Med. 389: 514–526.",
-      "Rosenstock, J. et al. (2023). The Lancet 402(10401): 529–544.",
-      "Urva, S. et al. (2022). The Lancet 400(10366): 1869–1881.",
-      "Knerr, P.J. et al. (2022). Mol. Metab. 63: 101533.",
-      "Frías, J.P. (2024). Curr. Opin. Endocrinol. Diabetes Obes. 31(2): 68–75.",
-    ],
   },
   {
     slug: "tesamorelin",
@@ -170,13 +154,6 @@ export const items: CatalogItem[] = [
       "Amino-acid analysis (AAA)",
       "Karl Fischer moisture",
     ],
-    references: [
-      "Falutz, J. et al. (2010). J. Clin. Endocrinol. Metab. 95(9): 4291–4304.",
-      "Ferdinandi, E.S. et al. (2007). Basic Clin. Pharmacol. Toxicol. 100(1): 49–58.",
-      "Stanley, T.L. et al. (2014). JAMA 312(4): 380–389.",
-      "Adrian, S. et al. (2019). J. Endocr. Soc. 3(6): 1149–1162.",
-      "Clemmons, D.R. (2019). Endocr. Rev. 40(1): 1–15.",
-    ],
   },
   {
     slug: "bpc-157",
@@ -201,13 +178,6 @@ export const items: CatalogItem[] = [
     scientificSummary:
       "A synthetic pentadecapeptide whose sequence is described in the preclinical research literature as a partial sequence derived from gastric juice protein studies. Supplied as a laboratory reference standard for in vitro assay development and analytical characterization only.",
     analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Karl Fischer moisture", "Amino-acid analysis (AAA)"],
-    references: [
-      "Sikiric, P. et al. (2018). Curr. Pharm. Des. 24(18): 1990–2001.",
-      "Seiwerth, S. et al. (2018). Curr. Pharm. Des. 24(18): 1972–1989.",
-      "Sikiric, P. et al. (2020). Curr. Med. Chem. 27(41): 6795–6820.",
-      "Chang, C.H. et al. (2014). J. Appl. Physiol. 117(11): 1287–1293.",
-      "Vukojević, J. et al. (2022). Biomedicines 10(6): 1420.",
-    ],
   },
   {
     slug: "tb-500",
@@ -231,13 +201,6 @@ export const items: CatalogItem[] = [
     scientificSummary:
       "A synthetic peptide fragment corresponding to regions of thymosin β4 described in cytoskeletal-biology and actin-sequestration research literature. The exact molecular formula and mass depend on the fragment and any N-terminal acetylation reported on the Certificate of Analysis for the specific lot. Supplied as a laboratory reference standard for in vitro research and analytical method work.",
     analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
-    references: [
-      "Goldstein, A.L. et al. (2005). Ann. N.Y. Acad. Sci. 1112: 1–13.",
-      "Crockford, D. et al. (2010). Ann. N.Y. Acad. Sci. 1194: 179–189.",
-      "Sosne, G.; Rimmer, D.; Kleinman, H.K.; Ousler, G. (2010). Vitam. Horm. 87: 155–176.",
-      "Kleinman, H.K.; Sosne, G. (2016). Vitam. Horm. 102: 251–275.",
-      "Xing, Y. et al. (2021). Int. J. Mol. Sci. 22(11): 5904.",
-    ],
   },
   {
     slug: "cjc-1295",
@@ -261,12 +224,6 @@ export const items: CatalogItem[] = [
     scientificSummary:
       "A modified GHRH(1-29) analog described in pharmacokinetic research literature. The DAC (drug affinity complex) variant carries a maleimidopropionic acid moiety at the C-terminus, described in the literature as a reference peptide for in vitro receptor and analytical work.",
     analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
-    references: [
-      "Teichman, S.L. et al. (2006). J. Clin. Endocrinol. Metab. 91(3): 799–805.",
-      "Ionescu, M.; Frohman, L.A. (2006). J. Clin. Endocrinol. Metab. 91(12): 4792–4797.",
-      "Sackmann-Sala, L.; Kopchick, J.J. (2015). Endocr. Rev. 36(2): 234–261.",
-      "Alba, M. et al. (2006). J. Clin. Endocrinol. Metab. 91(4): 1477–1484.",
-    ],
   },
   {
     slug: "ipamorelin",
@@ -290,13 +247,222 @@ export const items: CatalogItem[] = [
     scientificSummary:
       "A synthetic pentapeptide described in the receptor-pharmacology literature as a reference ligand at the ghrelin/GHS-R1a receptor system. Supplied as a laboratory reference standard for in vitro receptor and analytical work.",
     analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
-    references: [
-      "Raun, K. et al. (1998). Eur. J. Endocrinol. 139(5): 552–561.",
-      "Johansen, P.B. et al. (1999). Growth Horm. IGF Res. 9(2): 106–113.",
-      "Gobburu, J.V.S. et al. (1999). J. Clin. Pharmacol. 39(11): 1141–1148.",
-      "Sinha, D.K. et al. (2017). Transl. Androl. Urol. 6(Suppl 5): S760–S766.",
-      "Andersen, N.H. et al. (2001). J. Am. Chem. Soc. 123(11): 2528–2533.",
-    ],
+  },
+  {
+    slug: "ahk-cu",
+    name: "AHK-Cu",
+    fullName: "L-Alanyl-L-Histidyl-L-Lysine Copper(II) Complex",
+    synonyms: ["Copper tripeptide AHK"],
+    category: "Metal-Complex Peptide",
+    catalogNumber: "BH-CU-002",
+    molecularFormula: "C15H26CuN6O4",
+    molecularWeight: "≈ 417.9 g/mol",
+    sequence: "Ala-His-Lys · Cu(II)",
+    appearance: "Blue lyophilized powder",
+    physicalForm: "Lyophilized blue powder",
+    statedPurity: "≥ 98%",
+    storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
+    ...COMMON,
+    packs: [{ size: "50 mg", priceUSD: 70 }],
+    scientificSummary:
+      "A copper-binding tripeptide studied in extracellular-matrix and copper-coordination chemistry literature. Supplied as a laboratory reference standard for in vitro assay development, spectroscopic characterization, and analytical method work.",
+    analyticalMethods: ["RP-HPLC (UV, 220 nm)", "ESI-MS", "UV-Vis (Cu(II) d-d band)", "Karl Fischer moisture"],
+  },
+  {
+    slug: "igf-1-lr3",
+    name: "IGF-1 LR3 (reference standard)",
+    fullName: "Long R3 Insulin-like Growth Factor-1 analog",
+    synonyms: ["LR3-IGF-1"],
+    category: "Investigational Reference Compound",
+    catalogNumber: "BH-INC-071",
+    molecularFormula: "C990H1528N262O300S7",
+    molecularWeight: "≈ 9111 g/mol",
+    appearance: "White lyophilized powder",
+    physicalForm: "Lyophilized white powder",
+    statedPurity: "≥ 98%",
+    storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
+    ...COMMON,
+    packs: [{ size: "1 mg", priceUSD: 70 }],
+    scientificSummary:
+      "A recombinant analog of insulin-like growth factor-1 carrying an N-terminal extension and an Arg substitution at position 3, described in cell-culture literature as a reference protein for in vitro receptor and analytical characterization work.",
+    analyticalMethods: ["RP-HPLC (UV, 214 nm)", "LC-MS (ESI, deconvoluted mass)", "SDS-PAGE", "Karl Fischer moisture"],
+  },
+  {
+    slug: "pt-141",
+    name: "PT-141 (reference standard)",
+    fullName: "Bremelanotide — cyclic melanocortin receptor reference peptide",
+    synonyms: ["Bremelanotide"],
+    category: "Reference Peptide",
+    catalogNumber: "BH-REF-082",
+    casNumber: "189691-06-3",
+    molecularFormula: "C50H68N14O10",
+    molecularWeight: "1025.2 g/mol",
+    appearance: "White lyophilized powder",
+    physicalForm: "Lyophilized white powder",
+    statedPurity: "≥ 98%",
+    storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
+    ...COMMON,
+    packs: [{ size: "10 mg", priceUSD: 45 }],
+    scientificSummary:
+      "A cyclic heptapeptide described in receptor-pharmacology literature as a reference ligand at melanocortin receptor subtypes. Supplied as a laboratory reference standard for in vitro receptor binding and analytical method development.",
+    analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
+  },
+  {
+    slug: "glutathione",
+    name: "Glutathione (reduced, reference standard)",
+    fullName: "L-γ-Glutamyl-L-cysteinylglycine",
+    synonyms: ["GSH", "Reduced glutathione"],
+    category: "Research Compound",
+    catalogNumber: "BH-RC-090",
+    casNumber: "70-18-8",
+    molecularFormula: "C10H17N3O6S",
+    molecularWeight: "307.32 g/mol",
+    sequence: "γ-Glu-Cys-Gly",
+    appearance: "White lyophilized powder",
+    physicalForm: "Lyophilized white powder",
+    statedPurity: "≥ 98%",
+    storage: "Store dry at ≤ -20 °C; protect from light, moisture, and oxidizing conditions.",
+    ...COMMON,
+    packs: [{ size: "1500 mg", priceUSD: 80 }],
+    scientificSummary:
+      "An endogenous thiol tripeptide widely used in redox-biochemistry research as an analytical reference standard and assay control. Supplied for laboratory and analytical research applications only.",
+    analyticalMethods: ["RP-HPLC (UV, 214 nm)", "LC-MS (ESI)", "Ellman thiol assay", "Karl Fischer moisture"],
+  },
+  {
+    slug: "nad-plus",
+    name: "NAD+ (reference standard)",
+    fullName: "β-Nicotinamide adenine dinucleotide (oxidized form)",
+    synonyms: ["NAD", "β-NAD+"],
+    category: "Research Compound",
+    catalogNumber: "BH-RC-094",
+    casNumber: "53-84-9",
+    molecularFormula: "C21H27N7O14P2",
+    molecularWeight: "663.43 g/mol",
+    appearance: "White to off-white lyophilized powder",
+    physicalForm: "Lyophilized white to off-white powder",
+    statedPurity: "≥ 98%",
+    storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
+    ...COMMON,
+    packs: [{ size: "1000 mg", priceUSD: 70 }],
+    scientificSummary:
+      "A ubiquitous redox cofactor used across enzymology and metabolic-biochemistry research as an analytical reference standard and enzyme-assay substrate. Supplied for laboratory and analytical research applications only.",
+    analyticalMethods: ["RP-HPLC (UV, 260 nm)", "LC-MS (ESI)", "Enzymatic cycling assay", "Karl Fischer moisture"],
+  },
+  {
+    slug: "klow",
+    name: "KLOW (blended reference preparation)",
+    fullName: "Blended peptide reference preparation (GHK-Cu, BPC-157, TB-500, KPV)",
+    category: "Research Compound",
+    catalogNumber: "BH-RC-101",
+    molecularFormula: "Blend — component formulas listed on release documentation",
+    molecularWeight: "Blend — component masses listed on release documentation",
+    appearance: "Blue-tinted lyophilized powder",
+    physicalForm: "Lyophilized blended powder",
+    statedPurity: "≥ 98% per component",
+    storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
+    ...COMMON,
+    packs: [{ size: "80 mg", priceUSD: 140 }],
+    scientificSummary:
+      "A blended lyophilized preparation combining peptide components described individually in the laboratory-research literature. Supplied as a research preparation for in vitro assay development and analytical characterization only.",
+    analyticalMethods: ["RP-HPLC (UV, 214 nm)", "LC-MS (ESI)", "Component identity confirmation", "Karl Fischer moisture"],
+  },
+  {
+    slug: "glow",
+    name: "GLOW (blended reference preparation)",
+    fullName: "Blended peptide reference preparation (GHK-Cu, BPC-157, TB-500)",
+    category: "Research Compound",
+    catalogNumber: "BH-RC-102",
+    molecularFormula: "Blend — component formulas listed on release documentation",
+    molecularWeight: "Blend — component masses listed on release documentation",
+    appearance: "Blue-tinted lyophilized powder",
+    physicalForm: "Lyophilized blended powder",
+    statedPurity: "≥ 98% per component",
+    storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
+    ...COMMON,
+    packs: [{ size: "70 mg", priceUSD: 115 }],
+    scientificSummary:
+      "A blended lyophilized preparation combining peptide components described individually in the laboratory-research literature. Supplied as a research preparation for in vitro assay development and analytical characterization only.",
+    analyticalMethods: ["RP-HPLC (UV, 214 nm)", "LC-MS (ESI)", "Component identity confirmation", "Karl Fischer moisture"],
+  },
+  {
+    slug: "mots-c",
+    name: "MOTS-c (reference standard)",
+    fullName: "Mitochondrial ORF of the 12S rRNA type-c peptide",
+    synonyms: ["MOTS-C"],
+    category: "Reference Peptide",
+    catalogNumber: "BH-REF-110",
+    molecularFormula: "C101H152N28O22S2",
+    molecularWeight: "≈ 2174.6 g/mol",
+    appearance: "White lyophilized powder",
+    physicalForm: "Lyophilized white powder",
+    statedPurity: "≥ 98%",
+    storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
+    ...COMMON,
+    packs: [{ size: "10 mg", priceUSD: 30 }],
+    scientificSummary:
+      "A 16-amino-acid mitochondrial-derived peptide described in metabolic-biology research literature. Supplied as a laboratory reference standard for in vitro and analytical research.",
+    analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
+  },
+  {
+    slug: "mt-2",
+    name: "MT-2 (reference standard)",
+    fullName: "Melanotan II — cyclic melanocortin analog",
+    synonyms: ["Melanotan II", "MT-II"],
+    category: "Reference Peptide",
+    catalogNumber: "BH-REF-115",
+    casNumber: "121062-08-6",
+    molecularFormula: "C50H69N15O9",
+    molecularWeight: "1024.2 g/mol",
+    appearance: "White lyophilized powder",
+    physicalForm: "Lyophilized white powder",
+    statedPurity: "≥ 98%",
+    storage: "Store dry at ≤ -20 °C; protect from light and moisture.",
+    ...COMMON,
+    packs: [{ size: "10 mg", priceUSD: 30 }],
+    scientificSummary:
+      "A cyclic lactam melanocortin analog described in receptor-pharmacology literature as a reference ligand for melanocortin receptor subtypes. Supplied as a laboratory reference standard for in vitro receptor and analytical work.",
+    analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
+  },
+  {
+    slug: "bacteriostatic-water",
+    name: "Bacteriostatic Water",
+    fullName: "Sterile water containing 0.9% benzyl alcohol (laboratory diluent)",
+    category: "Laboratory Supply",
+    catalogNumber: "BH-SUP-201",
+    molecularFormula: "H2O with 0.9% benzyl alcohol (C7H8O)",
+    molecularWeight: "Not applicable",
+    appearance: "Clear, colorless solution",
+    physicalForm: "Sterile-filtered liquid in a sealed vial",
+    statedPurity: "Laboratory-grade diluent",
+    storage: "Store at 15–30 °C; protect from light. Do not freeze.",
+    solubility: "Miscible with water-based laboratory solutions.",
+    handling:
+      "Handle with standard laboratory personal protective equipment. For laboratory reconstitution of research materials only.",
+    stability: "Stable until the labeled expiry when the vial seal remains intact.",
+    recommendedAnalyticalUse: "Laboratory diluent for reconstituting lyophilized research materials for in vitro work.",
+    packs: [{ size: "10 mL", priceUSD: 15 }],
+    scientificSummary:
+      "A laboratory diluent consisting of sterile water with 0.9% benzyl alcohol as a bacteriostatic agent. Supplied for laboratory reconstitution of research materials only; not for human or veterinary use.",
+    analyticalMethods: ["Sterility filtration record", "Benzyl alcohol content by HPLC", "Visual particulate inspection"],
+  },
+  {
+    slug: "vial-holders",
+    name: "Vial Holders",
+    fullName: "Laboratory vial holder / rack insert",
+    category: "Laboratory Supply",
+    catalogNumber: "BH-SUP-210",
+    molecularFormula: "Not applicable",
+    molecularWeight: "Not applicable",
+    appearance: "Moulded laboratory plastic",
+    physicalForm: "Reusable vial holder",
+    statedPurity: "Not applicable",
+    storage: "Store at ambient laboratory temperature.",
+    handling: "Clean with standard laboratory detergents; not autoclave-rated unless labeled.",
+    recommendedAnalyticalUse: "Bench-top organization and upright storage of standard laboratory vials.",
+    packs: [{ size: "Each", priceUSD: 2 }],
+    scientificSummary:
+      "A reusable holder for keeping standard laboratory vials upright and organized during bench work and cold storage.",
+    analyticalMethods: ["Dimensional inspection", "Visual defect inspection"],
   },
 ];
 
@@ -305,6 +471,8 @@ export const categories: ResearchCategory[] = [
   "Investigational Reference Compound",
   "Peptide Fragment",
   "Metal-Complex Peptide",
+  "Research Compound",
+  "Laboratory Supply",
 ];
 
 export const getItem = (slug: string) => items.find((p) => p.slug === slug);

@@ -1,4 +1,4 @@
-// Product vial rendering. Uses the BIOHACKERS branded vial photograph and
+// Product vial rendering. Uses the BH branded vial photograph and
 // prints the compound name + strength directly onto the blank area of the
 // vial's own label so every product shows its own identity.
 
@@ -25,7 +25,7 @@ export function Vial({
     >
       <img
         src={vialImage}
-        alt={alt ? `${alt} BIOHACKERS research vial` : "BIOHACKERS research vial"}
+        alt={alt ? `${alt} BH research vial` : "BH research vial"}
         className="h-full w-full object-contain select-none"
         draggable={false}
         loading="lazy"

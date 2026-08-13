@@ -18,8 +18,8 @@ export const Route = createFileRoute("/research/$topic")({
   },
   head: ({ loaderData, params }) => {
     const a = loaderData?.article;
-    const title = a ? `${a.title} — Research Library | BIOHACKERS` : "Research Library";
-    const desc = a ? a.summary : "BIOHACKERS Research Library article.";
+    const title = a ? `${a.title} — Research Library | BH` : "Research Library";
+    const desc = a ? a.summary : "BH Research Materials Library article.";
     return {
       meta: [
         { title },

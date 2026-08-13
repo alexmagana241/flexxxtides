@@ -18,7 +18,7 @@ export const Route = createFileRoute("/peptides/$slug")({
   head: ({ loaderData, params }) => {
     const p = loaderData?.item;
     const title = p
-      ? `${p.name} — ${p.catalogNumber} | BIOHACKERS Research Materials`
+      ? `${p.name} — ${p.catalogNumber} | BH Research Materials`
       : "Catalog item";
     const desc = p
       ? `${p.name} laboratory reference standard. Molecular formula ${p.molecularFormula}, MW ${p.molecularWeight}. For research use only. Not for human or veterinary use.`
@@ -97,7 +97,6 @@ function PeptidePage() {
                 <Row label="Appearance" value={p.appearance ?? p.physicalForm} />
                 <Row label="Stated purity" value={p.statedPurity} />
                 <Row label="Storage" value={p.storage} />
-                {p.shippingTemperature && <Row label="Shipping temperature" value={p.shippingTemperature} />}
                 {p.solubility && <Row label="Solubility" value={p.solubility} />}
                 {p.handling && <Row label="Handling" value={p.handling} />}
                 {p.stability && <Row label="Stability" value={p.stability} />}
@@ -124,18 +123,6 @@ function PeptidePage() {
               </ul>
             </Section>
 
-            <Section title="References">
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                {p.references.map((r: string) => (
-                  <li key={r} className="border-l-2 border-border pl-3">{r}</li>
-                ))}
-              </ul>
-              <p className="mt-3 text-xs text-muted-foreground italic">
-                Citations are presented neutrally for laboratory-research context.
-                They are not claims about the safety, efficacy, or suitability of these
-                materials for use in or on humans or animals.
-              </p>
-            </Section>
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-24 self-start">

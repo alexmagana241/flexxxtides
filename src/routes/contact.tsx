@@ -5,15 +5,16 @@ import { CheckCircle2, Mail, MessageCircle, ShieldAlert } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { BRAND } from "@/lib/compliance";
+import { SUPPORT_EMAIL } from "@/lib/compliance";
 import { FAQ_ENTRIES } from "@/lib/support-kb";
 import { submitInquiry } from "@/lib/support.functions";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact & Compliance — BIOHACKERS" },
-      { name: "description", content: "Contact BIOHACKERS for research-organization inquiries, order questions, or to report a compliance concern about the use of research materials." },
-      { property: "og:title", content: "Contact & Compliance — BIOHACKERS" },
+      { title: "Contact & Compliance — BH Research Materials" },
+      { name: "description", content: "Contact BH for research-organization inquiries, order questions, or to report a compliance concern about the use of research materials." },
+      { property: "og:title", content: "Contact & Compliance — BH Research Materials" },
       { property: "og:description", content: "Research-organization contact, customer support and compliance reporting." },
       { property: "og:url", content: `${BRAND.domain}/contact` },
     ],
@@ -64,13 +65,18 @@ function Contact() {
           <p className="text-[10px] uppercase tracking-wider text-primary font-semibold">Contact</p>
           <h1 className="mt-2 text-4xl font-bold tracking-tight">Customer support & compliance reporting</h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">
-            BIOHACKERS responds to order questions and research-organization inquiries about catalog
+            BH responds to order questions and research-organization inquiries about catalog
             materials, documentation, and eligibility. We do not provide medical, veterinary,
             diagnostic, or treatment advice under any circumstances.
           </p>
           <p className="mt-3 inline-flex items-center gap-2 text-sm text-primary">
             <MessageCircle className="h-4 w-4" />
             For a fast answer, open the support chat in the bottom-right corner.
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            You can also email us directly at{" "}
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-primary underline">{SUPPORT_EMAIL}</a>{" "}
+            for general support, order, shipping, refund, compliance, privacy, or SMS assistance.
           </p>
           <div className="mt-6 max-w-3xl">
             <ResearchUseNotice variant="callout" />
@@ -144,7 +150,7 @@ function Contact() {
               <h3 className="font-semibold">Compliance reporting</h3>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
-              To report suspected misuse of BIOHACKERS materials, a website content concern,
+              To report suspected misuse of BH materials, a website content concern,
               a labelling issue, or a suspected diverted shipment, use this form and select
               "compliance report" as the inquiry type.
             </p>

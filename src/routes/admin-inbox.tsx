@@ -9,9 +9,9 @@ import { listInquiries, setInquiryStatus } from "@/lib/support.functions";
 export const Route = createFileRoute("/admin-inbox")({
   head: () => ({
     meta: [
-      { title: "Customer Inbox — BIOHACKERS" },
+      { title: "Customer Inbox — BH Research Materials" },
       { name: "description", content: "Internal inbox of customer inquiries submitted through the website." },
-      { property: "og:title", content: "Customer Inbox — BIOHACKERS" },
+      { property: "og:title", content: "Customer Inbox — BH Research Materials" },
       { property: "og:description", content: "Internal customer inquiry inbox." },
       { property: "og:url", content: `${BRAND.domain}/admin-inbox` },
       { name: "robots", content: "noindex,nofollow" },
@@ -115,7 +115,7 @@ function AdminInbox() {
                       <span>{new Date(r.created_at).toLocaleString()}</span>
                     </div>
                     <p className="mt-2 text-sm font-semibold">
-                      {r.name} · <a className="text-primary hover:underline" href={`mailto:${r.email}?subject=Re: your BIOHACKERS inquiry`}>{r.email}</a>
+                      {r.name} · <a className="text-primary hover:underline" href={`mailto:${r.email}?subject=Re: your BH inquiry`}>{r.email}</a>
                       {r.organization ? <span className="text-muted-foreground"> · {r.organization}</span> : null}
                     </p>
                     <p className="text-xs text-muted-foreground">{r.inquiry_type}</p>
