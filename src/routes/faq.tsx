@@ -17,7 +17,8 @@ export const Route = createFileRoute("/faq")({
   component: FAQ,
 });
 
-const sections = [
+type FaqItem = { q: string; a: string; link?: { to: string; label: string } };
+const sections: { title: string; items: FaqItem[] }[] = [
   {
     title: "About BH materials",
     items: [
@@ -93,6 +94,13 @@ function FAQ() {
                     <span className="text-muted-foreground group-open:rotate-180 transition-transform">▾</span>
                   </summary>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{it.a}</p>
+                  {it.link && (
+                    <p className="mt-2 text-sm">
+                      Please review our{" "}
+                      <Link to={it.link.to} className="text-primary underline">{it.link.label}</Link>{" "}
+                      for additional information.
+                    </p>
+                  )}
                 </details>
               ))}
             </div>
