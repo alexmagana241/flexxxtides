@@ -9,7 +9,9 @@ import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import {
   BRAND,
   CHECKOUT_CERTIFICATION,
+  CHECKOUT_POLICY_NOTICE,
   CONFIRMATIONS,
+  FREE_PRIORITY_THRESHOLD,
   formatPrice,
 } from "@/lib/compliance";
 
@@ -96,7 +98,7 @@ export function Checkout() {
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("United States");
-  const [shipMethod, setShipMethod] = useState<ShipMethod>("standard");
+  const [shipMethod, setShipMethod] = useState<ShipMethod>("priority");
 
   // Billing
   const [billingSame, setBillingSame] = useState(true);
@@ -116,9 +118,12 @@ export function Checkout() {
   const [age21, setAge21] = useState(false);
   const [researchOnly, setResearchOnly] = useState(false);
   const [certify, setCertify] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [agreeZeroTolerance, setAgreeZeroTolerance] = useState(false);
+  const [showAgreeError, setShowAgreeError] = useState(false);
 
   const vialCount = lines.reduce((n, l) => n + l.qty * (l.kit ? KIT_VIALS : 1), 0);
-  const shipOptions = shippingOptions(country, state, vialCount);
+  const shipOptions = shippingOptions(country, state, vialCount, subtotal);
   const ship = shipOptions.find((s) => s.method === shipMethod) ?? shipOptions[0]!;
   const shippingCost = lines.length ? ship.priceUSD : 0;
   const total = subtotal + shippingCost;
@@ -135,7 +140,8 @@ export function Checkout() {
     /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry) &&
     /^\d{3,4}$/.test(cvv) &&
     billingZip.trim().length >= 4;
-  const reviewOk = age21 && researchOnly && certify;
+  const agreementsOk = agreeTerms && agreeZeroTolerance;
+  const reviewOk = age21 && researchOnly && certify && agreementsOk;
 
   const stepOk = [customerOk, shippingOk, paymentOk, reviewOk][step];
 
@@ -249,7 +255,7 @@ export function Checkout() {
                       <input type="radio" name="shipping" checked={ship.method === s.method} onChange={() => setShipMethod(s.method)} />
 
                       <span className="flex-1">{s.label}</span>
-                      <span className="font-semibold tabular-nums">{formatPrice(s.priceUSD)}</span>
+                      <span className="font-semibold tabular-nums">{s.free ? "Free" : formatPrice(s.priceUSD)}</span>
                     </label>
                   ))}
                 </div>
@@ -365,6 +371,47 @@ export function Checkout() {
                   </label>
                 </div>
               </Card>
+
+              <Card title="Required agreements">
+                <p className="text-xs text-muted-foreground leading-relaxed">{CHECKOUT_POLICY_NOTICE}</p>
+                <div className="mt-4 space-y-3 text-sm">
+                  <label className="flex gap-3 items-start">
+                    <input
+                      type="checkbox"
+                      checked={agreeZeroTolerance}
+                      onChange={(e) => { setAgreeZeroTolerance(e.target.checked); setShowAgreeError(false); }}
+                      className="mt-1"
+                    />
+                    <span>
+                      I have read and agree to the{" "}
+                      <Link to="/policies/zero-tolerance" target="_blank" className="text-primary underline">
+                        BH Zero-Tolerance Policy
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                  <label className="flex gap-3 items-start">
+                    <input
+                      type="checkbox"
+                      checked={agreeTerms}
+                      onChange={(e) => { setAgreeTerms(e.target.checked); setShowAgreeError(false); }}
+                      className="mt-1"
+                    />
+                    <span>
+                      I have read and agree to the{" "}
+                      <Link to="/policies/terms-of-sale" target="_blank" className="text-primary underline">
+                        BH Terms and Conditions
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                </div>
+                {showAgreeError && (
+                  <p role="alert" className="mt-3 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-xs text-destructive">
+                    Please accept both the BH Zero-Tolerance Policy and the BH Terms and Conditions before placing your order.
+                  </p>
+                )}
+              </Card>
             </>
           )}
 
@@ -389,8 +436,11 @@ export function Checkout() {
               </button>
             ) : (
               <button
-                disabled={!reviewOk}
                 onClick={() => {
+                  if (!reviewOk) {
+                    setShowAgreeError(true);
+                    return;
+                  }
                   const id = `BH-${Date.now().toString(36).toUpperCase()}`;
                   setPlaced({ id, total });
                   clear();
@@ -416,7 +466,7 @@ export function Checkout() {
           </ul>
           <div className="border-t border-border pt-3 space-y-1 text-sm">
             <Row label="Subtotal" value={formatPrice(subtotal)} />
-            <Row label="Shipping" value={formatPrice(shippingCost)} />
+            <Row label="Shipping" value={ship.free ? "Free (Priority)" : formatPrice(shippingCost)} />
             <div className="flex justify-between pt-2 text-base font-semibold">
               <span>Total</span>
               <span className="tabular-nums text-primary">{formatPrice(total)}</span>
