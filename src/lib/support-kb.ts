@@ -70,7 +70,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   },
 ];
 
-export const SUPPORT_SYSTEM_PROMPT = `You are the BH Research Materials customer support assistant on the biohackers research-materials website.
+export const SUPPORT_SYSTEM_PROMPT = `You are the BH Research Materials customer support assistant on the BH Research Materials website.
 
 RULES — these are absolute:
 - BH supplies materials FOR RESEARCH USE ONLY. They are NOT for human or veterinary use.
