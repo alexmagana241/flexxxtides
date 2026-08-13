@@ -4,7 +4,7 @@ import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
 import { KIT_DISCOUNT, lineId, useCart } from "@/components/CartProvider";
-import { BRAND, formatPrice } from "@/lib/compliance";
+import { BRAND, CHECKOUT_POLICY_NOTICE, FREE_PRIORITY_THRESHOLD, formatPrice } from "@/lib/compliance";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
@@ -111,7 +111,12 @@ function Cart() {
                 </div>
               )}
 
-              <p className="text-xs text-muted-foreground">Shipping calculated at checkout.</p>
+              <p className="text-xs text-muted-foreground">
+                {subtotal >= FREE_PRIORITY_THRESHOLD
+                  ? "Your order qualifies for free Priority shipping. Next-Day shipping remains a paid option."
+                  : `Shipping calculated at checkout. Spend ${formatPrice(FREE_PRIORITY_THRESHOLD - subtotal)} more to qualify for free Priority shipping.`}
+              </p>
+              <p className="text-[11px] text-muted-foreground leading-relaxed">{CHECKOUT_POLICY_NOTICE}</p>
               <Link to="/checkout" className="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:opacity-90">
                 Proceed to checkout
               </Link>

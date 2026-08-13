@@ -13,6 +13,10 @@ export const Route = createFileRoute("/policies/shipping")({
   }),
   component: () => (
     <PolicyPage eyebrow="Policy" title="Shipping Policy">
+      <h2>Processing time</h2>
+      <p>Orders are generally processed and shipped within 1–3 business days (Monday–Friday). Once processed, you will receive an email with your order status and shipping information, including carrier tracking details.</p>
+      <h2>Shipping options</h2>
+      <p>We offer Priority and Next-Day shipping. Orders with a cart subtotal of $150 or more qualify for free Priority shipping. Free shipping applies only to regular Priority shipping; Next-Day shipping is not included in the free-shipping promotion and remains a paid shipping option regardless of cart subtotal.</p>
       <h2>Shipping destinations</h2>
       <p>Orders are shipped only to institutional or business addresses associated with a research organization. Residential addresses may result in cancellation.</p>
       <h2>Handling</h2>

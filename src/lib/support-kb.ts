@@ -70,8 +70,6 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   },
 ];
 
-export const TAX_AND_AGREEMENT_ENTRIES: FaqEntry[] = [];
-
 export const SUPPORT_SYSTEM_PROMPT = `You are the BH Research Materials customer support assistant on the biohackers research-materials website.
 
 RULES — these are absolute:
