@@ -28,8 +28,8 @@ export const Route = createFileRoute("/checkout")({
   component: Checkout,
 });
 
-type ShipMethod = "standard" | "express";
-type Shipping = { method: ShipMethod; label: string; priceUSD: number };
+type ShipMethod = "priority" | "nextday";
+type Shipping = { method: ShipMethod; label: string; priceUSD: number; free?: boolean };
 
 // Automated zone-based rate calculation.
 const ZONE_2 = ["CA", "OR", "WA", "NV", "AZ", "ID", "UT"]; // west
@@ -44,23 +44,33 @@ function shippingZone(country: string, state: string): number {
   return 3;
 }
 
-function shippingOptions(country: string, state: string, weightUnits: number): Shipping[] {
+function shippingOptions(
+  country: string,
+  state: string,
+  weightUnits: number,
+  subtotal: number,
+): Shipping[] {
   const zone = shippingZone(country, state);
   const zoneFee = { 2: 0, 3: 4, 4: 14, 5: 26 }[zone] ?? 4;
   const handling = Math.max(0, Math.ceil(weightUnits / 10) - 1) * 3;
+  const freePriority = subtotal >= FREE_PRIORITY_THRESHOLD;
   return [
     {
-      method: "standard",
-      label: "Standard shipping (4–7 business days)",
-      priceUSD: 9 + zoneFee + handling,
+      method: "priority",
+      label: freePriority
+        ? "Priority shipping (2–5 business days) — free on orders $150+"
+        : "Priority shipping (2–5 business days)",
+      priceUSD: freePriority ? 0 : 9 + zoneFee + handling,
+      free: freePriority,
     },
     {
-      method: "express",
-      label: "Express shipping (2–3 business days)",
-      priceUSD: 22 + Math.round(zoneFee * 1.5) + handling,
+      method: "nextday",
+      label: "Next-Day shipping (next business day)",
+      priceUSD: 39 + Math.round(zoneFee * 1.5) + handling,
     },
   ];
 }
+
 
 
 const STEPS = ["Customer", "Shipping", "Payment", "Review"] as const;
