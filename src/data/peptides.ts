@@ -39,15 +39,13 @@ export interface CatalogItem {
   packs: PackOption[];
   scientificSummary: string;
   analyticalMethods: string[];
-  references: string[];
+  references?: string[];
   documentation?: string[];
   coaUrl?: string;
   sdsUrl?: string;
 }
 
 const COMMON = {
-  shippingTemperature:
-    "Shipped with cold packs; short-term ambient exposure during transit does not typically affect a lyophilized reference standard.",
   solubility:
     "Typically soluble in bacteriostatic or sterile water, dilute acetic acid, or DMSO for analytical work; solubility is sequence-dependent and should be established per assay.",
   handling:
@@ -95,14 +93,6 @@ export const items: CatalogItem[] = [
       "Karl Fischer moisture",
       "Amino-acid analysis (AAA)",
     ],
-    references: [
-      "Pickart, L.; Thaler, M.M. (1973). Nature New Biology 243: 85–87.",
-      "Pickart, L.; Margolina, A. (2018). Int. J. Mol. Sci. 19(7): 1987.",
-      "Maquart, F.X. et al. (1988). FEBS Lett. 238(2): 343–346.",
-      "Pickart, L. (2008). J. Biomater. Sci. Polym. Ed. 19(8): 969–988.",
-      "Pickart, L.; Vasquez-Soltero, J.M.; Margolina, A. (2015). Oxid. Med. Cell. Longev. 2015: 648108.",
-      "Miller, D.M.; DeSilva, D.; Pickart, L.; Aust, S.D. (1990). Adv. Exp. Med. Biol. 264: 79–84.",
-    ],
   },
   {
     slug: "retatrutide",
@@ -134,14 +124,6 @@ export const items: CatalogItem[] = [
       "Karl Fischer moisture",
       "Residual TFA / acetate by IC",
     ],
-    references: [
-      "Coskun, T. et al. (2022). Cell Metabolism 34(9): 1234–1247.e9.",
-      "Jastreboff, A.M. et al. (2023). N. Engl. J. Med. 389: 514–526.",
-      "Rosenstock, J. et al. (2023). The Lancet 402(10401): 529–544.",
-      "Urva, S. et al. (2022). The Lancet 400(10366): 1869–1881.",
-      "Knerr, P.J. et al. (2022). Mol. Metab. 63: 101533.",
-      "Frías, J.P. (2024). Curr. Opin. Endocrinol. Diabetes Obes. 31(2): 68–75.",
-    ],
   },
   {
     slug: "tesamorelin",
@@ -170,13 +152,6 @@ export const items: CatalogItem[] = [
       "Amino-acid analysis (AAA)",
       "Karl Fischer moisture",
     ],
-    references: [
-      "Falutz, J. et al. (2010). J. Clin. Endocrinol. Metab. 95(9): 4291–4304.",
-      "Ferdinandi, E.S. et al. (2007). Basic Clin. Pharmacol. Toxicol. 100(1): 49–58.",
-      "Stanley, T.L. et al. (2014). JAMA 312(4): 380–389.",
-      "Adrian, S. et al. (2019). J. Endocr. Soc. 3(6): 1149–1162.",
-      "Clemmons, D.R. (2019). Endocr. Rev. 40(1): 1–15.",
-    ],
   },
   {
     slug: "bpc-157",
@@ -201,13 +176,6 @@ export const items: CatalogItem[] = [
     scientificSummary:
       "A synthetic pentadecapeptide whose sequence is described in the preclinical research literature as a partial sequence derived from gastric juice protein studies. Supplied as a laboratory reference standard for in vitro assay development and analytical characterization only.",
     analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Karl Fischer moisture", "Amino-acid analysis (AAA)"],
-    references: [
-      "Sikiric, P. et al. (2018). Curr. Pharm. Des. 24(18): 1990–2001.",
-      "Seiwerth, S. et al. (2018). Curr. Pharm. Des. 24(18): 1972–1989.",
-      "Sikiric, P. et al. (2020). Curr. Med. Chem. 27(41): 6795–6820.",
-      "Chang, C.H. et al. (2014). J. Appl. Physiol. 117(11): 1287–1293.",
-      "Vukojević, J. et al. (2022). Biomedicines 10(6): 1420.",
-    ],
   },
   {
     slug: "tb-500",
@@ -231,13 +199,6 @@ export const items: CatalogItem[] = [
     scientificSummary:
       "A synthetic peptide fragment corresponding to regions of thymosin β4 described in cytoskeletal-biology and actin-sequestration research literature. The exact molecular formula and mass depend on the fragment and any N-terminal acetylation reported on the Certificate of Analysis for the specific lot. Supplied as a laboratory reference standard for in vitro research and analytical method work.",
     analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
-    references: [
-      "Goldstein, A.L. et al. (2005). Ann. N.Y. Acad. Sci. 1112: 1–13.",
-      "Crockford, D. et al. (2010). Ann. N.Y. Acad. Sci. 1194: 179–189.",
-      "Sosne, G.; Rimmer, D.; Kleinman, H.K.; Ousler, G. (2010). Vitam. Horm. 87: 155–176.",
-      "Kleinman, H.K.; Sosne, G. (2016). Vitam. Horm. 102: 251–275.",
-      "Xing, Y. et al. (2021). Int. J. Mol. Sci. 22(11): 5904.",
-    ],
   },
   {
     slug: "cjc-1295",
@@ -261,12 +222,6 @@ export const items: CatalogItem[] = [
     scientificSummary:
       "A modified GHRH(1-29) analog described in pharmacokinetic research literature. The DAC (drug affinity complex) variant carries a maleimidopropionic acid moiety at the C-terminus, described in the literature as a reference peptide for in vitro receptor and analytical work.",
     analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
-    references: [
-      "Teichman, S.L. et al. (2006). J. Clin. Endocrinol. Metab. 91(3): 799–805.",
-      "Ionescu, M.; Frohman, L.A. (2006). J. Clin. Endocrinol. Metab. 91(12): 4792–4797.",
-      "Sackmann-Sala, L.; Kopchick, J.J. (2015). Endocr. Rev. 36(2): 234–261.",
-      "Alba, M. et al. (2006). J. Clin. Endocrinol. Metab. 91(4): 1477–1484.",
-    ],
   },
   {
     slug: "ipamorelin",
@@ -290,13 +245,6 @@ export const items: CatalogItem[] = [
     scientificSummary:
       "A synthetic pentapeptide described in the receptor-pharmacology literature as a reference ligand at the ghrelin/GHS-R1a receptor system. Supplied as a laboratory reference standard for in vitro receptor and analytical work.",
     analyticalMethods: ["RP-HPLC (UV, 214 nm)", "ESI-MS / LC-MS", "Amino-acid analysis (AAA)", "Karl Fischer moisture"],
-    references: [
-      "Raun, K. et al. (1998). Eur. J. Endocrinol. 139(5): 552–561.",
-      "Johansen, P.B. et al. (1999). Growth Horm. IGF Res. 9(2): 106–113.",
-      "Gobburu, J.V.S. et al. (1999). J. Clin. Pharmacol. 39(11): 1141–1148.",
-      "Sinha, D.K. et al. (2017). Transl. Androl. Urol. 6(Suppl 5): S760–S766.",
-      "Andersen, N.H. et al. (2001). J. Am. Chem. Soc. 123(11): 2528–2533.",
-    ],
   },
 ];
 
