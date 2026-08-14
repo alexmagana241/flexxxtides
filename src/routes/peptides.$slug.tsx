@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, CheckCircle2, FileText, Minus, Plus, ShieldAlert, ShoppingCart } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ShieldAlert, ShoppingCart } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
