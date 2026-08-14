@@ -1,3 +1,6 @@
+import bacteriostaticWaterAsset from "@/assets/bacteriostatic-water.png.asset.json";
+import vialHoldersAsset from "@/assets/vial-holders.png.asset.json";
+
 // BH research materials catalog — laboratory reference data only.
 // No dosing, no administration, no therapeutic or bodily-effect claims.
 //
@@ -43,6 +46,9 @@ export interface CatalogItem {
   analyticalMethods: string[];
   references?: string[];
   documentation?: string[];
+  imageUrl?: string;
+  /** Accessory / non-vial item: no strengths, no kits. */
+  accessory?: boolean;
   coaUrl?: string;
   sdsUrl?: string;
 }
@@ -426,6 +432,7 @@ export const items: CatalogItem[] = [
   {
     slug: "bacteriostatic-water",
     name: "Bacteriostatic Water",
+    imageUrl: bacteriostaticWaterAsset.url,
     fullName: "Sterile water containing 0.9% benzyl alcohol (laboratory diluent)",
     category: "Laboratory Supply",
     catalogNumber: "BH-SUP-201",
@@ -448,6 +455,8 @@ export const items: CatalogItem[] = [
   {
     slug: "vial-holders",
     name: "Vial Holders",
+    imageUrl: vialHoldersAsset.url,
+    accessory: true,
     fullName: "Laboratory vial holder / rack insert",
     category: "Laboratory Supply",
     catalogNumber: "BH-SUP-210",
