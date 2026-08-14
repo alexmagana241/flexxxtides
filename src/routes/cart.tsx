@@ -4,6 +4,7 @@ import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
 import { KIT_DISCOUNT, lineId, useCart } from "@/components/CartProvider";
+import { getItem } from "@/data/peptides";
 import { BRAND, CHECKOUT_POLICY_NOTICE, FREE_PRIORITY_THRESHOLD, MIN_ORDER_SUBTOTAL, formatPrice } from "@/lib/compliance";
 
 export const Route = createFileRoute("/cart")({
@@ -51,7 +52,7 @@ function Cart() {
               {lines.map((l) => (
                 <li key={lineId(l)} className="rounded-xl border border-border bg-card p-4 flex flex-col sm:flex-row gap-4">
                   <Link to="/peptides/$slug" params={{ slug: l.slug }} className="shrink-0 self-center">
-                    <Vial compound={l.name} packSize={l.size} className="h-28 w-auto" />
+                    <Vial compound={l.name} packSize={l.size} imageUrl={getItem(l.slug)?.imageUrl} className="h-28 w-auto" />
                   </Link>
                   <div className="flex-1 min-w-0">
                     <Link to="/peptides/$slug" params={{ slug: l.slug }} className="font-semibold hover:text-primary">

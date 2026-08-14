@@ -5,6 +5,7 @@ import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
 import { KIT_VIALS, lineId, useCart } from "@/components/CartProvider";
+import { getItem } from "@/data/peptides";
 import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import {
   BRAND,
@@ -409,7 +410,7 @@ export function Checkout() {
                     </span>
                   </label>
                 </div>
-                {showAgreeError && (
+                {(showAgreeError || belowMinimum) && (
                   <p role="alert" className="mt-3 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-xs text-destructive">
                     {belowMinimum
                       ? `${formatPrice(MIN_ORDER_SUBTOTAL)} minimum order required. Add ${formatPrice(minimumRemaining)} more to checkout.`
