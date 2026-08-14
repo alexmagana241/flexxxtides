@@ -4,7 +4,7 @@ import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
 import { KIT_DISCOUNT, lineId, useCart } from "@/components/CartProvider";
-import { BRAND, CHECKOUT_POLICY_NOTICE, FREE_PRIORITY_THRESHOLD, formatPrice } from "@/lib/compliance";
+import { BRAND, CHECKOUT_POLICY_NOTICE, FREE_PRIORITY_THRESHOLD, MIN_ORDER_SUBTOTAL, formatPrice } from "@/lib/compliance";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
@@ -23,6 +23,8 @@ export const Route = createFileRoute("/cart")({
 
 function Cart() {
   const { lines, subtotal, savings, setQty, remove } = useCart();
+  const belowMinimum = subtotal < MIN_ORDER_SUBTOTAL;
+  const remaining = Math.max(0, MIN_ORDER_SUBTOTAL - subtotal);
 
   return (
     <Layout>
@@ -116,10 +118,25 @@ function Cart() {
                   ? "Your order qualifies for free Priority shipping. Next-Day shipping remains a paid option."
                   : `Shipping calculated at checkout. Spend ${formatPrice(FREE_PRIORITY_THRESHOLD - subtotal)} more to qualify for free Priority shipping.`}
               </p>
+              <p className="text-[11px] text-muted-foreground">Minimum order subtotal: {formatPrice(MIN_ORDER_SUBTOTAL)}</p>
               <p className="text-[11px] text-muted-foreground leading-relaxed">{CHECKOUT_POLICY_NOTICE}</p>
-              <Link to="/checkout" className="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:opacity-90">
-                Proceed to checkout
-              </Link>
+              {belowMinimum ? (
+                <>
+                  <p role="alert" className="rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-xs text-destructive">
+                    {formatPrice(MIN_ORDER_SUBTOTAL)} minimum order required. Add {formatPrice(remaining)} more to checkout.
+                  </p>
+                  <button
+                    disabled
+                    className="w-full inline-flex items-center justify-center rounded-md bg-primary/40 px-4 py-3 text-sm font-medium text-primary-foreground cursor-not-allowed"
+                  >
+                    Proceed to checkout
+                  </button>
+                </>
+              ) : (
+                <Link to="/checkout" className="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:opacity-90">
+                  Proceed to checkout
+                </Link>
+              )}
               <Link to="/catalog" className="w-full inline-flex items-center justify-center rounded-md border border-border px-4 py-3 text-sm font-medium hover:bg-muted">
                 Continue shopping
               </Link>
