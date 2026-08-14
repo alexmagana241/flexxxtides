@@ -5,6 +5,7 @@ import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
 import { KIT_VIALS, lineId, useCart } from "@/components/CartProvider";
+import { getItem } from "@/data/peptides";
 import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import {
   BRAND,
@@ -12,6 +13,7 @@ import {
   CHECKOUT_POLICY_NOTICE,
   CONFIRMATIONS,
   FREE_PRIORITY_THRESHOLD,
+  MIN_ORDER_SUBTOTAL,
   formatPrice,
 } from "@/lib/compliance";
 
@@ -127,6 +129,8 @@ export function Checkout() {
   const ship = shipOptions.find((s) => s.method === shipMethod) ?? shipOptions[0]!;
   const shippingCost = lines.length ? ship.priceUSD : 0;
   const total = subtotal + shippingCost;
+  const belowMinimum = subtotal < MIN_ORDER_SUBTOTAL;
+  const minimumRemaining = Math.max(0, MIN_ORDER_SUBTOTAL - subtotal);
 
 
   const digits = cardNumber.replace(/\D/g, "");
@@ -141,9 +145,9 @@ export function Checkout() {
     /^\d{3,4}$/.test(cvv) &&
     billingZip.trim().length >= 4;
   const agreementsOk = agreeTerms && agreeZeroTolerance;
-  const reviewOk = age21 && researchOnly && certify && agreementsOk;
+  const reviewOk = age21 && researchOnly && certify && agreementsOk && !belowMinimum;
 
-  const stepOk = [customerOk, shippingOk, paymentOk, reviewOk][step];
+  const stepOk = ([customerOk, shippingOk, paymentOk, reviewOk][step] ?? false) && !belowMinimum;
 
   if (placed) {
     return (
@@ -338,7 +342,7 @@ export function Checkout() {
                 <ul className="divide-y divide-border">
                   {lines.map((l) => (
                     <li key={lineId(l)} className="flex items-center gap-3 py-3">
-                      <Vial compound={l.name} packSize={l.size} className="h-16 w-auto shrink-0" />
+                      <Vial compound={l.name} packSize={l.size} imageUrl={getItem(l.slug)?.imageUrl} className="h-16 w-auto shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate">{l.name}{l.kit ? " — 10-vial kit" : ""}</p>
                         <p className="text-xs text-muted-foreground">{l.size} · Qty {l.qty} · {formatPrice(l.priceUSD)} each</p>
@@ -406,9 +410,11 @@ export function Checkout() {
                     </span>
                   </label>
                 </div>
-                {showAgreeError && (
+                {(showAgreeError || belowMinimum) && (
                   <p role="alert" className="mt-3 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-xs text-destructive">
-                    Please accept both the BH Zero-Tolerance Policy and the BH Terms and Conditions before placing your order.
+                    {belowMinimum
+                      ? `${formatPrice(MIN_ORDER_SUBTOTAL)} minimum order required. Add ${formatPrice(minimumRemaining)} more to checkout.`
+                      : "Please accept both the BH Zero-Tolerance Policy and the BH Terms and Conditions before placing your order."}
                   </p>
                 )}
               </Card>
@@ -437,6 +443,11 @@ export function Checkout() {
             ) : (
               <button
                 onClick={() => {
+                  // Server-side/authoritative guard: never accept an order below the minimum.
+                  if (subtotal < MIN_ORDER_SUBTOTAL) {
+                    setShowAgreeError(true);
+                    return;
+                  }
                   if (!reviewOk) {
                     setShowAgreeError(true);
                     return;
@@ -466,6 +477,7 @@ export function Checkout() {
           </ul>
           <div className="border-t border-border pt-3 space-y-1 text-sm">
             <Row label="Subtotal" value={formatPrice(subtotal)} />
+            <p className="text-[11px] text-muted-foreground">Minimum order subtotal: {formatPrice(MIN_ORDER_SUBTOTAL)}</p>
             <Row label="Shipping" value={ship.free ? "Free (Priority)" : formatPrice(shippingCost)} />
             <div className="flex justify-between pt-2 text-base font-semibold">
               <span>Total</span>

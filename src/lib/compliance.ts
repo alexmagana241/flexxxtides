@@ -12,6 +12,9 @@ export const BRAND = {
 /** Official company email used everywhere on the site. */
 export const SUPPORT_EMAIL = "flexxxinc2022@gmail.com";
 
+/** Minimum merchandise subtotal (USD) required to check out. */
+export const MIN_ORDER_SUBTOTAL = 50;
+
 /** Free Priority shipping threshold (cart subtotal, USD). */
 export const FREE_PRIORITY_THRESHOLD = 150;
 

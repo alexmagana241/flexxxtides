@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, CheckCircle2, FileText, Minus, Plus, ShieldAlert, ShoppingCart } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ShieldAlert, ShoppingCart } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
@@ -53,6 +53,7 @@ function PeptidePage() {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const [buyKit, setBuyKit] = useState(false);
+  const accessory = p.accessory === true;
   const pack = p.packs[sizeIdx] ?? p.packs[0];
   const displayName = p.name.replace(/\s*\(.*\)$/, "");
 
@@ -66,7 +67,7 @@ function PeptidePage() {
             </Link>
             <div className="mt-6 grid gap-8 md:grid-cols-[220px_1fr] items-start">
               <div className="rounded-xl border border-border bg-card p-4 grid place-items-center">
-                <Vial packSize={pack?.size} compound={displayName} className="h-56 w-auto" />
+                <Vial packSize={pack?.size} compound={displayName} imageUrl={p.imageUrl} className="h-56 w-auto" />
               </div>
 
               <div>
@@ -100,9 +101,6 @@ function PeptidePage() {
                 {p.solubility && <Row label="Solubility" value={p.solubility} />}
                 {p.handling && <Row label="Handling" value={p.handling} />}
                 {p.stability && <Row label="Stability" value={p.stability} />}
-                {p.recommendedAnalyticalUse && (
-                  <Row label="Recommended analytical use" value={p.recommendedAnalyticalUse} />
-                )}
               </dl>
             </Section>
 
@@ -127,7 +125,7 @@ function PeptidePage() {
 
           <aside className="space-y-4 lg:sticky lg:top-24 self-start">
             <div className="rounded-xl border border-border bg-card p-5">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">Select strength</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">{accessory ? "Select option" : "Select strength"}</p>
               <ul className="mt-3 space-y-2">
                 {p.packs.map((pk: { size: string; priceUSD: number }, i: number) => (
                   <li key={pk.size}>
@@ -138,7 +136,7 @@ function PeptidePage() {
                     >
                       <span>
                         <span className="block text-sm font-semibold">{pk.size}</span>
-                        <span className="block text-[10px] text-muted-foreground uppercase tracking-wider">Lyophilized · single vial</span>
+                        <span className="block text-[10px] text-muted-foreground uppercase tracking-wider">{accessory ? "Single vial holder" : "Lyophilized · single vial"}</span>
                       </span>
                       <span className="tabular-nums text-base font-bold text-primary">{formatPrice(pk.priceUSD)}</span>
                     </button>
@@ -157,11 +155,12 @@ function PeptidePage() {
                     aria-pressed={!buyKit}
                     className={`rounded-md border px-3 py-2.5 text-left transition ${!buyKit ? "border-primary bg-primary/5" : "border-border hover:bg-muted"}`}
                   >
-                    <span className="block text-sm font-semibold">Single vial</span>
+                    <span className="block text-sm font-semibold">{accessory ? "Single vial holder" : "Single vial"}</span>
                     <span className="block text-xs text-muted-foreground">
-                      {pack ? formatPrice(pack.priceUSD) : ""} per vial
+                      {pack ? formatPrice(pack.priceUSD) : ""} per {accessory ? "vial holder" : "vial"}
                     </span>
                   </button>
+                  {!accessory && (
                   <button
                     onClick={() => { setBuyKit(true); setAdded(false); }}
                     aria-pressed={buyKit}
@@ -181,6 +180,7 @@ function PeptidePage() {
                       </span>
                     )}
                   </button>
+                  )}
                 </div>
 
                 <div className="mt-4 rounded-md border border-primary/40 bg-primary/5 p-3">
@@ -190,7 +190,7 @@ function PeptidePage() {
 
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <span className="text-xs uppercase tracking-wider text-muted-foreground">
-                    {buyKit ? "Kits" : "Quantity"}
+                    {buyKit && !accessory ? "Kits" : "Quantity"}
                   </span>
                   <div className="inline-flex items-center rounded-md border border-border">
                     <button aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))} className="h-9 w-9 grid place-items-center hover:bg-muted">
@@ -211,14 +211,15 @@ function PeptidePage() {
                 <button
                   onClick={() => {
                     if (!pack) return;
-                    const unit = buyKit ? kitPrice(pack.priceUSD) : pack.priceUSD;
-                    add({ slug: p.slug, name: displayName, size: pack.size, priceUSD: unit, kit: buyKit }, qty);
+                    const asKit = buyKit && !accessory;
+                    const unit = asKit ? kitPrice(pack.priceUSD) : pack.priceUSD;
+                    add({ slug: p.slug, name: displayName, size: pack.size, priceUSD: unit, kit: asKit }, qty);
                     setAdded(true);
                   }}
                   className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
                 >
                   <ShoppingCart className="h-4 w-4" />
-                  Add to cart — {pack ? formatPrice((buyKit ? kitPrice(pack.priceUSD) : pack.priceUSD) * qty) : ""}
+                  Add to cart — {pack ? formatPrice((buyKit && !accessory ? kitPrice(pack.priceUSD) : pack.priceUSD) * qty) : ""}
                 </button>
                 {added && (
                   <div className="mt-3 rounded-md border border-primary/40 bg-primary/5 p-3 text-xs">
@@ -231,20 +232,6 @@ function PeptidePage() {
                 )}
               </div>
 
-            </div>
-
-            <div className="rounded-xl border border-border bg-card p-5">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <FileText className="h-4 w-4 text-primary" /> Quality control
-              </div>
-              <ul className="mt-3 space-y-2 text-sm">
-                {p.analyticalMethods.map((d: string) => (
-                  <li key={d} className="flex items-start gap-2 text-muted-foreground">
-                    <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                    <span>{d}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
 
 

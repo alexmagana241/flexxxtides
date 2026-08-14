@@ -97,7 +97,7 @@ function Catalog() {
               >
                 <div className="flex gap-4">
                   <div className="shrink-0 w-24 grid place-items-center rounded-lg bg-gradient-to-b from-muted/60 to-background border border-border">
-                    <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} className="h-32 w-auto" />
+                    <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} imageUrl={p.imageUrl} className="h-32 w-auto" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.catalogNumber}</p>
