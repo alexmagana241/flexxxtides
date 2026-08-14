@@ -8,11 +8,28 @@ export function Vial({
   packSize,
   className = "h-40",
   compound,
+  imageUrl,
 }: {
   packSize?: string;
   className?: string;
   compound?: string;
+  /** Optional product photograph that replaces the branded vial rendering. */
+  imageUrl?: string;
 }) {
+  if (imageUrl) {
+    return (
+      <div className={`relative aspect-square ${className}`}>
+        <img
+          src={imageUrl}
+          alt={compound ? `${compound} product photo` : "Product photo"}
+          className="h-full w-full object-contain select-none"
+          draggable={false}
+          loading="lazy"
+        />
+      </div>
+    );
+  }
+
   const name = compound ? compound.replace(/\s*\(.*\)$/, "") : "";
   const strength = packSize ?? "";
   const alt = [name, strength].filter(Boolean).join(" ");
