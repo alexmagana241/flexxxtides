@@ -66,13 +66,13 @@ function PeptidePage() {
               <ArrowLeft className="h-3 w-3" /> Back to catalog
             </Link>
             <div className="mt-6 grid gap-8 md:grid-cols-[220px_1fr] items-start">
-              <div className="rounded-xl border border-border bg-card p-4 grid place-items-center">
+              <div className="mx-auto w-full max-w-[260px] md:max-w-none rounded-xl border border-border bg-card p-4 grid place-items-center">
                 <Vial packSize={pack?.size} compound={displayName} imageUrl={p.imageUrl} className="w-full max-w-[220px]" />
               </div>
 
               <div>
                 <p className="text-[11px] uppercase tracking-wider text-primary font-semibold">{p.catalogNumber} · {p.category}</p>
-                <h1 className="mt-2 text-4xl font-bold tracking-tight">{p.name}</h1>
+                <h1 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight break-words">{p.name}</h1>
                 {p.fullName && <p className="text-muted-foreground mt-1">{p.fullName}</p>}
                 <div className="mt-4 max-w-2xl">
                   <ResearchUseNotice variant="callout" />
