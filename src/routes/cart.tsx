@@ -52,7 +52,7 @@ function Cart() {
               {lines.map((l) => (
                 <li key={lineId(l)} className="rounded-xl border border-border bg-card p-4 flex flex-col sm:flex-row gap-4">
                   <Link to="/peptides/$slug" params={{ slug: l.slug }} className="shrink-0 self-center">
-                    <Vial compound={l.name} packSize={l.size} imageUrl={getItem(l.slug)?.imageUrl} className="h-28 w-auto" />
+                    <Vial compound={l.name} packSize={l.size} imageUrl={getItem(l.slug)?.imageUrl} className="w-20 sm:w-24 shrink-0" />
                   </Link>
                   <div className="flex-1 min-w-0">
                     <Link to="/peptides/$slug" params={{ slug: l.slug }} className="font-semibold hover:text-primary">

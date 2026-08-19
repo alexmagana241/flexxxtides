@@ -18,7 +18,7 @@ export function Vial({
 }) {
   if (imageUrl) {
     return (
-      <div className={`relative aspect-square ${className}`}>
+      <div className={`relative mx-auto aspect-square max-w-full ${className}`}>
         <img
           src={imageUrl}
           alt={compound ? `${compound} product photo` : "Product photo"}
@@ -37,7 +37,7 @@ export function Vial({
 
   return (
     <div
-      className={`relative aspect-square ${className}`}
+      className={`relative mx-auto aspect-square max-w-full ${className}`}
       style={{ containerType: "inline-size" }}
     >
       <img

@@ -87,7 +87,7 @@ function Home() {
               params={{ slug: p.slug }}
               className="group rounded-xl border border-border bg-card p-5 card-hover flex flex-col items-center text-center"
             >
-              <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} className="h-36 w-auto" />
+              <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} className="w-full max-w-[9rem]" />
               <span className="mt-3 text-[10px] uppercase tracking-wider text-muted-foreground">{p.catalogNumber}</span>
               <h3 className="mt-1 text-base font-semibold group-hover:text-primary transition-colors">{p.name}</h3>
               <p className="mt-1 text-xs text-muted-foreground">from {formatPrice(p.packs[0].priceUSD)}</p>

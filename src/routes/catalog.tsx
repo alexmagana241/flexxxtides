@@ -96,8 +96,8 @@ function Catalog() {
                 className="group rounded-xl border border-border bg-card p-5 card-hover flex flex-col"
               >
                 <div className="flex gap-4">
-                  <div className="shrink-0 w-24 grid place-items-center rounded-lg bg-gradient-to-b from-muted/60 to-background border border-border">
-                    <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} imageUrl={p.imageUrl} className="h-32 w-auto" />
+                  <div className="shrink-0 w-24 sm:w-28 grid place-items-center rounded-lg bg-gradient-to-b from-muted/60 to-background border border-border">
+                    <Vial packSize={p.packs[0]?.size} compound={p.name.replace(/\s*\(.*\)$/, "")} imageUrl={p.imageUrl} className="w-full" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{p.catalogNumber}</p>

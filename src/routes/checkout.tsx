@@ -342,7 +342,7 @@ export function Checkout() {
                 <ul className="divide-y divide-border">
                   {lines.map((l) => (
                     <li key={lineId(l)} className="flex items-center gap-3 py-3">
-                      <Vial compound={l.name} packSize={l.size} imageUrl={getItem(l.slug)?.imageUrl} className="h-16 w-auto shrink-0" />
+                      <Vial compound={l.name} packSize={l.size} imageUrl={getItem(l.slug)?.imageUrl} className="w-16 shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate">{l.name}{l.kit ? " — 10-vial kit" : ""}</p>
                         <p className="text-xs text-muted-foreground">{l.size} · Qty {l.qty} · {formatPrice(l.priceUSD)} each</p>

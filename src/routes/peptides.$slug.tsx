@@ -67,7 +67,7 @@ function PeptidePage() {
             </Link>
             <div className="mt-6 grid gap-8 md:grid-cols-[220px_1fr] items-start">
               <div className="rounded-xl border border-border bg-card p-4 grid place-items-center">
-                <Vial packSize={pack?.size} compound={displayName} imageUrl={p.imageUrl} className="h-56 w-auto" />
+                <Vial packSize={pack?.size} compound={displayName} imageUrl={p.imageUrl} className="w-full max-w-[220px]" />
               </div>
 
               <div>
