@@ -123,7 +123,7 @@ function PeptidePage() {
 
           </div>
 
-          <aside className="space-y-4 lg:sticky lg:top-24 self-start">
+          <aside className="min-w-0 w-full space-y-4 order-1 lg:order-2 lg:sticky lg:top-24 self-start">
             <div className="rounded-xl border border-border bg-card p-5">
               <p className="text-xs uppercase tracking-wider text-muted-foreground">{accessory ? "Select option" : "Select strength"}</p>
               <ul className="mt-3 space-y-2">
@@ -188,11 +188,11 @@ function PeptidePage() {
                   <p className="mt-1 text-xs text-muted-foreground">Not for human or veterinary use.</p>
                 </div>
 
-                <div className="mt-4 flex items-center justify-between gap-3">
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                   <span className="text-xs uppercase tracking-wider text-muted-foreground">
                     {buyKit && !accessory ? "Kits" : "Quantity"}
                   </span>
-                  <div className="inline-flex items-center rounded-md border border-border">
+                  <div className="inline-flex shrink-0 items-center rounded-md border border-border">
                     <button aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))} className="h-9 w-9 grid place-items-center hover:bg-muted">
                       <Minus className="h-3.5 w-3.5" />
                     </button>
