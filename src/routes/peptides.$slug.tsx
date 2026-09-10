@@ -21,8 +21,8 @@ export const Route = createFileRoute("/peptides/$slug")({
       ? `${p.name} — ${p.catalogNumber} | BH Research Materials`
       : "Catalog item";
     const desc = p
-      ? `${p.name} laboratory reference standard. Molecular formula ${p.molecularFormula}, MW ${p.molecularWeight}. For research use only. Not for human or veterinary use.`
-      : "Research reference standard.";
+      ? `${p.name} laboratory research material. Molecular formula ${p.molecularFormula}, MW ${p.molecularWeight}. For research use only. Not for human or veterinary use.`
+      : "Laboratory research material.";
     return {
       meta: [
         { title },
@@ -83,7 +83,7 @@ function PeptidePage() {
         </section>
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 grid gap-8 lg:grid-cols-[1fr_320px]">
-          <div className="space-y-10">
+          <div className="min-w-0 space-y-10 order-2 lg:order-1">
             <Section title="Identity & specification">
               <dl className="grid gap-4 sm:grid-cols-2">
                 <Row label="Catalog number" value={p.catalogNumber} />
