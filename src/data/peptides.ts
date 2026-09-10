@@ -104,7 +104,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "retatrutide",
-    name: "Retatrutide (reference standard)",
+    name: "GLP-3 (RT)",
     fullName: "LY-3437943 — GIP/GLP-1/Glucagon tri-agonist reference peptide",
     synonyms: ["LY3437943", "Tri-agonist reference peptide"],
     category: "Investigational Reference Compound",
@@ -135,7 +135,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "tesamorelin",
-    name: "Tesamorelin (reference standard)",
+    name: "Tesamorelin",
     fullName: "Synthetic stabilized GHRH(1-44) analog",
     synonyms: ["Tesamorelin acetate", "TH9507", "trans-3-hexenoyl-GHRH(1-44)"],
     category: "Reference Peptide",
@@ -163,7 +163,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "bpc-157",
-    name: "BPC-157 (reference standard)",
+    name: "BPC-157",
     fullName: "Body Protection Compound-157 (pentadecapeptide)",
     synonyms: ["PL-14736", "Pentadecapeptide BPC-157"],
     category: "Peptide Fragment",
@@ -187,7 +187,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "tb-500",
-    name: "TB-500 (reference standard)",
+    name: "TB-500",
     fullName:
       "Synthetic peptide fragment corresponding to regions reported in thymosin β4 literature",
     synonyms: ["Tβ4 fragment (as supplied)", "Thymosin-β4 partial sequence"],
@@ -210,7 +210,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "cjc-1295",
-    name: "CJC-1295 (reference standard)",
+    name: "CJC-1295",
     fullName: "Modified GHRH(1-29) analog (with or without DAC as documented on CoA)",
     synonyms: ["DAC:GRF", "CJC-1295 with DAC", "CJC-1295 no-DAC (Mod GRF 1-29)"],
     category: "Reference Peptide",
@@ -233,7 +233,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "ipamorelin",
-    name: "Ipamorelin (reference standard)",
+    name: "Ipamorelin",
     synonyms: ["NNC 26-0161"],
     category: "Reference Peptide",
     catalogNumber: "BH-REF-063",
@@ -276,7 +276,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "igf-1-lr3",
-    name: "IGF-1 LR3 (reference standard)",
+    name: "IGF-1 LR3",
     fullName: "Long R3 Insulin-like Growth Factor-1 analog",
     synonyms: ["LR3-IGF-1"],
     category: "Investigational Reference Compound",
@@ -295,7 +295,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "pt-141",
-    name: "PT-141 (reference standard)",
+    name: "PT-141",
     fullName: "Bremelanotide — cyclic melanocortin receptor reference peptide",
     synonyms: ["Bremelanotide"],
     category: "Reference Peptide",
@@ -315,7 +315,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "glutathione",
-    name: "Glutathione (reduced, reference standard)",
+    name: "Glutathione (reduced)",
     fullName: "L-γ-Glutamyl-L-cysteinylglycine",
     synonyms: ["GSH", "Reduced glutathione"],
     category: "Research Compound",
@@ -336,7 +336,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "nad-plus",
-    name: "NAD+ (reference standard)",
+    name: "NAD+",
     fullName: "β-Nicotinamide adenine dinucleotide (oxidized form)",
     synonyms: ["NAD", "β-NAD+"],
     category: "Research Compound",
@@ -356,7 +356,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "klow",
-    name: "KLOW (blended reference preparation)",
+    name: "KLOW",
     fullName: "Blended peptide reference preparation (GHK-Cu, BPC-157, TB-500, KPV)",
     category: "Research Compound",
     catalogNumber: "BH-RC-101",
@@ -374,7 +374,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "glow",
-    name: "GLOW (blended reference preparation)",
+    name: "GLOW",
     fullName: "Blended peptide reference preparation (GHK-Cu, BPC-157, TB-500)",
     category: "Research Compound",
     catalogNumber: "BH-RC-102",
@@ -392,7 +392,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "mots-c",
-    name: "MOTS-c (reference standard)",
+    name: "MOTS-c",
     fullName: "Mitochondrial ORF of the 12S rRNA type-c peptide",
     synonyms: ["MOTS-C"],
     category: "Reference Peptide",
@@ -411,7 +411,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "mt-2",
-    name: "MT-2 (reference standard)",
+    name: "MT-2",
     fullName: "Melanotan II — cyclic melanocortin analog",
     synonyms: ["Melanotan II", "MT-II"],
     category: "Reference Peptide",
@@ -431,7 +431,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "bacteriostatic-water",
-    name: "Bacteriostatic Water",
+    name: "BH H2O",
     imageUrl: bacteriostaticWaterAsset.url,
     fullName: "Sterile water containing 0.9% benzyl alcohol (laboratory diluent)",
     category: "Laboratory Supply",
