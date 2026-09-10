@@ -10,9 +10,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "BH — Research Materials for Laboratory Use" },
-      { name: "description", content: "BH supplies peptide reference standards and research materials for legitimate laboratory, analytical, and non-clinical research. Not for human or veterinary use." },
+      { name: "description", content: "BH supplies peptide research materials and research materials for legitimate laboratory, analytical, and non-clinical research. Not for human or veterinary use." },
       { property: "og:title", content: "BH — Research Materials for Laboratory Use" },
-      { property: "og:description", content: "Peptide reference standards for laboratory research. Not for human or veterinary use." },
+      { property: "og:description", content: "Peptide research materials for laboratory research. Not for human or veterinary use." },
       { property: "og:url", content: `${BRAND.domain}/` },
     ],
     links: [{ rel: "canonical", href: `${BRAND.domain}/` }],
@@ -32,7 +32,7 @@ function Home() {
               <FlaskConical className="h-3 w-3 text-primary" /> Laboratory reference materials
             </span>
             <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight text-balance">
-              Peptide reference standards for <span className="text-primary">non-clinical research.</span>
+              Peptide research materials for <span className="text-primary">non-clinical research.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground text-balance leading-relaxed">
               BH supplies characterized peptide reference materials for analytical,
@@ -73,7 +73,7 @@ function Home() {
         <div className="flex items-end justify-between mb-6">
           <div>
             <h2 className="text-3xl font-bold tracking-tight">Featured catalog items</h2>
-            <p className="text-muted-foreground mt-2">Reference standards commonly requested for laboratory research.</p>
+            <p className="text-muted-foreground mt-2">Research materials commonly requested for laboratory research.</p>
           </div>
           <Link to="/catalog" className="hidden sm:inline-flex items-center gap-1 text-sm text-primary hover:underline">
             View all <ArrowRight className="h-3 w-3" />

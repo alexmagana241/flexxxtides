@@ -30,7 +30,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
   },
   {
     q: "What products do you sell?",
-    a: "BH Research Materials supplies characterized peptide reference standards and related laboratory materials: GHK-Cu, AHK-Cu, GLP-3 (RT), Tesamorelin, BPC-157, TB-500, CJC-1295, Ipamorelin, IGF-1 LR3, PT-141, Glutathione, NAD+, KLOW, GLOW, MOTS-c and MT-2, plus BH H2O and vial holders.",
+    a: "BH Research Materials supplies characterized peptide research materials and related laboratory materials: GHK-Cu, AHK-Cu, GLP-3 (RT), Tesamorelin, BPC-157, TB-500, CJC-1295, Ipamorelin, IGF-1 LR3, PT-141, Glutathione, NAD+, KLOW, GLOW, MOTS-c and MT-2, plus BH H2O and vial holders.",
   },
   {
     q: "What pack sizes and prices are available?",

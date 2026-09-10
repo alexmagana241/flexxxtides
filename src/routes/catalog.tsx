@@ -11,9 +11,9 @@ export const Route = createFileRoute("/catalog")({
   head: () => ({
     meta: [
       { title: "Catalog — BH Research Materials" },
-      { name: "description", content: "Searchable catalog of BH peptide reference standards for laboratory, analytical, and non-clinical research. Pricing per pack size. Not for human or veterinary use." },
+      { name: "description", content: "Searchable catalog of BH peptide research materials for laboratory, analytical, and non-clinical research. Pricing per pack size. Not for human or veterinary use." },
       { property: "og:title", content: "Catalog — BH Research Materials" },
-      { property: "og:description", content: "Peptide reference standards for laboratory research, priced per pack size." },
+      { property: "og:description", content: "Peptide research materials for laboratory research, priced per pack size." },
       { property: "og:url", content: `${BRAND.domain}/catalog` },
     ],
     links: [{ rel: "canonical", href: `${BRAND.domain}/catalog` }],
@@ -47,7 +47,7 @@ function Catalog() {
           <p className="text-[10px] uppercase tracking-wider text-primary font-semibold">Research materials</p>
           <h1 className="mt-2 text-4xl font-bold tracking-tight">Catalog</h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">
-            Characterized peptide reference standards supplied for laboratory research.
+            Characterized peptide research materials supplied for laboratory research.
             Every pack ships as a lot-controlled lyophilized powder.
           </p>
           <div className="mt-5 max-w-3xl">

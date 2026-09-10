@@ -22,7 +22,7 @@ const sections: { title: string; items: FaqItem[] }[] = [
   {
     title: "About BH materials",
     items: [
-      { q: "What does BH supply?", a: "Characterized peptide reference standards and related research materials in lyophilized powder form, intended exclusively for laboratory, analytical, and non-clinical research." },
+      { q: "What does BH supply?", a: "Characterized peptide research materials and related research materials in lyophilized powder form, intended exclusively for laboratory, analytical, and non-clinical research." },
       { q: "Are these products medicines?", a: "No. BH materials are not drugs, foods, dietary supplements, cosmetics, medical devices, or veterinary products. They are laboratory research materials and are not offered or represented as suitable for use in or on humans or animals." },
       { q: "Do you offer clinical, dosing, administration, or reconstitution-for-use guidance?", a: "No. BH does not provide medical, veterinary, diagnostic, therapeutic, or personal-use guidance of any kind." },
     ],

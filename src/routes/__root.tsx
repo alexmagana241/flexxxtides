@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "BH — Research Materials for Laboratory Use" },
-      { name: "description", content: "BH supplies peptide reference standards and research materials exclusively for legitimate laboratory, analytical, and non-clinical research. Not for human or veterinary use." },
+      { name: "description", content: "BH supplies peptide research materials and research materials exclusively for legitimate laboratory, analytical, and non-clinical research. Not for human or veterinary use." },
       { name: "author", content: "BH" },
       { property: "og:site_name", content: "BH" },
       { property: "og:type", content: "website" },
