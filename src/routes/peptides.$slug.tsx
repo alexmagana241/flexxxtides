@@ -216,7 +216,7 @@ function PeptidePage() {
                     add({ slug: p.slug, name: displayName, size: pack.size, priceUSD: unit, kit: asKit }, qty);
                     setAdded(true);
                   }}
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground hover:opacity-90 transition"
                 >
                   <ShoppingCart className="h-4 w-4" />
                   Add to cart — {pack ? formatPrice((buyKit && !accessory ? kitPrice(pack.priceUSD) : pack.priceUSD) * qty) : ""}
