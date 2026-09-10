@@ -21,8 +21,8 @@ export const Route = createFileRoute("/peptides/$slug")({
       ? `${p.name} — ${p.catalogNumber} | BH Research Materials`
       : "Catalog item";
     const desc = p
-      ? `${p.name} laboratory reference standard. Molecular formula ${p.molecularFormula}, MW ${p.molecularWeight}. For research use only. Not for human or veterinary use.`
-      : "Research reference standard.";
+      ? `${p.name} laboratory research material. Molecular formula ${p.molecularFormula}, MW ${p.molecularWeight}. For research use only. Not for human or veterinary use.`
+      : "Laboratory research material.";
     return {
       meta: [
         { title },
@@ -83,7 +83,7 @@ function PeptidePage() {
         </section>
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 grid gap-8 lg:grid-cols-[1fr_320px]">
-          <div className="space-y-10">
+          <div className="min-w-0 space-y-10 order-2 lg:order-1">
             <Section title="Identity & specification">
               <dl className="grid gap-4 sm:grid-cols-2">
                 <Row label="Catalog number" value={p.catalogNumber} />
@@ -123,7 +123,7 @@ function PeptidePage() {
 
           </div>
 
-          <aside className="space-y-4 lg:sticky lg:top-24 self-start">
+          <aside className="min-w-0 w-full space-y-4 order-1 lg:order-2 lg:sticky lg:top-24 self-start">
             <div className="rounded-xl border border-border bg-card p-5">
               <p className="text-xs uppercase tracking-wider text-muted-foreground">{accessory ? "Select option" : "Select strength"}</p>
               <ul className="mt-3 space-y-2">
@@ -188,11 +188,11 @@ function PeptidePage() {
                   <p className="mt-1 text-xs text-muted-foreground">Not for human or veterinary use.</p>
                 </div>
 
-                <div className="mt-4 flex items-center justify-between gap-3">
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                   <span className="text-xs uppercase tracking-wider text-muted-foreground">
                     {buyKit && !accessory ? "Kits" : "Quantity"}
                   </span>
-                  <div className="inline-flex items-center rounded-md border border-border">
+                  <div className="inline-flex shrink-0 items-center rounded-md border border-border">
                     <button aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))} className="h-9 w-9 grid place-items-center hover:bg-muted">
                       <Minus className="h-3.5 w-3.5" />
                     </button>
@@ -216,7 +216,7 @@ function PeptidePage() {
                     add({ slug: p.slug, name: displayName, size: pack.size, priceUSD: unit, kit: asKit }, qty);
                     setAdded(true);
                   }}
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground hover:opacity-90 transition"
                 >
                   <ShoppingCart className="h-4 w-4" />
                   Add to cart — {pack ? formatPrice((buyKit && !accessory ? kitPrice(pack.priceUSD) : pack.priceUSD) * qty) : ""}
