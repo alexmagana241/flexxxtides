@@ -356,7 +356,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "klow",
-    name: "KLOW",
+    name: "KLOW (blended reference preparation)",
     fullName: "Blended peptide reference preparation (GHK-Cu, BPC-157, TB-500, KPV)",
     category: "Research Compound",
     catalogNumber: "BH-RC-101",
@@ -374,7 +374,7 @@ export const items: CatalogItem[] = [
   },
   {
     slug: "glow",
-    name: "GLOW",
+    name: "GLOW (blended reference preparation)",
     fullName: "Blended peptide reference preparation (GHK-Cu, BPC-157, TB-500)",
     category: "Research Compound",
     catalogNumber: "BH-RC-102",
