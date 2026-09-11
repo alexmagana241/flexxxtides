@@ -2,7 +2,11 @@
 // prints the compound name + strength directly onto the blank area of the
 // vial's own label so every product shows its own identity.
 
-import vialImage from "@/assets/vial-blank.png";
+import vialWhiteImage from "@/assets/vial-blank.png";
+import vialBlueImage from "@/assets/vial-blank-blue.png";
+
+/** Only copper peptides are supplied as blue powder; everything else is white. */
+const BLUE_POWDER = /^(ghk|ahk)-cu/i;
 
 export function Vial({
   packSize,
