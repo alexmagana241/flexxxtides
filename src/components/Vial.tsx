@@ -52,13 +52,13 @@ export function Vial({
 
       {(name || strength) && (
         <div
-          className="absolute left-1/2 top-[64%] -translate-x-1/2 -translate-y-1/2 flex w-[31%] flex-col items-center justify-center leading-none text-white"
+          className="absolute left-1/2 top-[71%] -translate-x-1/2 -translate-y-1/2 flex w-[30%] flex-col items-center justify-center leading-none text-[#1b2a6b]"
           style={{ fontFamily: "'Space Grotesk','Inter',system-ui,sans-serif" }}
         >
           {name && (
             <span
-              className="w-full truncate text-center font-semibold uppercase tracking-wide"
-              style={{ fontSize: longName ? "2.8cqw" : "3.6cqw" }}
+              className="w-full truncate text-center font-bold uppercase tracking-wide"
+              style={{ fontSize: longName ? "2.9cqw" : "3.8cqw" }}
             >
               {name}
             </span>
@@ -66,8 +66,8 @@ export function Vial({
 
           {strength && (
             <span
-              className="mt-[1cqw] w-full truncate text-center font-medium uppercase tracking-widest text-sky-300"
-              style={{ fontSize: "2.7cqw" }}
+              className="mt-[1.2cqw] w-full truncate text-center font-semibold uppercase tracking-widest text-[#3b5bd6]"
+              style={{ fontSize: "2.8cqw" }}
             >
               {strength}
 
