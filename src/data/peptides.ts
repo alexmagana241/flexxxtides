@@ -55,7 +55,7 @@ export interface CatalogItem {
 
 const COMMON = {
   solubility:
-    "Typically soluble in bacteriostatic or sterile water, dilute acetic acid, or DMSO for analytical work; solubility is sequence-dependent and should be established per assay.",
+    "Typically soluble in sterile water, dilute acetic acid, or DMSO for analytical work; solubility is sequence-dependent and should be established per assay.",
   handling:
     "Handle in a chemical fume hood or biosafety cabinet using nitrile gloves, safety eyewear, and a laboratory coat. Avoid inhalation of dust. Equilibrate sealed vials to room temperature before opening to prevent condensation.",
   stability:
