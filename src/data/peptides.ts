@@ -449,7 +449,7 @@ export const items: CatalogItem[] = [
     recommendedAnalyticalUse: "Laboratory diluent for reconstituting lyophilized research materials for in vitro work.",
     packs: [{ size: "10 mL", priceUSD: 15 }],
     scientificSummary:
-      "A laboratory diluent consisting of sterile water with 0.9% benzyl alcohol as a bacteriostatic agent. Supplied for laboratory reconstitution of research materials only; not for human or veterinary use.",
+      "A laboratory diluent consisting of sterile water with 0.9% benzyl alcohol. Supplied for laboratory reconstitution of research materials only; not for human or veterinary use.",
     analyticalMethods: ["Sterility filtration record", "Benzyl alcohol content by HPLC", "Visual particulate inspection"],
   },
   {
