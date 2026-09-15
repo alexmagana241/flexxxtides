@@ -304,14 +304,14 @@
   .fall-hero-grid {
     min-height: auto;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "copy" "product" "actions";
+    grid-template-areas: "copy" "actions" "product";
     gap: 0;
     padding-block: 2.5rem 3rem;
   }
   .fall-hero-copy { text-align: left; }
-  .fall-hero-product { min-height: 15.5rem; margin-top: 0.35rem; }
+  .fall-hero-product { min-height: 15.5rem; margin-top: 0.9rem; }
   .fall-vial-stage { width: min(15.5rem, 68vw); }
-  .fall-hero-actions { padding-top: 0.25rem; }
+  .fall-hero-actions { padding-top: 1.25rem; }
   .fall-hero-mark {
     top: 48%;
     right: -4.5rem;
