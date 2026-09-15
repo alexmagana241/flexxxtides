@@ -60,6 +60,15 @@
   --gradient-primary: linear-gradient(135deg, oklch(0.16 0.05 260) 0%, oklch(0.32 0.09 260) 100%);
   --shadow-card: 0 1px 2px oklch(0.16 0.03 260 / 0.05), 0 8px 24px -12px oklch(0.16 0.03 260 / 0.12);
   --shadow-glow: 0 0 0 1px oklch(0.24 0.07 260 / 0.05);
+  --hero-ink: oklch(0.18 0.025 45);
+  --hero-muted: oklch(0.43 0.03 55);
+  --hero-card: oklch(0.98 0.012 75 / 0.82);
+  --hero-border: oklch(0.72 0.07 55 / 0.34);
+  --hero-accent: oklch(0.53 0.13 45);
+  --hero-copper: oklch(0.58 0.13 48);
+  --hero-burgundy: oklch(0.34 0.09 25);
+  --hero-gold: oklch(0.76 0.12 72);
+  --hero-canvas: oklch(0.95 0.022 72);
 }
 
 .dark {
@@ -88,6 +97,15 @@
   --gradient-primary: linear-gradient(135deg, oklch(0.97 0.005 260) 0%, oklch(0.7 0.02 260) 100%);
   --shadow-card: 0 1px 2px oklch(0 0 0 / 0.5), 0 12px 32px -12px oklch(0 0 0 / 0.6);
   --shadow-glow: 0 0 0 1px oklch(0.97 0.005 260 / 0.08);
+  --hero-ink: oklch(0.97 0.006 70);
+  --hero-muted: oklch(0.76 0.025 70);
+  --hero-card: oklch(0.15 0.018 40 / 0.82);
+  --hero-border: oklch(0.65 0.09 50 / 0.32);
+  --hero-accent: oklch(0.78 0.12 63);
+  --hero-copper: oklch(0.66 0.14 48);
+  --hero-burgundy: oklch(0.4 0.1 25);
+  --hero-gold: oklch(0.78 0.12 72);
+  --hero-canvas: oklch(0.105 0.016 40);
 }
 
 @layer base {
@@ -126,8 +144,196 @@
     border-color: var(--color-primary);
   }
   .animate-fade-up { animation: fade-up 0.5s ease-out both; }
+  .text-hero-accent { color: var(--hero-accent); }
+  .fall-hero {
+    color: var(--hero-ink);
+    background:
+      radial-gradient(circle at 81% 45%, color-mix(in oklab, var(--hero-gold) 24%, transparent) 0%, transparent 25%),
+      radial-gradient(circle at 8% 100%, color-mix(in oklab, var(--hero-burgundy) 12%, transparent) 0%, transparent 31%),
+      linear-gradient(124deg, var(--hero-canvas) 0%, color-mix(in oklab, var(--hero-canvas) 88%, var(--hero-copper)) 53%, var(--hero-canvas) 100%);
+  }
+  .fall-hero::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--hero-border) 22%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--hero-border) 18%, transparent) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, black, transparent 72%);
+    opacity: 0.32;
+  }
+  .fall-hero-light,
+  .fall-hero-haze {
+    position: absolute;
+    z-index: -1;
+    border-radius: 999px;
+    pointer-events: none;
+    filter: blur(60px);
+  }
+  .fall-hero-light {
+    top: 10%;
+    right: 4%;
+    width: min(42vw, 34rem);
+    aspect-ratio: 1;
+    background: color-mix(in oklab, var(--hero-gold) 26%, transparent);
+    animation: fall-light-breathe 9s ease-in-out infinite;
+  }
+  .fall-hero-haze {
+    right: 25%;
+    bottom: -30%;
+    width: min(48vw, 42rem);
+    aspect-ratio: 1.5;
+    background: color-mix(in oklab, var(--hero-burgundy) 14%, transparent);
+  }
+  .fall-hero-grid {
+    min-height: min(44rem, calc(100svh - 6rem));
+    grid-template-columns: minmax(0, 1.08fr) minmax(17rem, 0.72fr);
+    grid-template-areas: "copy product" "actions product";
+    align-content: center;
+    column-gap: clamp(2rem, 6vw, 7rem);
+    padding-block: clamp(3rem, 7vh, 5.5rem);
+  }
+  .fall-hero-copy { grid-area: copy; align-self: end; }
+  .fall-hero-copy .bg-card\/70,
+  .fall-hero-actions .bg-card { background-color: var(--hero-card); }
+  .fall-hero-copy .text-muted-foreground { color: var(--hero-muted); }
+  .fall-hero-copy .border-border,
+  .fall-hero-actions .border-border { border-color: var(--hero-border); }
+  .fall-hero-copy .text-primary { color: var(--hero-accent); }
+  .fall-hero-actions { grid-area: actions; align-self: start; padding-top: 1.4rem; }
+  .fall-hero-product { grid-area: product; min-height: 25rem; }
+  .fall-vial-stage {
+    position: relative;
+    z-index: 2;
+    width: clamp(18rem, 31vw, 28rem);
+    aspect-ratio: 1;
+    animation: fall-vial-float 7s ease-in-out infinite;
+    filter: drop-shadow(0 24px 24px color-mix(in oklab, var(--hero-burgundy) 20%, transparent));
+  }
+  .fall-vial-stage img { image-rendering: auto; }
+  .fall-vial-shadow {
+    position: absolute;
+    left: 22%;
+    right: 22%;
+    bottom: 4%;
+    height: 5%;
+    z-index: -1;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--hero-burgundy) 30%, transparent);
+    filter: blur(12px);
+    animation: fall-shadow-breathe 7s ease-in-out infinite;
+  }
+  .fall-vial-glow {
+    position: absolute;
+    width: min(85%, 25rem);
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: radial-gradient(circle, color-mix(in oklab, var(--hero-gold) 28%, transparent), transparent 68%);
+    animation: fall-light-breathe 8s ease-in-out infinite reverse;
+  }
+  .fall-hero-mark {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    right: clamp(-3rem, 1vw, 1rem);
+    width: clamp(24rem, 43vw, 40rem);
+    height: auto;
+    transform: translateY(-50%);
+    opacity: 0.055;
+    animation: fall-mark-drift 14s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .fall-leaves { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+  .fall-leaf {
+    position: absolute;
+    top: -3rem;
+    color: var(--hero-copper);
+    opacity: 0;
+    animation: fall-leaf-drift 15s linear infinite;
+  }
+  .fall-leaf svg { width: 100%; height: 100%; filter: drop-shadow(0 5px 5px color-mix(in oklab, var(--hero-burgundy) 18%, transparent)); }
+  .fall-leaf-one { left: 3%; width: 1.5rem; animation-delay: -3s; animation-duration: 17s; }
+  .fall-leaf-two { left: 43%; width: 1.1rem; color: var(--hero-burgundy); animation-delay: -11s; animation-duration: 19s; }
+  .fall-leaf-three { left: 67%; width: 1.75rem; animation-delay: -6s; animation-duration: 16s; }
+  .fall-leaf-four { left: 91%; width: 1.25rem; color: var(--hero-burgundy); animation-delay: -13s; animation-duration: 20s; }
+  .fall-leaf-five { left: 78%; width: 0.9rem; animation-delay: -1s; animation-duration: 18s; }
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes fall-vial-float {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.35deg); }
+    50% { transform: translate3d(0.35rem, -0.65rem, 0) rotate(0.45deg); }
+  }
+  @keyframes fall-shadow-breathe {
+    0%, 100% { opacity: 0.55; transform: scaleX(1); }
+    50% { opacity: 0.32; transform: scaleX(0.88); }
+  }
+  @keyframes fall-light-breathe {
+    0%, 100% { opacity: 0.65; transform: translate3d(0, 0, 0) scale(1); }
+    50% { opacity: 0.95; transform: translate3d(-0.75rem, 0.4rem, 0) scale(1.06); }
+  }
+  @keyframes fall-mark-drift {
+    0%, 100% { transform: translate3d(0, -50%, 0) rotate(-1deg); }
+    50% { transform: translate3d(-0.5rem, calc(-50% - 0.6rem), 0) rotate(0.5deg); }
+  }
+  @keyframes fall-leaf-drift {
+    0% { opacity: 0; transform: translate3d(0, -3rem, 0) rotate(0deg); }
+    12% { opacity: 0.45; }
+    86% { opacity: 0.32; }
+    100% { opacity: 0; transform: translate3d(5rem, 48rem, 0) rotate(310deg); }
+  }
+}
+
+@media (max-width: 1023px) {
+  .fall-hero-grid {
+    min-height: min(43rem, calc(100svh - 6rem));
+    grid-template-columns: minmax(0, 1.08fr) minmax(15rem, 0.72fr);
+    column-gap: 1.5rem;
+    padding-block: 3rem;
+  }
+  .fall-hero-product { min-height: 21rem; }
+  .fall-vial-stage { width: clamp(16rem, 35vw, 20rem); }
+  .fall-hero-mark { right: -5rem; width: min(52vw, 31rem); }
+}
+
+@media (max-width: 767px) {
+  .fall-hero-grid {
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "copy" "actions" "product";
+    gap: 0;
+    padding-block: 2.5rem 3rem;
+  }
+  .fall-hero-copy { text-align: left; }
+  .fall-hero-product { min-height: 15.5rem; margin-top: 0.9rem; }
+  .fall-vial-stage { width: min(15.5rem, 68vw); }
+  .fall-hero-actions { padding-top: 1.25rem; }
+  .fall-hero-mark {
+    top: 48%;
+    right: -4.5rem;
+    width: min(82vw, 22rem);
+    opacity: 0.045;
+  }
+  .fall-hero-light { top: 33%; right: -18%; width: 22rem; }
+  .fall-hero-haze { right: 42%; bottom: -15%; width: 24rem; }
+  .fall-leaf-one { left: 4%; }
+  .fall-leaf-two { left: 90%; }
+  .fall-leaf-three { display: none; }
+  .fall-leaf-four { left: 82%; }
+  .fall-leaf-five { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fall-hero-light,
+  .fall-hero-mark,
+  .fall-leaf,
+  .fall-vial-stage,
+  .fall-vial-shadow {
+    animation: none;
+  }
+  .fall-leaf { display: none; }
 }
