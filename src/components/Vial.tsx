@@ -4,6 +4,7 @@
 
 import vialWhiteImage from "@/assets/vial-blank.png";
 import vialBlueImage from "@/assets/vial-blank-blue.png";
+import vialBlueIsolatedImage from "@/assets/vial-blank-blue-isolated.png";
 
 /** Only copper peptides are supplied as blue powder; everything else is white. */
 const BLUE_POWDER = /^(ghk|ahk)-cu/i;
@@ -13,12 +14,15 @@ export function Vial({
   className = "h-40",
   compound,
   imageUrl,
+  isolated = false,
 }: {
   packSize?: string;
   className?: string;
   compound?: string;
   /** Optional product photograph that replaces the branded vial rendering. */
   imageUrl?: string;
+  /** Uses the background-free version of the same vial artwork for staged campaign scenes. */
+  isolated?: boolean;
 }) {
   if (imageUrl) {
     return (
@@ -38,7 +42,8 @@ export function Vial({
   const strength = packSize ?? "";
   const alt = [name, strength].filter(Boolean).join(" ");
   const longName = name.length > 12;
-  const vialImage = BLUE_POWDER.test(name.trim()) ? vialBlueImage : vialWhiteImage;
+  const hasBluePowder = BLUE_POWDER.test(name.trim());
+  const vialImage = isolated && hasBluePowder ? vialBlueIsolatedImage : hasBluePowder ? vialBlueImage : vialWhiteImage;
 
   return (
     <div
@@ -57,7 +62,7 @@ export function Vial({
 
       {(name || strength) && (
         <div
-          className="absolute left-1/2 top-[68%] -translate-x-1/2 -translate-y-1/2 flex w-[24%] flex-col items-center justify-center leading-none text-[#1b2a6b]"
+          className="absolute left-1/2 top-[67.5%] -translate-x-1/2 -translate-y-1/2 flex w-[24%] flex-col items-center justify-center leading-none text-[#1b2a6b]"
           style={{ fontFamily: "'Space Grotesk','Inter',system-ui,sans-serif" }}
         >
           {name && (
@@ -71,12 +76,19 @@ export function Vial({
 
           {strength && (
             <span
-              className="mt-[1.4cqw] w-full truncate text-center font-semibold uppercase tracking-widest text-[#3b5bd6]"
-              style={{ fontSize: "2.8cqw" }}
+              className="mt-[1cqw] w-full truncate text-center font-semibold uppercase tracking-widest text-[#3b5bd6]"
+              style={{ fontSize: "2.65cqw" }}
             >
               {strength}
             </span>
           )}
+
+          <span
+            className="mt-[1cqw] w-full whitespace-nowrap text-center font-bold uppercase text-[#1b2a6b]"
+            style={{ fontSize: "1.35cqw" }}
+          >
+            FOR RESEARCH PURPOSES ONLY
+          </span>
         </div>
       )}
     </div>

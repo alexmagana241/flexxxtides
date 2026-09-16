@@ -59,7 +59,7 @@ function Home() {
           <div className="fall-hero-product relative flex min-w-0 items-center justify-center" aria-label="GHK-Cu 100 MG research vial">
             <div className="fall-vial-glow" aria-hidden="true" />
             <div className="fall-vial-stage">
-              <Vial packSize="100 MG" compound="GHK-Cu" className="h-full w-full" />
+              <Vial packSize="100 MG" compound="GHK-Cu" className="h-full w-full" isolated />
               <div className="fall-vial-shadow" aria-hidden="true" />
             </div>
           </div>

@@ -145,6 +145,9 @@
   }
   .animate-fade-up { animation: fade-up 0.5s ease-out both; }
   .text-hero-accent { color: var(--hero-accent); }
+  .header-logo-fall {
+    filter: sepia(0.78) saturate(2.1) hue-rotate(332deg) brightness(0.92) contrast(1.08) drop-shadow(0 2px 5px color-mix(in oklab, var(--hero-copper) 20%, transparent));
+  }
   .fall-hero {
     color: var(--hero-ink);
     background:
@@ -160,7 +163,8 @@
     pointer-events: none;
     background-image:
       linear-gradient(to right, color-mix(in oklab, var(--hero-border) 22%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in oklab, var(--hero-border) 18%, transparent) 1px, transparent 1px);
+      linear-gradient(to bottom, color-mix(in oklab, var(--hero-border) 18%, transparent) 1px, transparent 1px),
+      repeating-linear-gradient(112deg, color-mix(in oklab, var(--hero-copper) 4%, transparent) 0 1px, transparent 1px 8px);
     background-size: 72px 72px;
     mask-image: linear-gradient(to bottom, black, transparent 72%);
     opacity: 0.32;
@@ -204,27 +208,47 @@
   .fall-hero-actions .border-border { border-color: var(--hero-border); }
   .fall-hero-copy .text-primary { color: var(--hero-accent); }
   .fall-hero-actions { grid-area: actions; align-self: start; padding-top: 1.4rem; }
-  .fall-hero-product { grid-area: product; min-height: 25rem; }
+  .fall-hero-product {
+    grid-area: product;
+    min-height: 25rem;
+    perspective: 70rem;
+  }
+  .fall-hero-product::after {
+    position: absolute;
+    left: 50%;
+    bottom: 6%;
+    width: min(88%, 27rem);
+    height: 18%;
+    content: "";
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background:
+      radial-gradient(ellipse at 50% 20%, color-mix(in oklab, var(--hero-gold) 30%, transparent), transparent 56%),
+      linear-gradient(to bottom, color-mix(in oklab, var(--hero-copper) 22%, var(--hero-canvas)), color-mix(in oklab, var(--hero-burgundy) 18%, var(--hero-canvas)));
+    box-shadow: inset 0 1px color-mix(in oklab, var(--hero-gold) 40%, transparent), 0 18px 30px color-mix(in oklab, var(--hero-burgundy) 16%, transparent);
+    filter: blur(0.2px);
+  }
   .fall-vial-stage {
     position: relative;
     z-index: 2;
     width: clamp(18rem, 31vw, 28rem);
     aspect-ratio: 1;
-    animation: fall-vial-float 7s ease-in-out infinite;
-    filter: drop-shadow(0 24px 24px color-mix(in oklab, var(--hero-burgundy) 20%, transparent));
+    transform-origin: center bottom;
+    animation: fall-vial-reveal 900ms cubic-bezier(0.2, 0.75, 0.25, 1) both, fall-vial-breathe 11s ease-in-out 900ms infinite;
+    filter: drop-shadow(0 18px 18px color-mix(in oklab, var(--hero-burgundy) 24%, transparent)) drop-shadow(-8px 0 16px color-mix(in oklab, var(--hero-gold) 12%, transparent));
   }
   .fall-vial-stage img { image-rendering: auto; }
   .fall-vial-shadow {
     position: absolute;
     left: 22%;
     right: 22%;
-    bottom: 4%;
-    height: 5%;
+    bottom: 9.5%;
+    height: 3.5%;
     z-index: -1;
     border-radius: 999px;
-    background: color-mix(in oklab, var(--hero-burgundy) 30%, transparent);
-    filter: blur(12px);
-    animation: fall-shadow-breathe 7s ease-in-out infinite;
+    background: color-mix(in oklab, var(--hero-burgundy) 44%, transparent);
+    filter: blur(9px);
+    animation: fall-shadow-breathe 11s ease-in-out infinite;
   }
   .fall-vial-glow {
     position: absolute;
@@ -238,11 +262,11 @@
     position: absolute;
     z-index: -1;
     top: 50%;
-    right: clamp(-3rem, 1vw, 1rem);
-    width: clamp(24rem, 43vw, 40rem);
+    left: 50%;
+    width: clamp(28rem, 48vw, 44rem);
     height: auto;
-    transform: translateY(-50%);
-    opacity: 0.055;
+    transform: translate(-50%, -50%);
+    opacity: 0.07;
     animation: fall-mark-drift 14s ease-in-out infinite;
     pointer-events: none;
   }
@@ -264,9 +288,13 @@
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  @keyframes fall-vial-float {
-    0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.35deg); }
-    50% { transform: translate3d(0.35rem, -0.65rem, 0) rotate(0.45deg); }
+  @keyframes fall-vial-reveal {
+    from { opacity: 0; transform: translate3d(0, 1.1rem, 0) rotateX(1.5deg); }
+    to { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); }
+  }
+  @keyframes fall-vial-breathe {
+    0%, 100% { transform: translate3d(0, 0, 0) rotateX(0); }
+    50% { transform: translate3d(0.12rem, -0.08rem, 0) rotateX(0.3deg); }
   }
   @keyframes fall-shadow-breathe {
     0%, 100% { opacity: 0.55; transform: scaleX(1); }
@@ -277,8 +305,8 @@
     50% { opacity: 0.95; transform: translate3d(-0.75rem, 0.4rem, 0) scale(1.06); }
   }
   @keyframes fall-mark-drift {
-    0%, 100% { transform: translate3d(0, -50%, 0) rotate(-1deg); }
-    50% { transform: translate3d(-0.5rem, calc(-50% - 0.6rem), 0) rotate(0.5deg); }
+    0%, 100% { transform: translate3d(-50%, -50%, 0) rotate(-0.5deg); }
+    50% { transform: translate3d(-50%, calc(-50% - 0.35rem), 0) rotate(0.35deg); }
   }
   @keyframes fall-leaf-drift {
     0% { opacity: 0; transform: translate3d(0, -3rem, 0) rotate(0deg); }
@@ -297,7 +325,7 @@
   }
   .fall-hero-product { min-height: 21rem; }
   .fall-vial-stage { width: clamp(16rem, 35vw, 20rem); }
-  .fall-hero-mark { right: -5rem; width: min(52vw, 31rem); }
+  .fall-hero-mark { width: min(58vw, 34rem); }
 }
 
 @media (max-width: 767px) {
@@ -314,9 +342,9 @@
   .fall-hero-actions { padding-top: 1.25rem; }
   .fall-hero-mark {
     top: 48%;
-    right: -4.5rem;
-    width: min(82vw, 22rem);
-    opacity: 0.045;
+    left: 50%;
+    width: min(78vw, 22rem);
+    opacity: 0.06;
   }
   .fall-hero-light { top: 33%; right: -18%; width: 22rem; }
   .fall-hero-haze { right: 42%; bottom: -15%; width: 24rem; }
