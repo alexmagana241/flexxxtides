@@ -9,3 +9,4 @@
 - [x] Recolor only the existing BH logo in the top navigation with fall tones.
 - [x] Add “FOR RESEARCH PURPOSES ONLY” consistently to every vial label without changing other vial elements.
 - [x] Verify every product and strength on desktop and mobile, including powder-color rules and image transparency.
+- [x] Separate every vial strength from the research-purpose line so both remain fully visible.

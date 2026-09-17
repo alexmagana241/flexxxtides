@@ -76,7 +76,7 @@ export function Vial({
 
           {strength && (
             <span
-              className="mt-[1cqw] w-full truncate text-center font-semibold uppercase tracking-widest text-[#3b5bd6]"
+              className="mt-[1cqw] w-full whitespace-nowrap text-center font-semibold uppercase tracking-widest text-[#3b5bd6]"
               style={{ fontSize: "2.65cqw" }}
             >
               {strength}
@@ -84,7 +84,7 @@ export function Vial({
           )}
 
           <span
-            className="mt-[1cqw] w-full whitespace-nowrap text-center font-bold uppercase text-[#1b2a6b]"
+            className="mt-[2.4cqw] w-full whitespace-nowrap text-center font-bold uppercase text-[#1b2a6b]"
             style={{ fontSize: "1.35cqw" }}
           >
             FOR RESEARCH PURPOSES ONLY
