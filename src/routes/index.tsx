@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, FileText, FlaskConical, ShieldCheck, Beaker } from "lucide-react";
 import { Layout } from "@/components/Layout";
-import { BrandMark } from "@/components/BrandMark";
 import { ResearchUseNotice } from "@/components/ResearchUseNotice";
 import { Vial } from "@/components/Vial";
 import { items } from "@/data/peptides";
 import { BRAND, formatPrice } from "@/lib/compliance";
+import watermarkAsset from "@/assets/bh-watermark-hidpi.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,10 +28,12 @@ function Home() {
       <section className="fall-hero relative isolate overflow-hidden border-b border-border">
         <div className="fall-hero-light" aria-hidden="true" />
         <div className="fall-hero-haze" aria-hidden="true" />
-        <BrandMark
+        <img
+          src={watermarkAsset.url}
           className="fall-hero-mark"
-          variant="icon"
-          title=""
+          alt=""
+          aria-hidden="true"
+          draggable={false}
         />
 
         <div className="fall-leaves" aria-hidden="true">
@@ -83,7 +85,7 @@ function Home() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid gap-6 md:grid-cols-3">
           {[
-            { icon: FileText, title: "Documented", body: "Each catalog item ships with a Certificate of Analysis and Safety Data Sheet describing purity, identity, and handling." },
+            { icon: FileText, title: "Professional Research Supply", body: "Clearly labeled products, consistent presentation, and dependable order fulfillment for the research community." },
             { icon: Beaker, title: "Laboratory-Only", body: "Materials are supplied as dry lyophilized powder for in vitro and analytical research — never for administration to humans or animals." },
             { icon: ShieldCheck, title: "Transparent Pricing", body: "Every pack size is listed with a clear price. Pricing is subject to change without notice." },
           ].map(({ icon: Icon, title, body }) => (
