@@ -261,7 +261,7 @@
   .fall-hero-mark {
     position: absolute;
     z-index: -1;
-    top: 46%;
+    top: 46.5%;
     left: 50%;
     width: clamp(28rem, 42vw, 34rem);
     height: auto;
