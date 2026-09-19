@@ -261,9 +261,9 @@
   .fall-hero-mark {
     position: absolute;
     z-index: -1;
-    top: 50%;
+    top: 46%;
     left: 50%;
-    width: clamp(28rem, 48vw, 44rem);
+    width: clamp(28rem, 42vw, 38rem);
     height: auto;
     transform: translate(-50%, -50%);
     opacity: 0.07;
@@ -325,7 +325,10 @@
   }
   .fall-hero-product { min-height: 21rem; }
   .fall-vial-stage { width: clamp(16rem, 35vw, 20rem); }
-  .fall-hero-mark { width: min(58vw, 34rem); }
+  .fall-hero-mark {
+    top: 47%;
+    width: min(54vw, 32rem);
+  }
 }
 
 @media (max-width: 767px) {
@@ -341,7 +344,7 @@
   .fall-vial-stage { width: min(15.5rem, 68vw); }
   .fall-hero-actions { padding-top: 1.25rem; }
   .fall-hero-mark {
-    top: 48%;
+    top: 46%;
     left: 50%;
     width: min(78vw, 22rem);
     opacity: 0.06;
@@ -353,6 +356,20 @@
   .fall-leaf-three { display: none; }
   .fall-leaf-four { left: 82%; }
   .fall-leaf-five { display: none; }
+}
+
+@media (max-width: 479px) {
+  .fall-hero-mark {
+    top: 45%;
+    width: min(76vw, 19rem);
+  }
+}
+
+@media (max-width: 767px) and (orientation: landscape) {
+  .fall-hero-mark {
+    top: 47%;
+    width: min(48vw, 19rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
