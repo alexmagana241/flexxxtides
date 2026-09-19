@@ -263,7 +263,7 @@
     z-index: -1;
     top: 46%;
     left: 50%;
-    width: clamp(28rem, 42vw, 38rem);
+    width: clamp(28rem, 42vw, 34rem);
     height: auto;
     transform: translate(-50%, -50%);
     opacity: 0.07;
