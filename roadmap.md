@@ -12,4 +12,4 @@
 - [x] Separate every vial strength from the research-purpose line so both remain fully visible.
 - [x] Sharpen the existing translucent homepage BH watermark for high-resolution displays without changing its design.
 - [x] Replace homepage testing and certification claims with brand and customer-experience language.
-- [ ] Verify the homepage at desktop and mobile sizes and confirm a clean build.
+- [x] Verify the homepage at desktop and mobile sizes and confirm a clean build.
