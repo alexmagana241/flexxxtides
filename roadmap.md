@@ -10,3 +10,6 @@
 - [x] Add “FOR RESEARCH PURPOSES ONLY” consistently to every vial label without changing other vial elements.
 - [x] Verify every product and strength on desktop and mobile, including powder-color rules and image transparency.
 - [x] Separate every vial strength from the research-purpose line so both remain fully visible.
+- [x] Sharpen the existing translucent homepage BH watermark for high-resolution displays without changing its design.
+- [x] Replace homepage testing and certification claims with brand and customer-experience language.
+- [x] Verify the homepage at desktop and mobile sizes and confirm a clean build.
